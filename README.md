@@ -7,7 +7,7 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 
 - Rylan Arbour
 - Jack Hunsberger
-- MEMBER3
+- Cole DenBleyker
 - MEMBER4
 
 
