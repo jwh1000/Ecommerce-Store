@@ -9,7 +9,7 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 - Jack Hunsberger
 - Cole DenBleyker
 - Ryan Robison
-- MEMBER5
+- Xin Huang
 
 
 ## Prerequisites
