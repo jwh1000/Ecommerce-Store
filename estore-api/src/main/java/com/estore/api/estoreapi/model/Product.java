@@ -43,4 +43,51 @@ public class Product {
         this.quantity = 0;
         this.description = "Lorem Ipsum";
     }
+    
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    //Mutators for all fields, so that an Owner will have an easier time editing any particular product.
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    //String representation of product, for tests/debugging
+    @Override
+    public String toString() {
+        return "Product ID " + this.id + ": " +this.name;
+    }
 }
