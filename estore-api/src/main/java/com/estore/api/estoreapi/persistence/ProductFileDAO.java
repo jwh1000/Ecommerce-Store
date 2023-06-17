@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.sql.rowset.spi.SyncResolver;
+
 import com.estore.api.estoreapi.model.Product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,9 +40,53 @@ public class ProductFileDAO implements ProductDAO{
         load();
     }
 
+    /**
+     * Generates the next id for a new {@linkplain Product product}
+     * 
+     * @return the next id to use
+     */
+    private synchronized static int nextId() {
+        int id = nextId;
+        ++nextId;
+        return id;
+    }
+
+    /**
+     * Generates an array of {@linkplain Product products} from tree map 
+     * Runs if empty, otherwise uses below implementation
+     * 
+     * @return The array of {@linkplain Product products}
+     */
+    private Product[] getProductArray() {
+        return getProductArray(null);
+    }
+
+    /**
+     * Creates an array of {@linkplain Product products} from tree map for any
+     * {@linkplain Product products} that have containsText in their name
+     * 
+     * If containsText is null, return every {@linkplain Product product} in the map
+     * 
+     * @param containsText
+     * @return
+     */
+    private Product[] getProductArray(String containsText) {
+        ArrayList<Product> productArrayList = new ArrayList<>();
+
+        for (Product product : products.values()) {
+            if (containsText == null || product.getName().contains(containsText)) {
+                productArrayList.add(product);
+            }
+        }
+
+        Product[] productArray = new Product[productArrayList.size()];
+        productArrayList.toArray(productArray);
+        return productArray;
+    }
+
     
     private boolean save() throws IOException {
-        Product[] productArray = getProductArray();
+        
     }
 
 
