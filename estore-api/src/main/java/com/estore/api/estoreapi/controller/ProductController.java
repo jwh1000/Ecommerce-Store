@@ -55,7 +55,7 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         try {
             Product newProduct = productDAO.createProduct(product);
-            return new ResponseEntity<Product>(newProduct, HttpStatus.OK);
+            return new ResponseEntity<Product>(newProduct, HttpStatus.CREATED);
         } catch (IOException e) {
             return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
