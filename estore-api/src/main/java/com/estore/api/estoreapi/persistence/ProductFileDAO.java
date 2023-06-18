@@ -86,7 +86,7 @@ public class ProductFileDAO implements ProductDAO{
 
     
     private boolean save() throws IOException {
-        Product[] productArray = new getProductArray();
+        Product[] productArray = getProductArray();
 
         objectMapper.writeValue(new File(filename), productArray);
         return true;
