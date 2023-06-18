@@ -86,17 +86,41 @@ public class ProductFileDAO implements ProductDAO{
 
     
     private boolean save() throws IOException {
-        
+        Product[] productArray = new getProductArray();
+
+        objectMapper.writeValue(new File(filename), productArray);
+        return true;
     }
 
 
     private boolean load() throws IOException {
-        // not done!
+        products = new TreeMap<>();
+        nextId = 0;
+
+        Product[] productArray = objectMapper.readValue(new File(filename), Product[].class);
+
+        for (Product product : productArray) {
+            products.put(product.getId(), product);
+            if (product.getId() > nextId)
+                nextId = product.getId();
+        }
+
+        ++nextId;
+        return true;
     }
 
 
+    /**
+    ** {@inheritDoc}}
+     */
+    @Override
     public Product createProduct(Product product) throws IOException {
-        // not done!
+        synchronized(products) {
+            Product newProduct = new Product(product.getName(), product.getPrice(), nextId());
+            products.put(newProduct.getId(), newProduct);
+            save();
+            return newProduct;
+        }
     }
 
     
