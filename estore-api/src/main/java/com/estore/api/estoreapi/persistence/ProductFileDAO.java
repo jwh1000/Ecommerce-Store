@@ -137,15 +137,22 @@ public class ProductFileDAO implements ProductDAO{
      */
 
     public Product[] getProducts() throws IOException {
-        return null;
+        synchronized(products){
+            return getProductArray();
+        }
     }
 
     public Product[] findProducts(String containsText) throws IOException {
         return null;
     }
 
-    public Product[] getProduct(int id) throws IOException {
-        return null;
+    public Product getProduct(int id) throws IOException {
+        synchronized(products){
+            if(products.containsKey(id))
+                return products.get(id);
+            else
+                return null;
+        }
     }
 
     public Product updateProduct(Product product) throws IOException {
