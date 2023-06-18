@@ -84,7 +84,12 @@ public class ProductFileDAO implements ProductDAO{
         return productArray;
     }
 
-    
+    /**
+     * saves the {@linkplain Product products} from the map as JSON objects
+     * 
+     * @return true on success
+     * @throws IOException if the file cannot be accessed
+     */
     private boolean save() throws IOException {
         Product[] productArray = getProductArray();
 
@@ -92,7 +97,12 @@ public class ProductFileDAO implements ProductDAO{
         return true;
     }
 
-
+    /**
+     * loads {@linkplain Product products} as JSON objects into java objects
+     * 
+     * @return true if successful
+     * @throws IOException if the file cannot be accessed
+     */
     private boolean load() throws IOException {
         products = new TreeMap<>();
         nextId = 0;
@@ -121,6 +131,30 @@ public class ProductFileDAO implements ProductDAO{
             save();
             return newProduct;
         }
+    }
+
+    /**
+     * Hi team, implement these functions :)
+     */
+
+    public Product[] getProducts() throws IOException {
+        return null;
+    }
+
+    public Product[] findProducts(String containsText) throws IOException {
+        return null;
+    }
+
+    public Product[] getProduct(int id) throws IOException {
+        return null;
+    }
+
+    public Product updateProduct(Product product) throws IOException {
+        return null;
+    }
+
+    public boolean deleteProduct(int id) throws IOException {
+        return false;
     }
 
     
