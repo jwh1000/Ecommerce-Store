@@ -6,13 +6,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.sql.rowset.spi.SyncResolver;
-
 import com.estore.api.estoreapi.model.Product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 public class ProductFileDAO implements ProductDAO{
     
