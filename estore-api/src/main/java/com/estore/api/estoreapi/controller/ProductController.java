@@ -28,7 +28,7 @@ import com.estore.api.estoreapi.model.Product;
  * @author JacK Hunsberger (when you edit this, add your name here)
  */
 @RestController
-@RequestMapping("products")
+@RequestMapping("estore")
 public class ProductController {
 
     private ProductDAO productDAO;
@@ -49,9 +49,9 @@ public class ProductController {
      * @param product the {@link Product product} to create
      * 
      * @return a ResponseEntity with the new product and an OK status on success
-     *         or a ResponseEntity with an internal server error otherwise
+     *         or a ResponseEntity with an internal server error 
      */
-    @PostMapping("")
+    @PostMapping("/inventory/product")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         try {
             Product newProduct = productDAO.createProduct(product);

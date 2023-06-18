@@ -10,7 +10,9 @@ import com.estore.api.estoreapi.model.Product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductFileDAO implements ProductDAO{
     
     Map<Integer, Product> products; // local cache of products so you don't

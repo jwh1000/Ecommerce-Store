@@ -36,7 +36,7 @@ public class Product {
      * @param price The price of the product
      * @param id The id of the product
      */
-    public Product(@JsonProperty String name, @JsonProperty double price, @JsonProperty int id) {
+    public Product(@JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("id") int id) {
         this.name = name;
         this.price = price;
         this.id = id;
