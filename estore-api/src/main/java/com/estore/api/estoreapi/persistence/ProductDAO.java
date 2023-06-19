@@ -10,7 +10,7 @@ public interface ProductDAO {
 
     Product[] findProducts(String containsText) throws IOException;
 
-    Product[] getProduct(int id) throws IOException;
+    Product getProduct(int id) throws IOException;
 
     /**
      * Creates and saves a {@linkplain Product product}
