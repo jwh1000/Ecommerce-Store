@@ -54,6 +54,8 @@ public class ProductController {
     @PostMapping("/inventory/product")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         try {
+            //TODO search if the product exists or not, if it does return status CONFLICT
+
             Product newProduct = productDAO.createProduct(product);
             return new ResponseEntity<Product>(newProduct, HttpStatus.CREATED);
         } catch (IOException e) {
