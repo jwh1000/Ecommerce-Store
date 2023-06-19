@@ -25,7 +25,7 @@ import com.estore.api.estoreapi.model.Product;
  * API
  * method handler to the Spring framework
  * 
- * @author JacK Hunsberger (when you edit this, add your name here)
+ * @author Jack Hunsberger, Cole DenBleyker (when you edit this, add your name here)
  */
 @RestController
 @RequestMapping("estore")
@@ -85,4 +85,17 @@ public class ProductController {
         }
     }
     
+    @PutMapping("/inventory/product")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product){
+        try{
+            Product newProduct = productDAO.updateProduct(product);
+            if(newProduct != null)
+                return new ResponseEntity<Product>(newProduct, HttpStatus.OK);
+            else
+                return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e){
+            return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
