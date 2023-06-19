@@ -132,16 +132,14 @@ public class ProductFileDAO implements ProductDAO{
         }
     }
 
-    /**
-     * Hi team, implement these functions :)
-     */
-
+    // TODO getProducts
     public Product[] getProducts() throws IOException {
         synchronized(products){
             return getProductArray();
         }
     }
 
+    // TODO findProducts
     public Product[] findProducts(String containsText) throws IOException {
         return null;
     }
@@ -155,10 +153,26 @@ public class ProductFileDAO implements ProductDAO{
         }
     }
 
+    /**
+     * Updates and saves a {@linkplain Product product}
+     * @param {@link Product product} object to be updated and saved
+     * @return the updated {@link Product product} if successful, null if 
+     * {@link Product product} could not be found
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    @Override
     public Product updateProduct(Product product) throws IOException {
-        return null;
+        synchronized(products){
+            if(products.containsKey(product.getId()) == false)
+                return null; // product does not exist
+            
+            products.put(product.getId(), product);
+            save(); // may throw IOException
+            return product;
+        }
     }
 
+    // TODO deleteProduct
     public boolean deleteProduct(int id) throws IOException {
         return false;
     }
