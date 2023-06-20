@@ -12,6 +12,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implements JSON file persistence for Products.
+ * 
+ * @author Rylan Arbour (Add your name!)
+ */
 @Component
 public class ProductFileDAO implements ProductDAO{
     
@@ -172,10 +177,21 @@ public class ProductFileDAO implements ProductDAO{
         }
     }
 
-    // TODO deleteProduct
+    /**
+     * Deletes a product with a given id.
+     * @param id The id of the product to delete.
+     * @return Boolean of whether or not the product deletion was successful.
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    @Override
     public boolean deleteProduct(int id) throws IOException {
-        return false;
-    }
-
-    
+        synchronized(products){
+            if (products.containsKey(id)) {
+                products.remove(id);
+                return save();
+            } else {
+                return false;
+            }
+        }
+    }    
 }
