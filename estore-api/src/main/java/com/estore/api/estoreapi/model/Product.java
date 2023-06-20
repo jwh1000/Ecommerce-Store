@@ -19,6 +19,7 @@ public class Product {
     @JsonProperty("price") private double price;
     /**
      * The description of the product.
+     * Defaults to "Lorem Ipsum".
      */
     @JsonProperty("description") private String description;
     /**
@@ -27,6 +28,7 @@ public class Product {
     @JsonProperty("id") private int id;
     /**
      * The amount of this product the owner has available to sell.
+     * Defaults to 0.
      */
     @JsonProperty("quantity") private int quantity;
 

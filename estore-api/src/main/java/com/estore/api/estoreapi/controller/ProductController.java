@@ -25,7 +25,7 @@ import com.estore.api.estoreapi.model.Product;
  * API
  * method handler to the Spring framework
  * 
- * @author JacK Hunsberger (when you edit this, add your name here)
+ * @author Jack Hunsberger, Cole DenBleyker (when you edit this, add your name here)
  */
 @RestController
 @RequestMapping("estore")
@@ -87,4 +87,72 @@ public class ProductController {
         }
     }
     
+    @PutMapping("/inventory/product")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product){
+        try{
+            Product newProduct = productDAO.updateProduct(product);
+            if(newProduct != null)
+                return new ResponseEntity<Product>(newProduct, HttpStatus.OK);
+            else
+                return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e){
+            return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Deletes a product with the given ID.
+     * 
+     * @param id The id of the product to delete.
+     * 
+     * @return ResponseEntity HTTP status of OK if deleted<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @author Rylan Arbour
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
+        try {
+            if (productDAO.getProduct(id) == null) //check to see if the product with given id doesn't exist
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); //return 404
+            else { //otherwise go ahead and delete it
+                productDAO.deleteProduct(id);
+                return new ResponseEntity<Product>(HttpStatus.OK); //return 200 (OK)
+            }
+        }
+        catch(IOException e) { //catch any error and return internal server error
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Responds to the GET request for all {@linkplain Product products} whose name contains
+     * the text in name
+     * 
+     * @param name The name parameter which contains the text used to find the {@link Product product}
+     * 
+     * @return ResponseEntity with array of {@link Products product} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * <p>
+     * Example: Find all products that contain the text "ma"
+     * GET http://localhost:8080/inventory/?product=ma
+     */
+
+    @GetMapping("/")
+    public ResponseEntity<Product[]> searchProduct(@RequestParam String name) {
+        LOG.info("GET /inventory/?product="+product);
+        try {
+            Product[] product = productDao.findProducts(name); 
+        if (product != null)
+            return new ResponseEntity<Hero[]>(product,HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }    
+    }
 }
