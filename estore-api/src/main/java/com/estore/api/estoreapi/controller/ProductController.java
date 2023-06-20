@@ -137,16 +137,16 @@ public class ProductController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
      * Example: Find all products that contain the text "ma"
-     * GET http://localhost:8080/inventory/?product=ma
+     * GET http://localhost:8080/inventory/?name=ma
      */
 
     @GetMapping("/")
     public ResponseEntity<Product[]> searchProduct(@RequestParam String name) {
-        LOG.info("GET /inventory/?product="+product);
+        LOG.info("GET /inventory/?name="+name);
         try {
             Product[] product = productDao.findProducts(name); 
         if (product != null)
-            return new ResponseEntity<Hero[]>(product,HttpStatus.OK);
+            return new ResponseEntity<Product[]>(product,HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
