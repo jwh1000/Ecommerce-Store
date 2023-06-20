@@ -143,11 +143,13 @@ public class ProductFileDAO implements ProductDAO{
             return getProductArray();
         }
     }
-
-    // TODO findProducts
-    public Product[] findProducts(String containsText) throws IOException {
-        synchronized(heroes) {
-            return getPorductArray(containsText);
+    /**
+     ** {@inheritDoc}
+     */
+    @Override
+    public Product[] findProducts(String containsText) {
+        synchronized(products) {
+            return getProductArray(containsText);
         }
     }
 
