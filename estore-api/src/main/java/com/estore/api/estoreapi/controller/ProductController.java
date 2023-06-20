@@ -135,7 +135,7 @@ public class ProductController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
      * Example: Find all products that contain the text "ma"
-     * GET http://localhost:8080/inventory/?name=ma
+     * GET http://localhost:8080/inventory/?product=ma
      */
 
     @GetMapping("/")
