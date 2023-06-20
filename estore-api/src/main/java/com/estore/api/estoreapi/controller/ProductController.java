@@ -98,4 +98,29 @@ public class ProductController {
             return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Deletes a product with the given ID.
+     * 
+     * @param id The id of the product to delete.
+     * 
+     * @return ResponseEntity HTTP status of OK if deleted<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @author Rylan Arbour
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
+        try {
+            if (productDAO.getProduct(id) == null) //check to see if the product with given id doesn't exist
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); //return 404
+            else { //otherwise go ahead and delete it
+                productDAO.deleteProduct(id);
+                return new ResponseEntity<Product>(HttpStatus.OK); //return 200 (OK)
+            }
+        }
+        catch(IOException e) { //catch any error and return internal server error
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

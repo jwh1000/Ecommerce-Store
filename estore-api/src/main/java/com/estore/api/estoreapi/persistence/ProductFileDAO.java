@@ -182,6 +182,7 @@ public class ProductFileDAO implements ProductDAO{
      * @param id The id of the product to delete.
      * @return Boolean of whether or not the product deletion was successful.
      * @throws IOException if underlying storage cannot be accessed
+     * @author Rylan Arbour
      */
     @Override
     public boolean deleteProduct(int id) throws IOException {
