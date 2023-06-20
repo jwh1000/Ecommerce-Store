@@ -8,6 +8,15 @@ public interface ProductDAO {
 
     Product[] getProducts() throws IOException;
 
+    /**
+     * Finds all {@linkplain Product products} whose name contain the text
+     * 
+     * @param containsText The text to compare to
+     * 
+     * @return An array of {@link Product products} whoes names contain the text
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
     Product[] findProducts(String containsText) throws IOException;
 
     Product getProduct(int id) throws IOException;

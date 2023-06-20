@@ -17,6 +17,7 @@ import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.ProductDAO;
 
 
+
 /**
  * Tests for the Product Controller Class
  * 
@@ -75,6 +76,40 @@ public class ProductControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    @Test
+    public void testSearchProducts() throws IOException { // findProducts may throw IOException
+        //Setup
+        String searchString = "Att";
+        Product[] products = new Product[2];
+        products[0] = new Product("Attack on Titan V1", 15, 6);
+        products[1] = new Product("All about Bodhisattva", 14, 5);
+        // When findProducts is called with the search string, return the two
+        // heroes above
+        when(mockProductDAO.findProducts(searchString)).thenReturn(products);
+
+        //Invoke
+        ResponseEntity<Product[]> response = productController.searchProducts(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(products,response.getBody());
+    }
+
+    @Test
+    public void testSearchHeroesHandleException() throws IOException { // findHeroes may throw IOException
+        // Setup
+        String searchString = "an";
+        // When createProduct is called on the Mock Product DAO, throw an IOException
+        doThrow(new IOException()).when(mockProductDAO).findProducts(searchString);
+
+        // Invoke
+        ResponseEntity<Product[]> response = productController.searchProducts(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+        
+    }
+
     //TODO: test is failing and I don't know why
     @Test
     public void testDeleteProduct() throws IOException {
@@ -115,4 +150,6 @@ public class ProductControllerTest {
         //analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
+
+
 }

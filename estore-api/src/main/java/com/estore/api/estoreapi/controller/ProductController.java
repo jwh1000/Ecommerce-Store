@@ -71,19 +71,7 @@ public class ProductController {
             return new ResponseEntity<Product[]>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/inventory/product/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable int id){
-        try{
-            Product product = productDAO.getProduct(id);
-            if(product != null)
-                return new ResponseEntity<Product>(product,HttpStatus.OK);
-            else
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        catch(IOException e){
-            return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    
     
     @PutMapping("/inventory/product")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product){
@@ -128,7 +116,7 @@ public class ProductController {
      * Responds to the GET request for all {@linkplain Product products} whose name contains
      * the text in name
      * 
-     * @param name The name parameter which contains the text used to find the {@link Product product}
+     * @param name The name parameter which contains the text used to find the {@link Product products}
      * 
      * @return ResponseEntity with array of {@link Products product} objects (may be empty) and
      * HTTP status of OK<br>
@@ -139,17 +127,15 @@ public class ProductController {
      */
 
     @GetMapping("/")
-    public ResponseEntity<Product[]> searchProduct(@RequestParam String name) {
-        LOG.info("GET /inventory/?name="+name);
+    public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
         try {
-            Product[] product = productDao.findProducts(name); 
+            Product[] product = productDAO.findProducts(name); 
         if (product != null)
             return new ResponseEntity<Product[]>(product,HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }    
     }
