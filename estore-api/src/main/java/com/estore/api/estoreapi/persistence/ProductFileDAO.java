@@ -146,7 +146,9 @@ public class ProductFileDAO implements ProductDAO{
 
     // TODO findProducts
     public Product[] findProducts(String containsText) throws IOException {
-        return null;
+        synchronized(heroes) {
+            return getPorductArray(containsText);
+        }
     }
 
     public Product getProduct(int id) throws IOException {
