@@ -134,7 +134,7 @@ public class ProductController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * @author Rylan Arbour
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("inventory/product/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         try {
             if (productDAO.getProduct(id) == null) //check to see if the product with given id doesn't exist
@@ -163,7 +163,7 @@ public class ProductController {
      * GET http://localhost:8080/inventory/?name=ma
      */
 
-    @GetMapping("/")
+    @GetMapping("inventory/")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
         try {
             Product[] product = productDAO.findProducts(name); 
