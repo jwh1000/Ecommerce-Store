@@ -146,7 +146,7 @@ public class ProductController {
      * GET http://localhost:8080/inventory/?name=ma
      */
 
-    @GetMapping("/")
+    @GetMapping("inventory/")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
         try {
             Product[] product = productDAO.findProducts(name); 
