@@ -109,7 +109,16 @@ public class ProductController {
         }
     }
     
-    
+    /**
+     * MAKE SURE TO INCLUDE ID WHEN YOU CURL WITH PRODUCT JSON
+     * 
+     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
+     * @param hero The {@link Product product} to update
+     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @author Cole DenBleyker
+     */
     @PutMapping("/inventory/product")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product){
         try{
