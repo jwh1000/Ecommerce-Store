@@ -67,6 +67,14 @@ public class ProductController {
         }
     }
 
+    /**
+     * Gets all products.
+     * 
+     * @return ResponseEntity HTTP status of OK when complete list is returned
+     * Returned list contains all products or an empty list if none
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @author Ryan Robison
+     */
     @GetMapping("/inventory")
     public ResponseEntity<Product[]> getProducts(){
         try{
@@ -77,8 +85,17 @@ public class ProductController {
             return new ResponseEntity<Product[]>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-     @GetMapping("/inventory/product/{id}")
+    /**
+     * Gets single product based on id
+     * 
+     * @param id
+     * 
+     * @return ResponseEntity HTTP status of OK if item is found and returned
+     * ResponseEntity with HTTP status of NOT_FOUND if not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @author Ryan Robison
+     */
+    @GetMapping("/inventory/product/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable int id){
         try{
             Product product = productDAO.getProduct(id);
