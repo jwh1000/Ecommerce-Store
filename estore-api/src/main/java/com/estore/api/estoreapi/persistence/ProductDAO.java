@@ -5,6 +5,14 @@ import com.estore.api.estoreapi.model.Product;
 
 public interface ProductDAO {
 
+
+    /**
+     * Finds all {@linkplain Product products}
+     * 
+     * @return An array of all {@link Product products}
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
     Product[] getProducts() throws IOException;
 
     /**
@@ -18,6 +26,17 @@ public interface ProductDAO {
      */
     Product[] findProducts(String containsText) throws IOException;
 
+    /**
+     * Finds specified {@linkplain Product products} using id
+     * 
+     * @param id products id
+     * 
+     * @return {@link Product products} if product found with id
+     * 
+     * @return status not found if not found
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
     Product getProduct(int id) throws IOException;
 
     /**
