@@ -119,7 +119,7 @@ public class ProductController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * @author Cole DenBleyker
      */
-    @PutMapping("/inventory/product")
+    @PutMapping("")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product){
         try{
             Product newProduct = productDAO.updateProduct(product);
