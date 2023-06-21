@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
  * @author Rylan Arbour (Add your name!)
  */
 @Component
-public class ProductFileDAO implements ProductDAO{
-    
+public class ProductFileDAO implements ProductDAO {
+
     Map<Integer, Product> products; // local cache of products so you don't
                                     // need to read file every time
 
@@ -33,7 +33,7 @@ public class ProductFileDAO implements ProductDAO{
     /**
      * Creates a product file DAO
      * 
-     * @param filename the name of the file to read and write to
+     * @param filename     the name of the file to read and write to
      * @param objectMapper allows for serialization/deserialization
      * 
      * @throws IOException throw if the file cannot be accessed
@@ -56,7 +56,7 @@ public class ProductFileDAO implements ProductDAO{
     }
 
     /**
-     * Generates an array of {@linkplain Product products} from tree map 
+     * Generates an array of {@linkplain Product products} from tree map
      * Runs if empty, otherwise uses below implementation
      * 
      * @return The array of {@linkplain Product products}
@@ -123,13 +123,12 @@ public class ProductFileDAO implements ProductDAO{
         return true;
     }
 
-
     /**
-    ** {@inheritDoc}}
+     ** {@inheritDoc}}
      */
     @Override
     public Product createProduct(Product product) throws IOException {
-        synchronized(products) {
+        synchronized (products) {
             Product newProduct = new Product(product.getName(), product.getPrice(), nextId());
             products.put(newProduct.getId(), newProduct);
             save();
@@ -137,25 +136,31 @@ public class ProductFileDAO implements ProductDAO{
         }
     }
 
-    // TODO getProducts
+    /**
+     ** {@inheritDoc}
+     */
     public Product[] getProducts() throws IOException {
-        synchronized(products){
+        synchronized (products) {
             return getProductArray();
         }
     }
+
     /**
      ** {@inheritDoc}
      */
     @Override
     public Product[] findProducts(String containsText) {
-        synchronized(products) {
+        synchronized (products) {
             return getProductArray(containsText);
         }
     }
 
+    /**
+     ** {@inheritDoc}
+     */
     public Product getProduct(int id) throws IOException {
-        synchronized(products){
-            if(products.containsKey(id))
+        synchronized (products) {
+            if (products.containsKey(id))
                 return products.get(id);
             else
                 return null;
@@ -164,17 +169,18 @@ public class ProductFileDAO implements ProductDAO{
 
     /**
      * Updates and saves a {@linkplain Product product}
+     * 
      * @param {@link Product product} object to be updated and saved
-     * @return the updated {@link Product product} if successful, null if 
-     * {@link Product product} could not be found
+     * @return the updated {@link Product product} if successful, null if
+     *         {@link Product product} could not be found
      * @throws IOException if underlying storage cannot be accessed
      */
     @Override
     public Product updateProduct(Product product) throws IOException {
-        synchronized(products){
-            if(products.containsKey(product.getId()) == false)
+        synchronized (products) {
+            if (products.containsKey(product.getId()) == false)
                 return null; // product does not exist
-            
+
             products.put(product.getId(), product);
             save(); // may throw IOException
             return product;
@@ -183,6 +189,7 @@ public class ProductFileDAO implements ProductDAO{
 
     /**
      * Deletes a product with a given id.
+     * 
      * @param id The id of the product to delete.
      * @return Boolean of whether or not the product deletion was successful.
      * @throws IOException if underlying storage cannot be accessed
@@ -190,7 +197,7 @@ public class ProductFileDAO implements ProductDAO{
      */
     @Override
     public boolean deleteProduct(int id) throws IOException {
-        synchronized(products){
+        synchronized (products) {
             if (products.containsKey(id)) {
                 products.remove(id);
                 return save();
@@ -198,5 +205,5 @@ public class ProductFileDAO implements ProductDAO{
                 return false;
             }
         }
-    }    
+    }
 }

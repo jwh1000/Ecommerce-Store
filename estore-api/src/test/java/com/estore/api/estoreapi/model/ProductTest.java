@@ -12,17 +12,17 @@ import org.junit.jupiter.api.Test;
 public class ProductTest {
     @Test
     public void test_Constructor() {
-        //setup
+        // setup
         int expected_id = 100;
         double expected_price = 5.99;
         String expected_name = "House of Leaves";
         String expected_description = "Lorem Ipsum";
         int expected_quantity = 0;
 
-        //invoke
+        // invoke
         Product product = new Product(expected_name, expected_price, expected_id);
 
-        //analyze
+        // analyze
         assertEquals(expected_id, product.getId());
         assertEquals(expected_name, product.getName());
         assertEquals(expected_price, product.getPrice());
@@ -32,17 +32,17 @@ public class ProductTest {
 
     @Test
     public void test_toString() {
-        //setup
+        // setup
         int id = 100;
         double price = 5.99;
         String name = "House of Leaves";
         Product product = new Product(name, price, id);
         String expected_string = "Product ID 100: House of Leaves";
 
-        //invoke
+        // invoke
         String actual_string = product.toString();
 
-        //analyze
+        // analyze
         assertEquals(expected_string, actual_string);
     }
 }

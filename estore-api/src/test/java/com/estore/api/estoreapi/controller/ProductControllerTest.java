@@ -16,12 +16,10 @@ import org.springframework.http.ResponseEntity;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.ProductDAO;
 
-
-
 /**
  * Tests for the Product Controller Class
  * 
- * @author Cole DenBleyker (add your name if you add tests)
+ * @author Cole DenBleyker
  */
 @Tag("Controller-tier")
 public class ProductControllerTest {
@@ -29,7 +27,8 @@ public class ProductControllerTest {
     private ProductDAO mockProductDAO;
 
     /**
-     * Before each test, create a new ProductController object and inject a mock Product DAO
+     * Before each test, create a new ProductController object and inject a mock
+     * Product DAO
      */
     @BeforeEach
     public void setupProductController() {
@@ -39,46 +38,48 @@ public class ProductControllerTest {
 
     @Test
     public void testUpdateProduct() throws IOException {
-        //setup
+        // setup
         Product product = new Product("Not Updated Product", 10, 6);
-        //when updateProduct is called, return true simulating successful update and save
+        // when updateProduct is called, return true simulating successful update and
+        // save
         when(mockProductDAO.updateProduct(product)).thenReturn(product);
         ResponseEntity<Product> response = productController.updateProduct(product);
         product.setName("Updated Product");
-        //invoke
+        // invoke
         response = productController.updateProduct(product);
-        //analysis
+        // analysis
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(product, response.getBody());
     }
 
     @Test
     public void testUpdateProductFailed() throws IOException {
-        //setup
+        // setup
         Product product = new Product("A Product", 15, 6);
-        //when updateProduct is called, return true simulating successful update and save
+        // when updateProduct is called, return true simulating successful update and
+        // save
         when(mockProductDAO.updateProduct(product)).thenReturn(null);
-        //invoke
+        // invoke
         ResponseEntity<Product> response = productController.updateProduct(product);
-        //analysis
+        // analysis
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
     public void testUpdateProductHandleException() throws IOException {
-        //setup
+        // setup
         Product product = new Product("A Product", 15, 6);
-        //when updateProduct is called on the mock Product DAO, throw an IOException
+        // when updateProduct is called on the mock Product DAO, throw an IOException
         doThrow(new IOException()).when(mockProductDAO).updateProduct(product);
-        //invoke
+        // invoke
         ResponseEntity<Product> response = productController.updateProduct(product);
-        //analysis
+        // analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
     @Test
     public void testSearchProducts() throws IOException { // findProducts may throw IOException
-        //Setup
+        // Setup
         String searchString = "Att";
         Product[] products = new Product[2];
         products[0] = new Product("Attack on Titan V1", 15, 6);
@@ -87,12 +88,12 @@ public class ProductControllerTest {
         // heroes above
         when(mockProductDAO.findProducts(searchString)).thenReturn(products);
 
-        //Invoke
+        // Invoke
         ResponseEntity<Product[]> response = productController.searchProducts(searchString);
 
         // Analyze
-        assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(products,response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(products, response.getBody());
     }
 
     @Test
@@ -106,11 +107,11 @@ public class ProductControllerTest {
         ResponseEntity<Product[]> response = productController.searchProducts(searchString);
 
         // Analyze
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-        
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+
     }
 
-    //TODO: test is failing and I don't know why
+    // TODO: test is failing and I don't know why
     @Test
     public void testDeleteProduct() throws IOException {
         //setup
@@ -137,19 +138,18 @@ public class ProductControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    //TODO: test is failing and I don't know why
+    // TODO: test is failing and I don't know why
     @Test
     public void testDeleteProductHandleException() throws IOException {
-        //setup
-        //when deleteProduct is called, throw IOException
+        // setup
+        // when deleteProduct is called, throw IOException
         doThrow(new IOException()).when(mockProductDAO).deleteProduct(1);
 
-        //invoke
+        // invoke
         ResponseEntity<Product> response = productController.deleteProduct(1);
 
-        //analysis
+        // analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
-
 
 }

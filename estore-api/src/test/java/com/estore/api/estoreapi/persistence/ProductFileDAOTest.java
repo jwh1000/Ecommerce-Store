@@ -20,9 +20,11 @@ public class ProductFileDAOTest {
     ObjectMapper mockObjectMapper;
 
     /**
-     * Before each test, setup the proper objects in memory such as the ProductFileDAO,
+     * Before each test, setup the proper objects in memory such as the
+     * ProductFileDAO,
      * using the @BeforeEach JUnit annotation.
      * Uses a mock object mapper to avoid having to use an actual file.
+     * 
      * @throws IOException
      */
     @BeforeEach
@@ -36,28 +38,28 @@ public class ProductFileDAOTest {
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the product array above
         when(mockObjectMapper
-            .readValue(new File("doesnt_matter.txt"),Product[].class))
+                .readValue(new File("doesnt_matter.txt"), Product[].class))
                 .thenReturn(testProduct);
-        productFileDAO = new ProductFileDAO("doesnt_matter.txt",mockObjectMapper);
+        productFileDAO = new ProductFileDAO("doesnt_matter.txt", mockObjectMapper);
     }
 
     @Test
     public void testDeleteHero_valid() {
-        //invoke
+        // invoke
         boolean result = assertDoesNotThrow(() -> productFileDAO.deleteProduct(1),
-                            "Unexpected exception thrown");
-        //analyze
-        assertEquals(result,true);
-        assertEquals(productFileDAO.products.size(),testProduct.length-1);
+                "Unexpected exception thrown");
+        // analyze
+        assertEquals(result, true);
+        assertEquals(productFileDAO.products.size(), testProduct.length - 1);
     }
 
     @Test
     public void testDeleteHero_invalid_id() {
-        //invoke
+        // invoke
         boolean result = assertDoesNotThrow(() -> productFileDAO.deleteProduct(100),
-                            "Unexpected exception thrown");
-        //analyze
-        assertEquals(result,false); //false as the delete fails
-        assertEquals(productFileDAO.products.size(),testProduct.length);
+                "Unexpected exception thrown");
+        // analyze
+        assertEquals(result, false); // false as the delete fails
+        assertEquals(productFileDAO.products.size(), testProduct.length);
     }
 }

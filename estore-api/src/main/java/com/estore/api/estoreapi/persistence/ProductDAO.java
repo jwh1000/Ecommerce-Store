@@ -5,7 +5,6 @@ import com.estore.api.estoreapi.model.Product;
 
 public interface ProductDAO {
 
-
     Product[] getProducts() throws IOException;
 
     /**
@@ -32,7 +31,23 @@ public interface ProductDAO {
      */
     Product createProduct(Product product) throws IOException;
 
+    /**
+     * Updates and saves a {@linkplain Product product}
+     * 
+     * @param {@link Product product} object to be updated and saved
+     * @return the updated {@link Product product} if successful, null if
+     *         {@link Product product} could not be found
+     * @throws IOException if underlying storage cannot be accessed
+     */
     Product updateProduct(Product product) throws IOException;
 
+    /**
+     * Deletes a product with a given id.
+     * 
+     * @param id The id of the product to delete.
+     * @return Boolean of whether or not the product deletion was successful.
+     * @throws IOException if underlying storage cannot be accessed
+     * @author Rylan Arbour
+     */
     boolean deleteProduct(int id) throws IOException;
 }
