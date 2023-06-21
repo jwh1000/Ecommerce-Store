@@ -77,6 +77,20 @@ public class ProductController {
             return new ResponseEntity<Product[]>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+     @GetMapping("/inventory/product/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable int id){
+        try{
+            Product product = productDAO.getProduct(id);
+            if(product != null)
+                return new ResponseEntity<Product>(product,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e){
+            return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     
     
     @PutMapping("/inventory/product")
