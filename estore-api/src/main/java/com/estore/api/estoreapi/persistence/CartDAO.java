@@ -7,7 +7,6 @@ import com.estore.api.estoreapi.model.Product;
 public interface CartDAO {
     //TODO documentation
     
-
     Product[] getCartContents() throws IOException;
 
     Product[] searchCart(String containsText) throws IOException;
