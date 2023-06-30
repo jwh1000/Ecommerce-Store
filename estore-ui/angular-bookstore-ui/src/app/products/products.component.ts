@@ -9,7 +9,7 @@ import { Product } from '../product';
 export class ProductsComponent {
   product: Product = {
     id: 1,
-    name: 'Book 1',
+    name: 'Book inventory',
     description: "Test",
     quantity: 10,
     price: 4.99
