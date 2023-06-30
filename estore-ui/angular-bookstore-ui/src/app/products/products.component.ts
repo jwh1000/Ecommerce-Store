@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../product';
+import { PRODUCTS } from '../mock-products';
 
 @Component({
   selector: 'app-products',
@@ -7,11 +8,10 @@ import { Product } from '../product';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
-  product: Product = {
-    id: 1,
-    name: 'Book 1',
-    description: "Test",
-    quantity: 10,
-    price: 4.99
-  };
+  products = PRODUCTS;
+  selectedProduct?: Product;
+
+  onSelect(product: Product): void {
+    this.selectedProduct = product;
+  }
 }
