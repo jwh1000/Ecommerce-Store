@@ -44,10 +44,12 @@ public class Product {
      * @param price The price of the product
      * @param id    The id of the product
      */
-    public Product(@JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("id") int id) {
+    public Product(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") double price) {
         this.name = name;
         this.price = price;
         this.id = id;
+
+        // these fields can be changed from the admin panel
         this.quantity = 0;
         this.description = "Lorem Ipsum";
     }
