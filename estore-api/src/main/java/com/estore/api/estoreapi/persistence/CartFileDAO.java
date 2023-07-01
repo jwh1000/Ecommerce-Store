@@ -123,12 +123,14 @@ public class CartFileDAO implements CartDAO{
     }
 
     public Product[] searchCart(String containsText, String username) throws IOException {
+        load(username);
         synchronized (products) {
             return getProductArray(containsText);
         }
     }
 
     public Product addToCart(Product product, String username) throws IOException {
+        load(username);
         synchronized (products) {
             products.put(product.getId(), product);
             save(username);
@@ -136,14 +138,8 @@ public class CartFileDAO implements CartDAO{
         }
     }
 
+    //TODO implement removeFromCart
     public boolean removeFromCart (int id, String username) throws IOException {
-        synchronized (products) {
-            if (products.containsKey(id)) {
-                products.remove(id);
-                return save(username);
-            } else {
-                return false;
-            }
-        }
+        return false;
     }
 }
