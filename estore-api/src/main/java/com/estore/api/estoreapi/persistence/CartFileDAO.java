@@ -23,6 +23,8 @@ public class CartFileDAO implements CartDAO{
 
     private String root;
 
+    private @Value("${products.file}") String inventory;
+
     /**
      * Creates a cart file DAO
      * 

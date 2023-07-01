@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.CartDAO;
+import com.estore.api.estoreapi.persistence.ProductDAO;
 
 @RestController
 @RequestMapping("estore")
@@ -22,15 +23,29 @@ public class CartController {
     //TODO: Documentation
 
     private CartDAO cartDAO;
+    private ProductDAO productDAO;
 
-    public CartController(CartDAO cartDAO) {
+    public CartController(CartDAO cartDAO, ProductDAO productDAO) {
         this.cartDAO = cartDAO;
+        this.productDAO = productDAO;
     }
 
     @PostMapping("/carts/{username}/product")
     public ResponseEntity<Product> addToCart(@RequestBody Product product, @PathVariable String username) {
         try {
-            Product[] products = cartDAO.searchCart(product.getName(), username);
+            
+            // check if in inventory
+            Product[] products = productDAO.findProducts(product.getName());
+            for (Product searchProduct : products) {
+                if (searchProduct.getName().equals(product.getName())) {
+                    break;
+                } else {
+                    return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+                }
+            }
+
+            // check if already in cart
+            products = cartDAO.searchCart(product.getName(), username);
             for (Product searchProduct : products) {
                 if (searchProduct.getName().equals(product.getName())) {
                     return new ResponseEntity<Product>(HttpStatus.CONFLICT);
