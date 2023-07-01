@@ -21,9 +21,7 @@ public class CartFileDAO implements CartDAO{
 
     private ObjectMapper objectMapper; // for reading and writing to the cart
 
-    private String user; // the current user whose cart to read/write to
-
-    private String filename; // directory of actual cart file, built from path and user
+    private String root;
 
     /**
      * Creates a cart file DAO
@@ -33,10 +31,9 @@ public class CartFileDAO implements CartDAO{
      * @throws IOException  throw if the file cannot be accessed
      */
     public CartFileDAO(@Value("${cart.file}") String root, ObjectMapper objectMapper) throws IOException {
-        this.user = "admin"; // by default
-        this.filename = root + this.user + ".json";
+        this.root = root;
         this.objectMapper = objectMapper;
-        load();
+        load("admin");
     }
 
     /**
@@ -46,8 +43,9 @@ public class CartFileDAO implements CartDAO{
      * @return true on success
      * @throws IOException if the file cannot be accessed
      */
-    private boolean save() throws IOException {
-        Product[] productArray = getProductArray();
+    private boolean save(String username) throws IOException {
+        String filename = this.root + username + ".json";
+        Product[] productArray = getProductArray(username);
 
         objectMapper.writeValue(new File(filename), productArray);
         return true;
@@ -60,7 +58,8 @@ public class CartFileDAO implements CartDAO{
      * @return true if successful
      * @throws IOException if the file cannot be accessed
      */
-    private boolean load() throws IOException {
+    private boolean load(String username) throws IOException {
+        String filename = this.root + username + ".json";
         products = new TreeMap<>();
 
         Product[] productArray = objectMapper.readValue(new File(filename), Product[].class);
@@ -78,8 +77,8 @@ public class CartFileDAO implements CartDAO{
      * 
      * @return The array of {@linkplain Product products}
      */
-    private Product[] getProductArray() {
-        return getProductArray(null);
+    private Product[] getProductArray(String username) throws IOException {
+        return getProductArray(null, username);
     }
 
     /**
@@ -91,7 +90,8 @@ public class CartFileDAO implements CartDAO{
      * @param containsText
      * @return
      */
-    private Product[] getProductArray(String containsText) {
+    private Product[] getProductArray(String containsText, String username) throws IOException {
+        load(username);
         ArrayList<Product> productArrayList = new ArrayList<>();
 
         for (Product product : products.values()) {
@@ -104,16 +104,16 @@ public class CartFileDAO implements CartDAO{
         productArrayList.toArray(productArray);
         return productArray;
     }
-
-    //TODO Implement these 
     
-    public Product[] getCartContents() throws IOException {
+    public Product[] getCartContents(String username) throws IOException {
+        load(username);
         synchronized (products) {
-            return getProductArray();
+            return getProductArray(username);
         }
     }
 
-    public Product getCartProduct(int id) throws IOException {
+    public Product getCartProduct(int id, String username) throws IOException {
+        load(username);
         synchronized (products) {
             if (products.containsKey(id))
                 return products.get(id);
@@ -122,25 +122,25 @@ public class CartFileDAO implements CartDAO{
         }
     }
 
-    public Product[] searchCart(String containsText) throws IOException {
+    public Product[] searchCart(String containsText, String username) throws IOException {
         synchronized (products) {
             return getProductArray(containsText);
         }
     }
 
-    public Product addToCart(Product product) throws IOException {
+    public Product addToCart(Product product, String username) throws IOException {
         synchronized (products) {
             products.put(product.getId(), product);
-            save();
+            save(username);
             return product;
         }
     }
 
-    public boolean removeFromCart (int id) throws IOException {
+    public boolean removeFromCart (int id, String username) throws IOException {
         synchronized (products) {
             if (products.containsKey(id)) {
                 products.remove(id);
-                return save();
+                return save(username);
             } else {
                 return false;
             }
