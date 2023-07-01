@@ -21,8 +21,6 @@ public class CartFileDAO implements CartDAO{
 
     private ObjectMapper objectMapper; // for reading and writing to the cart
 
-    private @Value("${cart.file}") String path; // path where user carts are saved
-
     private String user; // the current user whose cart to read/write to
 
     private String filename; // directory of actual cart file, built from path and user
@@ -34,16 +32,9 @@ public class CartFileDAO implements CartDAO{
      * @param objectMapper  allows for serialization/deserialization
      * @throws IOException  throw if the file cannot be accessed
      */
-    public CartFileDAO(String username, ObjectMapper objectMapper) throws IOException {
-        
-        if (username.equals(null)) {
-            this.user = "admin";
-        } else {
-            this.user = username;
-        }
-
-        this.filename = this.path + this.user;
-        
+    public CartFileDAO(@Value("${cart.file}") String root, ObjectMapper objectMapper) throws IOException {
+        this.user = "admin"; // by default
+        this.filename = root + this.user + ".json";
         this.objectMapper = objectMapper;
         load();
     }
