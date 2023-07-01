@@ -117,22 +117,42 @@ public class CartFileDAO implements CartDAO{
     //TODO Implement these 
     
     public Product[] getCartContents() throws IOException {
-        return null;
-    }
-
-    public Product[] searchCart(String containsText) throws IOException {
-        return null;
+        synchronized (products) {
+            return getProductArray();
+        }
     }
 
     public Product getCartProduct(int id) throws IOException {
-        return null;
+        synchronized (products) {
+            if (products.containsKey(id))
+                return products.get(id);
+            else
+                return null;
+        }
+    }
+
+    public Product[] searchCart(String containsText) throws IOException {
+        synchronized (products) {
+            return getProductArray(containsText);
+        }
     }
 
     public Product addToCart(Product product) throws IOException {
-        return null;
+        synchronized (products) {
+            products.put(product.getId(), product);
+            save();
+            return product;
+        }
     }
 
     public boolean removeFromCart (int id) throws IOException {
-        return false;
+        synchronized (products) {
+            if (products.containsKey(id)) {
+                products.remove(id);
+                return save();
+            } else {
+                return false;
+            }
+        }
     }
 }
