@@ -82,10 +82,29 @@ public class CartController {
         }
     }
 
-    //TODO: pretty much just copy this guy from the product controller
+    /**
+     * Deletes a {@link Product product} from the given user's shopping cart
+     * 
+     * @param id The id of the {@link Product product} to delete
+     * @param username The username of the user whose shopping cart you wish to remove a {@link Product product} from
+     * @return {@link ResponseEntity ResponseEntity} HTTP status of OK if deleted<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of NOT_FOUND if not found<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * 
+     * @author Cole DenBleyker
+     */
     @DeleteMapping("/carts/{username}/product/{id}")
     public ResponseEntity<Product> removeFromCart(@PathVariable int id, @PathVariable String username) {
-        return null;
+        try {
+            Product product = cartDAO.getCartProduct(id, username);
+            if (product != null) {
+                cartDAO.removeFromCart(id, username);
+                return new ResponseEntity<Product>(HttpStatus.OK);
+            } else
+                return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/carts/{username}/")
