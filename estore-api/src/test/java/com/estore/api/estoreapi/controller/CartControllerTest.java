@@ -196,6 +196,7 @@ public class CartControllerTest {
         ResponseEntity<Product> response = cartController.removeFromCart(6,"Bob");
         // analysis
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(null,response.getBody());
     }
 
     @Test
@@ -241,7 +242,6 @@ public class CartControllerTest {
     @Test
     public void testSearchProductsNotFound() throws IOException {
         // setup
-        Product product = new Product(6, "Search", 10);
         Product[] products = new Product[0];
         // when search cart is called and not found
         when(mockCartDAO.searchCart("Ka","Bob")).thenReturn(products);
