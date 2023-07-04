@@ -196,6 +196,7 @@ public class CartControllerTest {
         ResponseEntity<Product> response = cartController.removeFromCart(6,"Bob");
         // analysis
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(null,response.getBody());
     }
 
     @Test
