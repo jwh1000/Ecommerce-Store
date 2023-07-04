@@ -36,6 +36,11 @@ public class ProductControllerTest {
         productController = new ProductController(mockProductDAO);
     }
 
+    /**
+     * Tests updating a product that should pass
+     * @throws IOException
+     * @author Cole DenBleyker
+     */
     @Test
     public void testUpdateProduct() throws IOException {
         // setup
@@ -52,6 +57,11 @@ public class ProductControllerTest {
         assertEquals(product, response.getBody());
     }
 
+    /**
+     * Tests updating a product that should fail
+     * @throws IOException
+     * @author Cole DenBleyker
+     */
     @Test
     public void testUpdateProductFailed() throws IOException {
         // setup
@@ -65,6 +75,11 @@ public class ProductControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    /**
+     * Tests updating a product that should throw an IOException
+     * @throws IOException
+     * @author Cole DenBleyker
+     */
     @Test
     public void testUpdateProductHandleException() throws IOException {
         // setup
