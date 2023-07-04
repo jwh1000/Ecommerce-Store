@@ -17,10 +17,9 @@ public class User {
      * The admin privilage of the User
      */
     @JsonProperty("admin")
-    private Boolean admin;
+    private String admin;
     /**
-     * The id of the user
-     * @param id
+     * The id of the User.
      */
     @JsonProperty("id")
     private int id;
@@ -28,22 +27,26 @@ public class User {
     /**
      * Creates a user with a given username and password
      * @param username This is the username of the user
-     * @param id This is the password of the user
      * @param admin This is the permission of the user to see if they have administrator rights
      */
-    public User(@JsonProperty("username") String username){
+    public User(@JsonProperty("id") int id, @JsonProperty("username") String username){
         this.username = username;
+        this.id = id;
 
         // These fields can be changed
-        this.admin = false;
+        this.admin = "no";
     }
     
     public String getUsername() {
         return username;
     }
 
+    public int getId() {
+        return id;
+    }
 
-    public Boolean getAdmin() {
+
+    public String getAdmin() {
         return admin;
     }
 
@@ -54,9 +57,18 @@ public class User {
         this.username = username;
     }
 
-    public void setAdmin(Boolean admin){
+    public void setAdmin(String admin){
         this.admin = admin;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    // String representation of user, for tests/debugging
+    @Override
+    public String toString() {
+        return "User ID " + this.id + ": " + this.username;
+    }
 
 }

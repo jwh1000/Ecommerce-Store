@@ -1,6 +1,7 @@
 package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
+
 import com.estore.api.estoreapi.model.User;
 
 public interface UserDAO {
@@ -22,12 +23,27 @@ public interface UserDAO {
      */
     User createUser(User user) throws IOException;
 
-    /**
-     * Finds all {@linkplain User users}
+     /**
+     * Finds all {@linkplain User users} whose name contain the text
      * 
-     * @return An array of all {@link User users}
+     * @param containsText The text to compare to
      * 
-     * @throws IOException if an issue with underly storage
+     * @return An array of {@link User users} whoes names contain the text
+     * 
+     * @throws IOException if an issue with underlying storage
      */
-    
+    User[] findUsers(String containsText) throws IOException;
+
+    /**
+     * Finds specified {@linkplain User username} using id
+     * 
+     * @param id user's id
+     * 
+     * @return {@link User users} if user found with username
+     * 
+     * @return status not found if not found
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
+    User getUser(int id) throws IOException;
 }

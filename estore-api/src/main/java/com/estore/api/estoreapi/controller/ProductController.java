@@ -172,6 +172,7 @@ public class ProductController {
      *         <p>
      *         Example: Find all products that contain the text "ma"
      *         GET http://localhost:8080/inventory/?name=ma
+     * @author Xin Huang
      */
 
     @GetMapping("/inventory/")
