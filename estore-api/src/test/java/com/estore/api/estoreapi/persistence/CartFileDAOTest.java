@@ -29,11 +29,12 @@ public class CartFileDAOTest {
     ObjectMapper mockObjectMapper;
 
     /**
-    *  creates mock cart full of products and changes the current cart to be user's
-     *  tells object mapper to produce the mock list when writing values
-    */
+     * creates mock cart full of products and changes the current cart to be user's
+     * tells object mapper to produce the mock list when writing values
+     */
     @BeforeEach
     public void setupCartFileDAO() throws IOException {
+        // setup
         mockObjectMapper = mock(ObjectMapper.class);
 
         testProducts = new Product[3];
@@ -42,9 +43,9 @@ public class CartFileDAOTest {
         testProducts[2] = new Product(2, "Infnite Jest", 15.99);
 
         when(mockObjectMapper
-              .readValue(new File("estore-api/data/carts/user.json"), Product[].class))
+                .readValue(new File("estore-api/data/carts/user.json"), Product[].class))
                 .thenReturn(testProducts);
-        
+
         cartFileDAO = new CartFileDAO("estore-api/data/carts/", mockObjectMapper);
         cartFileDAO.updateCart("user");
     }
@@ -54,9 +55,11 @@ public class CartFileDAOTest {
      */
     @Test
     public void testGetCartContentsSuccess() {
+        // invoke
         Product[] result = assertDoesNotThrow(() -> cartFileDAO.getCartContents("user"),
-                  "Unexpected exception thrown");
-    
+                "Unexpected exception thrown");
+
+        // analyze
         assertArrayEquals(testProducts, result);
         assertEquals(testProducts.length, cartFileDAO.products.size());
     }
@@ -66,17 +69,20 @@ public class CartFileDAOTest {
      */
     @Test
     public void testGetCartContentsEmpty() {
+        // setup
         Product[] empty = new Product[0];
 
         assertDoesNotThrow(() -> when(mockObjectMapper
-              .readValue(new File("estore-api/data/carts/user.json"), Product[].class))
+                .readValue(new File("estore-api/data/carts/user.json"), Product[].class))
                 .thenReturn(empty));
-
+        
         assertDoesNotThrow(() -> cartFileDAO.updateCart("user"));
 
+        // invoke
         Product[] result = assertDoesNotThrow(() -> cartFileDAO.getCartContents("user"),
-                  "Unexpected exception thrown");
+                "Unexpected exception thrown");
 
+        // analyze
         assertArrayEquals(empty, result);
         assertEquals(empty.length, cartFileDAO.products.size());
     }
@@ -86,15 +92,17 @@ public class CartFileDAOTest {
      */
     @Test
     public void testGetCartProductSuccess() {
+        // invoke
         Product result1 = assertDoesNotThrow(() -> cartFileDAO.getCartProduct(0, "user"),
-                  "Unexpected exception thrown");
+                "Unexpected exception thrown");
 
         Product result2 = assertDoesNotThrow(() -> cartFileDAO.getCartProduct(1, "user"),
-                  "Unexpected exception thrown");
+                "Unexpected exception thrown");
 
         Product result3 = assertDoesNotThrow(() -> cartFileDAO.getCartProduct(2, "user"),
-                  "Unexpected exception thrown");
+                "Unexpected exception thrown");
 
+        // analyze
         assertEquals(testProducts[0], result1);
         assertEquals(testProducts[1], result2);
         assertEquals(testProducts[2], result3);
@@ -105,9 +113,11 @@ public class CartFileDAOTest {
      */
     @Test
     public void testGetCartProductNotFound() {
+        // invoke
         Product notFound = assertDoesNotThrow(() -> cartFileDAO.getCartProduct(5, "user"),
-                  "Unexpected exception thrown");
-        
+                "Unexpected exception thrown");
+
+        // analyze
         assertEquals(null, notFound);
     }
 
@@ -116,19 +126,22 @@ public class CartFileDAOTest {
      */
     @Test
     public void testSearchCart() {
+        // invoke
         Product[] result1 = assertDoesNotThrow(() -> cartFileDAO.searchCart("Good", "user"),
-                  "Unexpected exception thrown");
+                "Unexpected exception thrown");
 
         Product[] result2 = assertDoesNotThrow(() -> cartFileDAO.searchCart("ni", "user"),
-                  "Unexpected exception thrown");
+                "Unexpected exception thrown");
 
+        // setup
         Product[] search1 = new Product[1];
         search1[0] = testProducts[0];
 
         Product[] search2 = new Product[2];
         search2[0] = testProducts[0];
         search2[1] = testProducts[2];
-        
+
+        // analyze
         assertArrayEquals(search1, result1);
         assertArrayEquals(search2, result2);
     }
@@ -138,16 +151,19 @@ public class CartFileDAOTest {
      */
     @Test
     public void testAddToCart() {
+        // setup
         Product add = new Product(3, "Moby Dick", 9.99);
 
-        Product result = assertDoesNotThrow(() -> cartFileDAO.addToCart(add, "user"), 
+        // invoke
+        Product result = assertDoesNotThrow(() -> cartFileDAO.addToCart(add, "user"),
                 "Unexpected exception thrown");
 
         Product[] testProductsAdd = Arrays.copyOf(testProducts, 4);
         testProductsAdd[3] = result;
 
+        // analyze
         Product[] results2 = assertDoesNotThrow(() -> cartFileDAO.getCartContents("user"),
-                  "Unexpected exception thrown");
+                "Unexpected exception thrown");
 
         assertArrayEquals(testProductsAdd, results2);
     }
@@ -157,13 +173,15 @@ public class CartFileDAOTest {
      */
     @Test
     public void testRemoveFromCart() {
-        boolean result = assertDoesNotThrow(() -> cartFileDAO.removeFromCart(2, "user"), 
+        // invoke
+        boolean result = assertDoesNotThrow(() -> cartFileDAO.removeFromCart(2, "user"),
                 "Unexpected exception thrown");
 
         Product[] testProductsRem = Arrays.copyOf(testProducts, 2);
 
+        // analyze
         Product[] results = assertDoesNotThrow(() -> cartFileDAO.getCartContents("user"),
-                  "Unexpected exception thrown");
+                "Unexpected exception thrown");
 
         assertArrayEquals(testProductsRem, results);
         assertEquals(true, result);
@@ -174,12 +192,14 @@ public class CartFileDAOTest {
      */
     @Test
     public void testRemoveFromCartNotFound() {
-        boolean result = assertDoesNotThrow(() -> cartFileDAO.removeFromCart(5, "user"), 
+        // invoke
+        boolean result = assertDoesNotThrow(() -> cartFileDAO.removeFromCart(5, "user"),
                 "Unexpected exception thrown");
 
+        // analyze
         Product[] results = assertDoesNotThrow(() -> cartFileDAO.getCartContents("user"),
-                  "Unexpected exception thrown");
-
+                "Unexpected exception thrown");
+        
         assertArrayEquals(testProducts, results);
         assertEquals(false, result);
 
