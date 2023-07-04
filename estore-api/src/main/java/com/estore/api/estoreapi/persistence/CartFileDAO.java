@@ -14,16 +14,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CartFileDAO implements CartDAO{
-    //TODO documentation
 
     Map<Integer, Product> products; // a cart is a subset of the inventory, 
                                     // and it functions similarly
 
     private ObjectMapper objectMapper; // for reading and writing to the cart
 
-    private String root;
+    private String root; // root directory for carts
 
-    private @Value("${products.file}") String inventory;
+    private @Value("${products.file}") String inventory; // directory of inventory
 
     /**
      * Creates a cart file DAO
@@ -107,6 +106,9 @@ public class CartFileDAO implements CartDAO{
         return productArray;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public Product[] getCartContents(String username) throws IOException {
         load(username);
         synchronized (products) {
@@ -114,6 +116,9 @@ public class CartFileDAO implements CartDAO{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Product getCartProduct(int id, String username) throws IOException {
         load(username);
         synchronized (products) {
@@ -124,6 +129,9 @@ public class CartFileDAO implements CartDAO{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Product[] searchCart(String containsText, String username) throws IOException {
         load(username);
         synchronized (products) {
@@ -131,6 +139,9 @@ public class CartFileDAO implements CartDAO{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Product addToCart(Product product, String username) throws IOException {
         load(username);
         synchronized (products) {
