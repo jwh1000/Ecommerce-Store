@@ -112,7 +112,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testSearchHeroesHandleException() throws IOException { // findHeroes may throw IOException
+    public void testSearchProductsHandleException() throws IOException { // findHeroes may throw IOException
         // Setup
         String searchString = "an";
         // When createProduct is called on the Mock Product DAO, throw an IOException
@@ -187,6 +187,132 @@ public class ProductControllerTest {
 
         // analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+    /*
+     * Create and Get test Methods Below
+     * @author Ryan Robison
+     */
+    @Test
+    public void testCreateProduct() throws IOException {  
+        // Setup
+        Product product = new Product(6, "BookTest", 10.99);
+        Product[] products = new Product[0];
+        // when creat product is called creates product
+        when(mockProductDAO.createProduct(product)).thenReturn(product);
+        when(mockProductDAO.findProducts(product.getName())).thenReturn(products);
+
+        // Invoke
+        ResponseEntity<Product> response = productController.createProduct(product);
+
+        // Analyze
+        assertEquals(HttpStatus.CREATED,response.getStatusCode());
+        assertEquals(product,response.getBody());
+    }
+
+    @Test
+    public void testCreateProductFail() throws IOException { 
+        Product product = new Product(6, "BookTest", 10.99);
+        Product[] products = new Product[1];
+        products[0] = product;
+        // when create product is called but there is conflict aka product exists
+        when(mockProductDAO.createProduct(product)).thenReturn(null);
+        when(mockProductDAO.findProducts(product.getName())).thenReturn(products);
+        // Invoke
+        ResponseEntity<Product> response = productController.createProduct(product);
+
+        // Analyze
+        assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
+    }
+
+    @Test
+    public void testCreateProductInternalError() throws IOException {  
+        // Setup
+        Product product = new Product(6, "BookTest", 10.99);
+        // when create product is called and internal server error
+        doThrow(new IOException()).when(mockProductDAO).findProducts(product.getName());
+    
+        // Invoke
+        ResponseEntity<Product> response = productController.createProduct(product);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetProducts() throws IOException { 
+        // Setup
+        Product[] products = new Product[2];
+        products[0] = new Product(6, "BookTest", 10.99);
+        products[1] = new Product(7, "BookTest2", 5.00);
+        // When get products is called returns books above
+        when(mockProductDAO.getProducts()).thenReturn(products);
+
+        // Invoke
+        ResponseEntity<Product[]> response = productController.getProducts();
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(products,response.getBody());
+    }
+
+    @Test
+    public void testGetProductsInternalError() throws IOException {  
+        // Setup
+        //When get products is called returns internal error
+        doThrow(new IOException()).when(mockProductDAO).getProducts();
+    
+        // Invoke
+        ResponseEntity<Product[]> response = productController.getProducts();
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetProduct() throws IOException { 
+        // Setup
+        Product[] products = new Product[2];
+        products[0] = new Product(6, "BookTest", 10.99);
+        products[1] = new Product(7, "BookTest2", 5.00);
+        // When get product is called returns specified book above
+        when(mockProductDAO.getProduct(6)).thenReturn(products[0]);
+
+        // Invoke
+        ResponseEntity<Product> response = productController.getProduct(6);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(products[0],response.getBody());
+    }
+
+    @Test
+    public void testGetProductNotFound() throws IOException { 
+        // Setup
+        Product[] products = new Product[2];
+        products[0] = new Product(6, "BookTest", 10.99);
+        products[1] = new Product(7, "BookTest2", 5.00);
+        // When get product is called returns null as book wanted is not there
+        when(mockProductDAO.getProduct(5)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Product> response = productController.getProduct(5);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+        assertEquals(null,response.getBody());
+    }
+
+    @Test
+    public void testGetProductInternalError() throws IOException {  
+        // Setup
+        //When get product is called returns internal error
+        doThrow(new IOException()).when(mockProductDAO).getProduct(6);
+    
+        // Invoke
+        ResponseEntity<Product> response = productController.getProduct(6);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
 }
