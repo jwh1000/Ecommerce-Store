@@ -17,6 +17,11 @@ import java.util.Arrays;
 import com.estore.api.estoreapi.model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Junit test suite for CartFileDAO
+ * 
+ * @author Jack Hunsberger
+ */
 @Tag("Persistence-tier")
 public class CartFileDAOTest {
     CartFileDAO cartFileDAO;
@@ -24,9 +29,9 @@ public class CartFileDAOTest {
     ObjectMapper mockObjectMapper;
 
     /**
-     * Set up an example cart with some products in it
-     * @throws IOException
-     */
+    *  creates mock cart full of products and changes the current cart to be user's
+     *  tells object mapper to produce the mock list when writing values
+    */
     @BeforeEach
     public void setupCartFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
@@ -44,6 +49,9 @@ public class CartFileDAOTest {
         cartFileDAO.updateCart("user");
     }
 
+    /**
+     * tests when getting the contents of the cart is a success
+     */
     @Test
     public void testGetCartContentsSuccess() {
         Product[] result = assertDoesNotThrow(() -> cartFileDAO.getCartContents("user"),
@@ -53,6 +61,9 @@ public class CartFileDAOTest {
         assertEquals(testProducts.length, cartFileDAO.products.size());
     }
 
+    /**
+     * tests when getting the contents of the cart when it is empty
+     */
     @Test
     public void testGetCartContentsEmpty() {
         Product[] empty = new Product[0];
@@ -70,6 +81,9 @@ public class CartFileDAOTest {
         assertEquals(empty.length, cartFileDAO.products.size());
     }
 
+    /**
+     * tests when getting a certain product from the cart
+     */
     @Test
     public void testGetCartProductSuccess() {
         Product result1 = assertDoesNotThrow(() -> cartFileDAO.getCartProduct(0, "user"),
@@ -86,6 +100,9 @@ public class CartFileDAOTest {
         assertEquals(testProducts[2], result3);
     }
 
+    /**
+     * tests when the product cannot be found when getting a product
+     */
     @Test
     public void testGetCartProductNotFound() {
         Product notFound = assertDoesNotThrow(() -> cartFileDAO.getCartProduct(5, "user"),
@@ -94,6 +111,9 @@ public class CartFileDAOTest {
         assertEquals(null, notFound);
     }
 
+    /**
+     * tests searching a cart with a search term
+     */
     @Test
     public void testSearchCart() {
         Product[] result1 = assertDoesNotThrow(() -> cartFileDAO.searchCart("Good", "user"),
@@ -113,6 +133,9 @@ public class CartFileDAOTest {
         assertArrayEquals(search2, result2);
     }
 
+    /**
+     * Tests adding a product to the cart
+     */
     @Test
     public void testAddToCart() {
         Product add = new Product(3, "Moby Dick", 9.99);
@@ -129,6 +152,9 @@ public class CartFileDAOTest {
         assertArrayEquals(testProductsAdd, results2);
     }
 
+    /**
+     * Tests removing a product from the cart
+     */
     @Test
     public void testRemoveFromCart() {
         boolean result = assertDoesNotThrow(() -> cartFileDAO.removeFromCart(2, "user"), 
@@ -143,6 +169,9 @@ public class CartFileDAOTest {
         assertEquals(true, result);
     }
 
+    /**
+     * Tests removing a product from the cart that is not currently in it
+     */
     @Test
     public void testRemoveFromCartNotFound() {
         boolean result = assertDoesNotThrow(() -> cartFileDAO.removeFromCart(5, "user"), 
