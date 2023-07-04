@@ -63,6 +63,11 @@ public class CartFileDAO implements CartDAO{
 
         Product[] productArray = objectMapper.readValue(new File(filename), Product[].class);
 
+        // in theory, this should never be called when a user does not exist
+        if (productArray == null) {
+            productArray = new Product[0];
+        }
+
         for (Product product : productArray) {
             products.put(product.getId(), product);
         }
@@ -90,7 +95,6 @@ public class CartFileDAO implements CartDAO{
      * @return
      */
     private Product[] getProductArray(String containsText, String username) throws IOException {
-        load(username);
         ArrayList<Product> productArrayList = new ArrayList<>();
 
         for (Product product : products.values()) {
@@ -108,7 +112,6 @@ public class CartFileDAO implements CartDAO{
      * {@inheritDoc}
      */
     public Product[] getCartContents(String username) throws IOException {
-        load(username);
         synchronized (products) {
             return getProductArray(username);
         }
@@ -118,7 +121,6 @@ public class CartFileDAO implements CartDAO{
      * {@inheritDoc}
      */
     public Product getCartProduct(int id, String username) throws IOException {
-        load(username);
         synchronized (products) {
             if (products.containsKey(id))
                 return products.get(id);
@@ -131,9 +133,8 @@ public class CartFileDAO implements CartDAO{
      * {@inheritDoc}
      */
     public Product[] searchCart(String containsText, String username) throws IOException {
-        load(username);
         synchronized (products) {
-            return getProductArray(containsText);
+            return getProductArray(containsText, username);
         }
     }
 
@@ -141,7 +142,6 @@ public class CartFileDAO implements CartDAO{
      * {@inheritDoc}
      */
     public Product addToCart(Product product, String username) throws IOException {
-        load(username);
         synchronized (products) {
             products.put(product.getId(), product);
             save(username);
@@ -153,7 +153,6 @@ public class CartFileDAO implements CartDAO{
      * {@inheritDoc}
      */
     public boolean removeFromCart (int id, String username) throws IOException {
-        load(username);
         synchronized (products) {
             if (products.containsKey(id)) {
                 products.remove(id);
@@ -162,5 +161,12 @@ public class CartFileDAO implements CartDAO{
                 return false;
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void updateCart(String username) throws IOException{
+        load(username);
     }
 }

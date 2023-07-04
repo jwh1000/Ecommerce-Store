@@ -55,6 +55,7 @@ public class CartController {
     @PostMapping("/carts/{username}/product")
     public ResponseEntity<Product> addToCart(@RequestBody Product product, @PathVariable String username) {
         try {
+            cartDAO.updateCart(username);
             
             // check if in inventory
             Product[] products = productDAO.findProducts(product.getName());
@@ -93,6 +94,8 @@ public class CartController {
     @GetMapping("/carts/{username}")
     public ResponseEntity<Product[]> getCartContents(@PathVariable String username) {
         try {
+            cartDAO.updateCart(username);
+
             Product[] products = cartDAO.getCartContents(username);
             return new ResponseEntity<Product[]>(products, HttpStatus.OK);
         } catch (IOException e) {
@@ -114,6 +117,8 @@ public class CartController {
     @GetMapping("/carts/{username}/product/{id}")
     public ResponseEntity<Product> getCartProduct(@PathVariable int id, @PathVariable String username) {
         try {
+            cartDAO.updateCart(username);
+
             Product product = cartDAO.getCartProduct(id, username);
             if (product != null)
                 return new ResponseEntity<Product>(product, HttpStatus.OK);
@@ -138,6 +143,8 @@ public class CartController {
     @DeleteMapping("/carts/{username}/product/{id}")
     public ResponseEntity<Product> removeFromCart(@PathVariable int id, @PathVariable String username) {
         try {
+            cartDAO.updateCart(username);
+
             Product product = cartDAO.getCartProduct(id, username);
             if (product != null) {
                 cartDAO.removeFromCart(id, username);
@@ -163,6 +170,8 @@ public class CartController {
     @GetMapping("/carts/{username}/")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name, @PathVariable String username) {
         try {
+            cartDAO.updateCart(username);
+
             Product[] product = cartDAO.searchCart(name, username);
             if (product.length != 0)
                 return new ResponseEntity<Product[]>(product, HttpStatus.OK);
@@ -172,9 +181,5 @@ public class CartController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
-
 }
 

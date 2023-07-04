@@ -56,4 +56,7 @@ public interface CartDAO {
      * @author Cole DenBleyker
      */
     boolean removeFromCart (int id, String usernam) throws IOException;
+
+
+    public void updateCart(String username) throws IOException;
 }

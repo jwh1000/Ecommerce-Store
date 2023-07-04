@@ -101,4 +101,29 @@ public class Product {
     public String toString() {
         return "Product ID " + this.id + ": " + this.name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Product)) {
+            return false;
+        }
+
+        Product product = (Product) o;
+
+        if (this.getId() == product.getId() && 
+            this.getName() == product.getName() && 
+            this.getPrice() == product.getPrice() &&
+            this.getDescription() == product.getDescription() &&
+            this.getQuantity() == product.getQuantity()) {
+                
+            return true;
+            
+        } else {
+            return false;
+        }
+    }
 }
