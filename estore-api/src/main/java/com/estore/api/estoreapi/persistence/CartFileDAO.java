@@ -22,8 +22,6 @@ public class CartFileDAO implements CartDAO{
 
     private String root; // root directory for carts
 
-    private @Value("${products.file}") String inventory; // directory of inventory
-
     /**
      * Creates a cart file DAO
      * 

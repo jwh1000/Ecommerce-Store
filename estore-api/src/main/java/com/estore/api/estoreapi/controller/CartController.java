@@ -20,16 +20,38 @@ import com.estore.api.estoreapi.persistence.ProductDAO;
 @RestController
 @RequestMapping("estore")
 public class CartController {
-    //TODO: Documentation
 
     private CartDAO cartDAO;
-    private ProductDAO productDAO;
+    private ProductDAO productDAO; // needed for searching the inventory
 
+    /**
+     * Creates a REST API controller to respond to http requests regarding
+     * a user's shopping cart
+     * 
+     * @param cartDAO the DAO to perform CRUD operations on cart
+     * @param productDAO the DAO to interact with the product inventory
+     * 
+     * @author Jack Hunsberger, Cole DenBleyker
+     */
     public CartController(CartDAO cartDAO, ProductDAO productDAO) {
         this.cartDAO = cartDAO;
         this.productDAO = productDAO;
     }
 
+    /**
+     * adds a {@linkplain Product product} to a user's shopping cart
+     * checks if the product is in the inventory and if the product is already
+     * in the user's cart
+     * 
+     * @param product the product to add to the cart
+     * @param username the user whose cart to add the product to
+     * @return {@link ResponseEntity ResponseEntity} HTTP status of NOT_FOUND if product doesn't exist<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of CONFLICT if the product is in the cart already<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of CREATED on success<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * 
+     * @author Jack Hunsberger
+     */
     @PostMapping("/carts/{username}/product")
     public ResponseEntity<Product> addToCart(@RequestBody Product product, @PathVariable String username) {
         try {
@@ -59,6 +81,15 @@ public class CartController {
         
     }
 
+    /**
+     * Gets the contents of a user's shopping cart
+     * 
+     * @param username the user whose cart to get the contents of
+     * @return {@link ResponseEntity ResponseEntity} HTTP status of OK on success<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * 
+     * @author Jack Hunsberger
+     */
     @GetMapping("/carts/{username}")
     public ResponseEntity<Product[]> getCartContents(@PathVariable String username) {
         try {
@@ -69,6 +100,17 @@ public class CartController {
         }
     }
 
+    /**
+     * gets a single {@linkplain Product product} of a given id from a user's cart
+     * 
+     * @param id the id of the product to get
+     * @param username the name of the user whose cart to search 
+     * @return {@link ResponseEntity ResponseEntity} HTTP status of OK on success<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of NOT_FOUND if the product cannot be found<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * 
+     * @author Jack Hunsberger
+     */
     @GetMapping("/carts/{username}/product/{id}")
     public ResponseEntity<Product> getCartProduct(@PathVariable int id, @PathVariable String username) {
         try {
@@ -107,6 +149,17 @@ public class CartController {
         }
     }
 
+    /**
+     * searches a users cart with a given search term
+     * 
+     * @param name the search parameter
+     * @param username the name of the user whose cart to search
+     * @return {@link ResponseEntity ResponseEntity} HTTP status of OK on success<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of NOT_FOUND if the product cannot be found
+     *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * 
+     * @author Jack Hunsberger
+     */
     @GetMapping("/carts/{username}/")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name, @PathVariable String username) {
         try {
