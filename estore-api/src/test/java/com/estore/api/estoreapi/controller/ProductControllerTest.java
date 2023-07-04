@@ -19,7 +19,7 @@ import com.estore.api.estoreapi.persistence.ProductDAO;
 /**
  * Tests for the Product Controller Class
  * 
- * @author Cole DenBleyker
+ * @author Cole DenBleyker, Rylan Arbour
  */
 @Tag("Controller-tier")
 public class ProductControllerTest {
@@ -126,11 +126,18 @@ public class ProductControllerTest {
 
     }
 
-    // TODO: test is failing and I don't know why
+    /**
+     * Tests deleting a product.
+     * @throws IOException
+     * @author Rylan Arbour
+     */
     @Test
     public void testDeleteProduct() throws IOException {
         //setup
+        Product product = new Product(6, "A Product", 15);
+        mockProductDAO.createProduct(product);
         //when deleteProduct is called, return true simulating successful delete and save
+        when(mockProductDAO.getProduct(6)).thenReturn(product);
         when(mockProductDAO.deleteProduct(6)).thenReturn(true);
 
         //invoke
@@ -140,10 +147,18 @@ public class ProductControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    /**
+     * Tests deleting a product that doesn't exist, giving a 404 NOT_FOUND.
+     * @throws IOException
+     * @author Rylan Arbour
+     */
     @Test
     public void testDeleteProductNotFound() throws IOException {
         //setup
+        Product product = new Product(6, "A Product", 15);
+        mockProductDAO.createProduct(product);
         //when deleteProduct is called, return false simulating failed delete and save
+        when(mockProductDAO.getProduct(6)).thenReturn(product);
         when(mockProductDAO.deleteProduct(1)).thenReturn(false);
 
         //invoke
@@ -153,11 +168,18 @@ public class ProductControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    // TODO: test is failing and I don't know why
+    /**
+     * Tests deleting a product, when an internal server error happens, giving a 500 INTERNAL_SERVER_ERROR
+     * @throws IOException
+     * @author Rylan Arbour
+     */
     @Test
     public void testDeleteProductHandleException() throws IOException {
         // setup
+        Product product = new Product(1, "A Product", 15);
+        mockProductDAO.createProduct(product);
         // when deleteProduct is called, throw IOException
+        when(mockProductDAO.getProduct(1)).thenReturn(product);
         doThrow(new IOException()).when(mockProductDAO).deleteProduct(1);
 
         // invoke
