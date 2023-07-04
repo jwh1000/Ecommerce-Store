@@ -241,7 +241,6 @@ public class CartControllerTest {
     @Test
     public void testSearchProductsNotFound() throws IOException {
         // setup
-        Product product = new Product(6, "Search", 10);
         Product[] products = new Product[0];
         // when search cart is called and not found
         when(mockCartDAO.searchCart("Ka","Bob")).thenReturn(products);
