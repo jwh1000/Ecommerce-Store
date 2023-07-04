@@ -17,6 +17,12 @@ import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.CartDAO;
 import com.estore.api.estoreapi.persistence.ProductDAO;
 
+/**
+ * Tests for the Product Controller Class
+ * 
+ * @author Ryan Robison
+ */
+
 @Tag("Controller-tier")
 public class CartControllerTest {
     private CartController cartController;
