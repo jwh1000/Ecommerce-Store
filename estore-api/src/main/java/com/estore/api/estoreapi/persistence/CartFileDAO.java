@@ -140,8 +140,18 @@ public class CartFileDAO implements CartDAO{
         }
     }
 
-    //TODO implement removeFromCart
+    /**
+     * {@inheritDoc}
+     */
     public boolean removeFromCart (int id, String username) throws IOException {
-        return false;
+        load(username);
+        synchronized (products) {
+            if (products.containsKey(id)) {
+                products.remove(id);
+                return save(username);
+            } else {
+                return false;
+            }
+        }
     }
 }
