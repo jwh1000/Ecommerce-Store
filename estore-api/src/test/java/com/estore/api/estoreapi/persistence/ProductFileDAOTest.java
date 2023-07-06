@@ -44,7 +44,42 @@ public class ProductFileDAOTest {
     }
 
     @Test
-    public void testDeleteHero_valid() {
+    public void testGetHeroes() {
+
+    }
+
+    @Test
+    public void testFindProducts() {
+
+    }
+
+    @Test
+    public void testGetProduct() {
+
+    }
+
+    @Test
+    public void testGetProductNotFound() {
+
+    }
+
+    @Test
+    public void testCreateProduct() {
+
+    }
+
+    @Test
+    public void testUpdateProduct() {
+
+    }
+
+    @Test
+    public void testUpdateProductNotFound() {
+
+    }
+
+    @Test
+    public void testProducteroValid() {
         // invoke
         boolean result = assertDoesNotThrow(() -> productFileDAO.deleteProduct(1),
                 "Unexpected exception thrown");
@@ -54,7 +89,7 @@ public class ProductFileDAOTest {
     }
 
     @Test
-    public void testDeleteHero_invalid_id() {
+    public void testDeleteProductInvalidId() {
         // invoke
         boolean result = assertDoesNotThrow(() -> productFileDAO.deleteProduct(100),
                 "Unexpected exception thrown");
