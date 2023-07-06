@@ -17,14 +17,14 @@ import org.springframework.stereotype.Component;
  * @author Xin Huang
  */
 @Component
-public class UserFileDAO implements UserDAO{
+public class UserFileDAO implements UserDAO {
 
     Map<Integer, User> users; // local cache of users so you don't
                               // need to read file every time
 
     private ObjectMapper objectMapper; // allows for conversion from user
                                        // object and JSON file
-    
+
     private static int nextId; // the next id to use when making a new user
 
     private String filename; // the file name to read and write to
@@ -161,12 +161,12 @@ public class UserFileDAO implements UserDAO{
      */
     @Override
     public User getUser(int id) throws IOException {
-       synchronized (users) {
-        if (users.containsKey(id))
-            return users.get(id);
-        else
-            return null;
-       }
+        synchronized (users) {
+            if (users.containsKey(id))
+                return users.get(id);
+            else
+                return null;
+        }
     }
-    
+
 }

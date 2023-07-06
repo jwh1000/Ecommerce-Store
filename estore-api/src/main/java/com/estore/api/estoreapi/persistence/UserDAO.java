@@ -11,7 +11,7 @@ public interface UserDAO {
      * @throws IOException if an issue with underlying storage
      */
     User[] getUsers() throws IOException;
-    
+
     /**
      * Creates and saves a {@linkplain User user}
      * 
@@ -23,7 +23,7 @@ public interface UserDAO {
      */
     User createUser(User user) throws IOException;
 
-     /**
+    /**
      * Finds all {@linkplain User users} whose name contain the text
      * 
      * @param containsText The text to compare to

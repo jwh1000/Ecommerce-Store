@@ -30,7 +30,7 @@ import com.estore.api.estoreapi.model.User;
 @RequestMapping("estore")
 public class UserController {
     private UserDAO userDAO;
-    
+
     /**
      * Creates a REST API controller which responds to http requests
      * 
@@ -79,11 +79,12 @@ public class UserController {
     public ResponseEntity<User[]> getUsers() {
         try {
             User[] users = userDAO.getUsers();
-            return new ResponseEntity<User[]>(users, HttpStatus.OK);        
+            return new ResponseEntity<User[]>(users, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<User[]>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     /**
      * Gets single user based on id
      * 
@@ -106,6 +107,7 @@ public class UserController {
             return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     /**
      * Responds to the GET request for all {@linkplain User users} whose name
      * contains
