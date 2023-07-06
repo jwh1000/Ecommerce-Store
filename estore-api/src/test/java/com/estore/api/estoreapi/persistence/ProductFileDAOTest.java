@@ -1,5 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -43,19 +44,65 @@ public class ProductFileDAOTest {
         productFileDAO = new ProductFileDAO("doesnt_matter.txt", mockObjectMapper);
     }
 
+    /**
+     * Tests the getProducts function on an inventory with a few valid products
+     * 
+     * @author Jack Hunsberger
+     */
     @Test
-    public void testGetHeroes() {
+    public void testGetProducts() {
+        // invoke
+        Product[] result = assertDoesNotThrow(() -> productFileDAO.getProducts(),
+                "Unexpected exception thrown");
+
+        // analyze
+        assertArrayEquals(testProduct, result);
+        assertEquals(testProduct.length, result.length);
 
     }
 
+    /**
+     * Tests searching the inventory for 1 item and more than 1 item
+     * 
+     * @author Jack Hunsberger
+     */
     @Test
     public void testFindProducts() {
+        // setup
+        Product[] testProductSearch1 = new Product[1];
+        testProductSearch1[0] = testProduct[1];
 
+        Product[] testProductSearch2 = new Product[2];
+        testProductSearch2[0] = testProduct[0];
+        testProductSearch2[1] = testProduct[2];
+
+        // invoke
+        Product[] result1 = assertDoesNotThrow(() -> productFileDAO.findProducts("84"),
+                "Unexpected exception thrown");
+
+        Product[] result2 = assertDoesNotThrow(() -> productFileDAO.findProducts("i"),
+                "Unexpected exception thrown");
+
+        // analyze
+        assertArrayEquals(testProductSearch1, result1);
+        assertArrayEquals(testProductSearch2, result2);
     }
 
+    /**
+     * Tests getting a product with a given id from an inventory of valid items
+     * 
+     * @author Jack Hunsberger
+     */
     @Test
     public void testGetProduct() {
+        Product result1 = assertDoesNotThrow(() -> productFileDAO.getProduct(2),
+                "Unexpected exception thrown");
 
+        Product result2 = assertDoesNotThrow(() -> productFileDAO.getProduct(3),
+                "Unexpected exception thrown");
+
+        assertEquals(testProduct[1], result1);
+        assertEquals(testProduct[2], result2);
     }
 
     @Test
