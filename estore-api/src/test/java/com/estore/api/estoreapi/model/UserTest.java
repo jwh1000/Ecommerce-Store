@@ -31,6 +31,7 @@ public class UserTest {
         assertEquals(expected_Username, user.getUsername());
     }
 
+
     /**
      * Tests the constructor function to make sure that it
      * properly constructs a user.
@@ -67,6 +68,46 @@ public class UserTest {
 
         // invoke
         String actual_string = user.toString();
+
+        // analyze
+        assertEquals(expected_string, actual_string);
+
+    }
+
+    /**
+     * Makes sure the idString function works as intended
+     * @author Xin Huang
+     */
+    @Test
+    public void test_idString() {
+        // setup
+        int id = 50;
+        String Username = "Xintilleon";
+        String expected_string = "User ID 50";
+        User user = new User(id, Username);
+
+        // invoke
+        String actual_string = user.idString();
+
+        // analyze
+        assertEquals(expected_string, actual_string);
+
+    }
+
+    /**
+     * Makes sure the usernameString function works as intended
+     * @author Xin Huang
+     */
+    @Test
+    public void test_usernameString() {
+        // setup
+        int id = 50;
+        String Username = "Xintilleon";
+        String expected_string = "Username Xintilleon";
+        User user = new User(id, Username);
+
+        // invoke
+        String actual_string = user.usernameString();
 
         // analyze
         assertEquals(expected_string, actual_string);

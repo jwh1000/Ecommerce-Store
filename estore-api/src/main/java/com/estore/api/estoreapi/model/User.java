@@ -56,5 +56,15 @@ public class User {
     public String toString() {
         return "User ID " + this.id + ": " + this.username;
     }
+    
+    // String representation of user ID, for tests/debugging
+    public String idString() {
+        return "User ID " + this.id;
+    }
+
+    // String representation of user username, for tests/debugging
+    public String usernameString() {
+        return "Username " + this.username; 
+    }
 
 }
