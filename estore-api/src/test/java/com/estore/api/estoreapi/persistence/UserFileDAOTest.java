@@ -129,4 +129,25 @@ public class UserFileDAOTest {
         assertEquals(expectedLength, result.length);
         assertEquals(expectedString, resultString);
     }
+
+    /**
+     * Tests the getUsername function.
+     * DDemostrates successful use of getUsername
+     * 
+     * @throws IOException
+     * 
+     * @Author Xin Huang
+     */
+    @Test
+    public void testGetUsername() throws IOException{
+        // setuup
+        int expectedLegnth = 1;
+        String expectedString = "[User ID 1: firstUser]";
+        // invoke
+        User[] result = userFileDAO.getUsername("firstUser");
+        String resultString = Arrays.toString(result);
+        // analyze
+        assertEquals(expectedLegnth, result.length);
+        assertEquals(expectedString, resultString);
+    }
 }

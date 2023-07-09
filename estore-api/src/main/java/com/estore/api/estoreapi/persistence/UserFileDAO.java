@@ -75,9 +75,21 @@ public class UserFileDAO implements UserDAO {
      */
     private User[] getUserArray(String containsText) {
         ArrayList<User> userArrayList = new ArrayList<>();
-
         for (User user : users.values()) {
             if (containsText == null || user.getUsername().contains(containsText)) {
+                userArrayList.add(user);
+            }
+        }
+
+        User[] userArray = new User[userArrayList.size()];
+        userArrayList.toArray(userArray);
+        return userArray;
+    }
+
+    private User[] getExactUser(String userName) {
+        ArrayList<User> userArrayList = new ArrayList<>();
+        for (User user : users.values()) {
+            if (userName == null || user.getUsername().equals(userName)) {
                 userArrayList.add(user);
             }
         }
@@ -167,6 +179,14 @@ public class UserFileDAO implements UserDAO {
             else
                 return null;
         }
+    }
+
+    @Override
+    public User[] getUsername(String userName) throws IOException {
+        synchronized (users) {
+            return getExactUser(userName);
+        }
+        
     }
 
 }

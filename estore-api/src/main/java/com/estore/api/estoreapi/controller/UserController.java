@@ -138,4 +138,16 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/users/")
+    public ResponseEntity<User[]> authenticateUsers(@RequestParam String userName) {
+        try {
+            User[] user = userDAO.getUsername(userName);
+            if (user != null)
+                return new ResponseEntity<User[]>(user, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            return new ResponseEntity<User[]>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
