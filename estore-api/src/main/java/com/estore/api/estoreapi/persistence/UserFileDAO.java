@@ -181,12 +181,15 @@ public class UserFileDAO implements UserDAO {
         }
     }
 
+    /**
+     ** {@inheritDoc}
+     */
     @Override
     public User[] getUsername(String userName) throws IOException {
         synchronized (users) {
             return getExactUser(userName);
         }
-        
+
     }
 
 }

@@ -138,6 +138,16 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Authenticates the user based on Username
+     * 
+     * @param userName
+     * @return ResponseEntity HTTP status of OK if item is found and returned
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @author Xin Huang
+     */
     @GetMapping("/users/")
     public ResponseEntity<User[]> authenticateUsers(@RequestParam String userName) {
         try {
