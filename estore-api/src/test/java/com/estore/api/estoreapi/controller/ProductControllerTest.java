@@ -39,7 +39,7 @@ public class ProductControllerTest {
     @Test
     public void testUpdateProduct() throws IOException {
         // setup
-        Product product = new Product("Not Updated Product", 10, 6);
+        Product product = new Product(6, "Not Updated Product", 10);
         // when updateProduct is called, return true simulating successful update and
         // save
         when(mockProductDAO.updateProduct(product)).thenReturn(product);
@@ -55,7 +55,7 @@ public class ProductControllerTest {
     @Test
     public void testUpdateProductFailed() throws IOException {
         // setup
-        Product product = new Product("A Product", 15, 6);
+        Product product = new Product(6, "A Product", 15);
         // when updateProduct is called, return true simulating successful update and
         // save
         when(mockProductDAO.updateProduct(product)).thenReturn(null);
@@ -68,7 +68,7 @@ public class ProductControllerTest {
     @Test
     public void testUpdateProductHandleException() throws IOException {
         // setup
-        Product product = new Product("A Product", 15, 6);
+        Product product = new Product(6, "A Product", 15);
         // when updateProduct is called on the mock Product DAO, throw an IOException
         doThrow(new IOException()).when(mockProductDAO).updateProduct(product);
         // invoke
@@ -82,8 +82,8 @@ public class ProductControllerTest {
         // Setup
         String searchString = "Att";
         Product[] products = new Product[2];
-        products[0] = new Product("Attack on Titan V1", 15, 6);
-        products[1] = new Product("All about Bodhisattva", 14, 5);
+        products[0] = new Product(6, "Attack on Titan V1", 15);
+        products[1] = new Product(5, "All about Bodhisattva", 14);
         // When findProducts is called with the search string, return the two
         // heroes above
         when(mockProductDAO.findProducts(searchString)).thenReturn(products);

@@ -44,10 +44,12 @@ public class Product {
      * @param price The price of the product
      * @param id    The id of the product
      */
-    public Product(@JsonProperty("name") String name, @JsonProperty("price") double price, @JsonProperty("id") int id) {
+    public Product(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") double price) {
         this.name = name;
         this.price = price;
         this.id = id;
+
+        // these fields can be changed from the admin panel
         this.quantity = 0;
         this.description = "Lorem Ipsum";
     }
@@ -98,5 +100,30 @@ public class Product {
     @Override
     public String toString() {
         return "Product ID " + this.id + ": " + this.name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Product)) {
+            return false;
+        }
+
+        Product product = (Product) o;
+
+        if (this.getId() == product.getId() && 
+            this.getName() == product.getName() && 
+            this.getPrice() == product.getPrice() &&
+            this.getDescription() == product.getDescription() &&
+            this.getQuantity() == product.getQuantity()) {
+                
+            return true;
+            
+        } else {
+            return false;
+        }
     }
 }
