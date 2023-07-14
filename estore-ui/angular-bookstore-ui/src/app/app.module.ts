@@ -8,6 +8,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AdminButtonsComponent } from './admin-buttons/admin-buttons.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
     ProductsComponent,
     ProductDetailComponent,
     ProductUserDetailComponent,
-    ProductUserInventoryComponent
+    ProductUserInventoryComponent,
+    AdminButtonsComponent
   ],
   imports: [
     BrowserModule,
