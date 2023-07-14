@@ -4,12 +4,12 @@ import { ProductUserInventoryComponent } from './product-user-inventory/product-
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 
 const routes: Routes = [
-  { path: 'product', component: ProductUserInventoryComponent},
+  { path: '', redirectTo: '/user-product', pathMatch: 'full' },
+  { path: 'user-product', component: ProductUserInventoryComponent},
   { path: 'user-detail/:id', component: ProductUserDetailComponent}
 ]
 
 @NgModule({
-  declarations: [],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

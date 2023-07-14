@@ -52,3 +52,19 @@
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
+
+  button.add {
+    position: absolute;
+    left: 210px;
+    top: 5px;
+    background-color: white;
+    color:  #525252;
+    font-size: 1.1rem;
+    margin: 0;
+    padding: 1px 10px 3px 10px;
+  }
+  
+  button.add:hover {
+    background-color: #525252;
+    color: white;
+  }
