@@ -33,6 +33,16 @@ export class ProductService {
     );
   }
 
+  searchProduct(term: string): Observable<Product[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    const url = `${this.productURL}/inventory/?name=${term}`
+    return this.http.get<Product[]>(url).pipe(
+      tap(),
+      catchError(this.handleError<Product[]>('searchProducts', []))
+    );
+  }
 
 private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {

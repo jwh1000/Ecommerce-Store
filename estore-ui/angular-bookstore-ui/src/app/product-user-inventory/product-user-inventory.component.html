@@ -1,4 +1,5 @@
 <h2>My Products</h2>
+<app-inventory-search></app-inventory-search>
 <ul class="products">
   <li *ngFor="let product of products">
     <a routerLink="/user-detail/{{product.id}}">
@@ -7,6 +8,6 @@
     <button type="button" class="add" title="Add to Cart"
       (click)="add(product)">+</button>
     <button type="button" class="delete" title="Remove from Cart"
-      (click)="delete(product)">x</button>
+      (click)="delete(product)">-</button>
   </li>
 </ul>
