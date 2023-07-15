@@ -1,1 +1,1 @@
-[{"name":"BookUpdated","price":13.37,"id":1,"description":"Lorem Ipsum","quantity":0},{"name":"Textbook","price":399.99,"id":3,"description":"Lorem Ipsum","quantity":0}]
+[{"name":"Book 1","price":7.99,"id":1,"description":"Lorem Ipsum","quantity":0},{"name":"Book 2","price":4.99,"id":2,"description":"Lorem Ipsum","quantity":0},{"name":"Book 3","price":1.99,"id":3,"description":"Lorem Ipsum","quantity":1}]

@@ -4,5 +4,9 @@
     <a routerLink="/user-detail/{{product.id}}">
         <span class ="badge">{{product.id}}</span>{{product.name}}
     </a>
+    <button type="button" class="add" title="Add to Cart"
+      (click)="add(product)">+</button>
+    <button type="button" class="delete" title="Remove from Cart"
+      (click)="delete(product)">x</button>
   </li>
 </ul>

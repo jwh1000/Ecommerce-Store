@@ -31,9 +31,9 @@ public class ProductFileDAOTest {
     public void setupProductFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testProduct = new Product[3];
-        testProduct[0] = new Product("The Shining", 4.99, 1);
-        testProduct[1] = new Product("1984", 8.50, 2);
-        testProduct[2] = new Product("Pride and Prejudice", 2.99, 3);
+        testProduct[0] = new Product(1, "The Shining", 4.99);
+        testProduct[1] = new Product(2, "1984", 8.50);
+        testProduct[2] = new Product(3, "Pride and Prejudice", 2.99);
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the product array above

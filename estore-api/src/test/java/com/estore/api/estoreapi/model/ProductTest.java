@@ -20,7 +20,7 @@ public class ProductTest {
         int expected_quantity = 0;
 
         // invoke
-        Product product = new Product(expected_name, expected_price, expected_id);
+        Product product = new Product(expected_id, expected_name, expected_price);
 
         // analyze
         assertEquals(expected_id, product.getId());
@@ -36,7 +36,7 @@ public class ProductTest {
         int id = 100;
         double price = 5.99;
         String name = "House of Leaves";
-        Product product = new Product(name, price, id);
+        Product product = new Product(id, name, price);
         String expected_string = "Product ID 100: House of Leaves";
 
         // invoke

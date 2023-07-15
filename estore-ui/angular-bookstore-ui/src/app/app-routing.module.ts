@@ -6,12 +6,12 @@ import { AdminButtonsComponent } from './admin-buttons/admin-buttons.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminButtonsComponent},
-  { path: 'product', component: ProductUserInventoryComponent},
+  { path: '', redirectTo: '/user-product', pathMatch: 'full' },
+  { path: 'user-product', component: ProductUserInventoryComponent},
   { path: 'user-detail/:id', component: ProductUserDetailComponent}
 ]
 
 @NgModule({
-  declarations: [],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

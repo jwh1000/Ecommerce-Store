@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from './product'
-import { PRODUCTS } from './mock-products';
+
 import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class CartService {
 
   private productURL = 'http://localhost:8080/estore';
+  private user = 'admin';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,20 +20,21 @@ export class ProductService {
   constructor(private http: HttpClient) { 
   }
 
-  getProducts(): Observable<Product[]>{
-    const url = `${this.productURL}/inventory`;
-    return this.http.get<Product[]>(url).pipe(tap(),
-      catchError(this.handleError<Product[]>('getProducts', []))
-    )
-  }
-
-  getProduct(id: number) : Observable<Product> {
-    const url = `${this.productURL}/inventory/product/${id}`;
-    return this.http.get<Product>(url).pipe(tap(),
-      catchError(this.handleError<Product>(`getProduct id=${id}`))
+  addToCart(product: Product): Observable<Product> {
+    const url = `${this.productURL}/carts/${this.user}/product`
+    return this.http.post<Product>(url,product,this.httpOptions).pipe(
+      tap(),
+      catchError(this.handleError<Product>('addToCart'))
     );
   }
 
+  removeFromCart(product: Product): Observable<Product> {
+    const url = `${this.productURL}/carts/${this.user}/product/${product.id}`
+    return this.http.delete<Product>(url).pipe(
+      tap(),
+      catchError(this.handleError<Product>('addToCart'))
+    );
+  }
 
 private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
