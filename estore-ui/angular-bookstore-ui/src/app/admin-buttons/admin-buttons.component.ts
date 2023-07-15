@@ -7,16 +7,20 @@ import { Component } from '@angular/core';
 })
 export class AdminButtonsComponent {
   displayProducts: boolean = false;
+  displayCreate: boolean = false;
 
   createProductAction(): void {
-
+    this.displayProducts = false;
+    this.displayCreate = true;
   }
 
   editProductAction(): void {
     this.displayProducts = true;
+    this.displayCreate = false;
   }
 
   deleteProductAction(): void {
-    
+    this.displayProducts = false;
+    this.displayCreate = false;
   }
 }
