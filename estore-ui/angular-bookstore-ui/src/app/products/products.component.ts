@@ -8,6 +8,10 @@ import { ProductService } from '../product.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+/**
+ * Class to represent a list of all the products that exist in the store.
+ * @author Rylan Arbour
+ */
 export class ProductsComponent {
   selectedProduct?: Product;
 

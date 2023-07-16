@@ -7,11 +7,16 @@ import { ProductService } from '../product.service';
   templateUrl: './delete-product.component.html',
   styleUrls: ['./delete-product.component.css']
 })
+/**
+ * Class that controls the view of deleting a product as an admin.
+ * @author Rylan Arbour
+ */
 export class DeleteProductComponent {
   products: Product[] = [];
 
   constructor(private productService: ProductService) { }
 
+  //Get list of all products on initalization.
   ngOnInit(): void {
     this.getProducts();
   }
@@ -21,6 +26,10 @@ export class DeleteProductComponent {
     .subscribe(products => this.products = products);
   }
 
+  /**
+   * Deletes a product by calling the product service.
+   * @param product The product to be deleted.
+   */
   delete(product: Product): void {
     this.productService.deleteProduct(product.id).subscribe();
     window.location.reload(); //reloads this component to reflect update due to the product being deleted
