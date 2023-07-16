@@ -35,14 +35,16 @@ export class ProductService {
 
   /** PUT: update the product on the server */
   updateProduct(product: Product): Observable<any> {
-    return this.http.put(this.productURL, product, this.httpOptions).pipe(tap(),
+    const url = `${this.productURL}`;
+    return this.http.put(url, product, this.httpOptions).pipe(tap(),
       catchError(this.handleError<any>('updateProduct'))
     );
   }
 
   /** POST: add a new product to the server */
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.productURL, product, this.httpOptions).pipe(tap(),
+    const url = `${this.productURL}/inventory/product`;
+    return this.http.post<Product>(url, product, this.httpOptions).pipe(tap(),
       catchError(this.handleError<Product>('addProduct'))
     );
   }

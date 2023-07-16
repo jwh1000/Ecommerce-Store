@@ -20,8 +20,6 @@ export class NewProductComponent {
     var price = parseFloat(priceString);
     
     this.productService.addProduct({ name, price } as Product)
-      .subscribe(
-
-      );
+      .subscribe();
   }
 }
