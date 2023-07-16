@@ -1,6 +1,10 @@
 <h1>{{title}}</h1>
+<label for="username">(DEMO PLACEHOLDER FOR THIS BRANCH) Username: </label>
+<input id="username" [(ngModel)]="username" placeholder="User">
 <nav>
-    <a routerLink="/admin">Admin Page</a>
+    <div *ngIf="username == 'admin'">
+        <a routerLink="/admin">Admin Page</a>
+    </div>
     <br>
     <a routerLink="/user-product">Products</a>
 </nav>
