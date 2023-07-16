@@ -11,22 +11,27 @@ import { CartService } from '../cart.service'
 export class ProductUserInventoryComponent implements OnInit{
     products: Product[] = [];
   
+    //constructor initializes product and cart service
     constructor(private productService: ProductService,
       private cartService: CartService){}
 
+    //on initialize gets products
     ngOnInit(): void {
       this.getProducts()
     }
   
+    //uses product service to retrieve products
     getProducts(): void {
       this.productService.getProducts()
       .subscribe(products => this.products = products)
     }
 
+    //uses cart service to add to users cart
     add(product: Product):void {
       this.cartService.addToCart(product).subscribe();
     }
 
+    //uses cart service to remove from users cart
     delete(product: Product):void {
       this.cartService.removeFromCart(product).subscribe();
     }

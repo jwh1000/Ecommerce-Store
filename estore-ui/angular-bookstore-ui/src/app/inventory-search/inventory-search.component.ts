@@ -14,16 +14,19 @@ import { ProductService } from '../product.service';
   templateUrl: './inventory-search.component.html',
   styleUrls: ['./inventory-search.component.css']
 })
+
 export class InventorySearchComponent {
   products$!: Observable<Product[]>;
   private searchTerms = new Subject<string>();
 
   constructor(private productService: ProductService) {}
 
+  //calls the search
   search(term: string): void {
     this.searchTerms.next(term);
   }
 
+  //initializes on startup
   ngOnInit(): void {
     this.products$ = this.searchTerms.pipe(
       debounceTime(300),
