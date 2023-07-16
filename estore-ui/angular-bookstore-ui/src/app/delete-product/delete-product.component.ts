@@ -1,20 +1,13 @@
 import { Component } from '@angular/core';
 import { Product } from '../product';
-import { PRODUCTS } from '../mock-products';
 import { ProductService } from '../product.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: 'app-delete-product',
+  templateUrl: './delete-product.component.html',
+  styleUrls: ['./delete-product.component.css']
 })
-export class ProductsComponent {
-  selectedProduct?: Product;
-
-  onSelect(product: Product): void {
-    this.selectedProduct = product;
-  }
-
+export class DeleteProductComponent {
   products: Product[] = [];
 
   constructor(private productService: ProductService) { }
@@ -28,4 +21,8 @@ export class ProductsComponent {
     .subscribe(products => this.products = products);
   }
 
+  delete(product: Product): void {
+    this.productService.deleteProduct(product.id).subscribe();
+    window.location.reload(); //reloads this component to reflect update due to the product being deleted
+  }
 }

@@ -49,6 +49,15 @@ export class ProductService {
     );
   }
 
+  /** DELETE: delete the product from the server */
+  deleteProduct(id: number): Observable<Product> {
+    const url = `${this.productURL}/inventory/product/${id}`;
+
+    return this.http.delete<Product>(url, this.httpOptions).pipe(tap(),
+      catchError(this.handleError<Product>('deleteProduct'))
+    );
+  }
+
 
 private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {

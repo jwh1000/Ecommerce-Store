@@ -11,6 +11,7 @@ import { ProductUserInventoryComponent } from './product-user-inventory/product-
 import { AppRoutingModule } from './app-routing.module';
 import { AdminButtonsComponent } from './admin-buttons/admin-buttons.component';
 import { NewProductComponent } from './new-product/new-product.component';
+import { DeleteProductComponent } from './delete-product/delete-product.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NewProductComponent } from './new-product/new-product.component';
     ProductUserDetailComponent,
     ProductUserInventoryComponent,
     AdminButtonsComponent,
-    NewProductComponent
+    NewProductComponent,
+    DeleteProductComponent
   ],
   imports: [
     BrowserModule,
