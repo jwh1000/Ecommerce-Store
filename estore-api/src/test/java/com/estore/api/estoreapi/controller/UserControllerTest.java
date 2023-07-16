@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.User;
 import com.estore.api.estoreapi.persistence.UserDAO;
+
 /**
  * Tests for the User Controller Class
  * 
@@ -25,7 +26,7 @@ import com.estore.api.estoreapi.persistence.UserDAO;
 public class UserControllerTest {
     private UserController userController;
     private UserDAO mockUserDAO;
-    
+
     /**
      * Before each testm create a new UserController object and inject a mock
      * User DAO
@@ -35,6 +36,7 @@ public class UserControllerTest {
         mockUserDAO = mock(UserDAO.class);
         userController = new UserController(mockUserDAO);
     }
+
     /*
      * Tests to make sure the return for search works for the controller.
      */
@@ -42,8 +44,8 @@ public class UserControllerTest {
     public void testSearchProducts() throws IOException { // findUsers may throw IOException
         String searchString = "int";
         User[] users = new User[2];
-        users[0] = new User (3, "dirtyinter");
-        users[1] = new User (1, "Xintilleon");
+        users[0] = new User(3, "dirtyinter");
+        users[1] = new User(1, "Xintilleon");
         // When findusers is called with the search string, return the two
         // user above
         when(mockUserDAO.findUsers(searchString)).thenReturn(users);
@@ -55,6 +57,7 @@ public class UserControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(users, response.getBody());
     }
+
     /*
      * Tests to make sure the Handle exception works for search users
      */
@@ -72,4 +75,36 @@ public class UserControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 
     }
+    /*
+     * Tests to make sure create user works
+     */
+
+    @Test
+    public void testcreateUser() throws IOException {
+        // setup
+        User user = new User(1, "Xintilleon");
+        // when createProduct is called, return true simulating successful creation
+        // save
+        when(mockUserDAO.createUser(user)).thenReturn(user);
+        // Invoke
+        ResponseEntity<User> response = userController.createUser(user);
+        // analysis
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(user, response.getBody());
+    }
+    /*
+     * Tests to make sure the handle exception works for create users.
+     */
+    @Test
+    public void testcreateUserHandleException() throws IOException {
+        // setup
+        User user = new User(1, "Xintilleon");
+        // when createUser is called on the mock User DAO, throw an IOException
+        doThrow(new IOException()).when(mockUserDAO).createUser(user);
+        // invoke
+        ResponseEntity<User> response = userController.createUser(user);
+        // analysis
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+
 }
