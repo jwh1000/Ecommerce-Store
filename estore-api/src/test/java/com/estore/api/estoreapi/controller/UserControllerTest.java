@@ -76,20 +76,22 @@ public class UserControllerTest {
 
     }
     /*
-     * Tests to make sure create user works
+     * Tests to make sure that create user works
      */
 
     @Test
     public void testcreateUser() throws IOException {
         // setup
         User user = new User(1, "Xintilleon");
+        User[] users = new User[1];
+        users[0] = user;
         // when createProduct is called, return true simulating successful creation
         // save
         when(mockUserDAO.createUser(user)).thenReturn(user);
         // Invoke
         ResponseEntity<User> response = userController.createUser(user);
         // analysis
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(user, response.getBody());
     }
     /*
@@ -107,4 +109,85 @@ public class UserControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    /*
+     * Tests to make sure that get user works
+     */
+    @Test 
+    public void testgetUser() throws IOException {
+        // setup
+        User user = new User(1, "Xintilleon");
+        User[] users = new User[1];
+        users[0] = user;
+        // when get user is called
+        when(mockUserDAO.getUser(1)).thenReturn(user);
+        // invoke
+        ResponseEntity<User> response = userController.getUser(1);
+        //analysis
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(user, response.getBody());    
+    }
+    /*
+     * Tests to make sure that the correct response is shared when user is not found
+     */
+    @Test
+    public void testGetUserNotFound() throws IOException {
+        // setup
+        User user = new User(1, "Xintilleon");
+        User[] users = new User[1];
+        users[0] = user;
+        // when get user is called and not found
+        when(mockUserDAO.getUser(5)).thenReturn(null);
+        // invoke
+        ResponseEntity<User> response = userController.getUser(5);
+        // analysis
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals(null,response.getBody());
+    }
+    /*
+     * Tests to make sure that the get user sends back a Internal error when promted
+     */
+    @Test
+    public void testGetUserInternalError() throws IOException {
+        // setup
+        // when get user is called and Iternal Server Error
+        doThrow(new IOException()).when(mockUserDAO).getUser(1);
+        // invoke
+        ResponseEntity<User> response = userController.getUser(1);
+        // analysis
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+    /*
+     * Tests to make sure that user array gets returned when get users is called
+     */
+    @Test
+    public void testGetUsers() throws IOException {
+        // setup
+        User user = new User(1, "Xintilleon");
+        User user2 = new User(2, "DirtyFrank");
+        User[] users = new User[2];
+        users[0] = user;
+        users[1] = user2;
+        // when get users is called
+        when(mockUserDAO.getUsers()).thenReturn(users);
+        // invoke
+        ResponseEntity<User[]> response = userController.getUsers();
+        // analysis
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(users, response.getBody());
+
+    }
+
+    /*
+     * Tests to make sure that the get users sends back a Internal error when promted
+     */
+    @Test
+    public void testGetUsersInternalError() throws IOException {
+        // setup
+        // when get user is called and Iternal Server Error
+        doThrow(new IOException()).when(mockUserDAO).getUsers();
+        // invoke
+        ResponseEntity<User[]> response = userController.getUsers();
+        // analysis
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 }
