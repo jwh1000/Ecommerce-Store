@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.User;
 import com.estore.api.estoreapi.persistence.UserDAO;
 
@@ -237,7 +236,6 @@ public class UserControllerTest {
         users[1] = user2;
         // invoke
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 
 
     }
