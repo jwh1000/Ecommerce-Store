@@ -1,0 +1,12 @@
+<button type="button" (click)="createProductAction()">Create new product</button>
+<button type="button" (click)="editProductAction()">Edit existing product</button>
+<button type="button" (click)="deleteProductAction()">Delete existing product</button>
+
+<p *ngIf="displayProducts">Edit an existing product below by clicking on it.</p>
+<app-products *ngIf="displayProducts"></app-products>
+
+<p *ngIf="displayCreate">Create a new product below.</p>
+<app-new-product *ngIf="displayCreate"></app-new-product>
+
+<p *ngIf="displayDelete">Click a product to DELETE it!</p>
+<app-delete-product *ngIf="displayDelete"></app-delete-product>
