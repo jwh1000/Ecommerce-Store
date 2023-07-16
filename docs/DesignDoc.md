@@ -19,7 +19,7 @@ geometry: margin=1in
 
 ## Executive Summary
 
-This is a summary of the project.
+The main intention of this project is to act as an e-store, with a focus in selling books. Users are able to login and add products to their shopping cart. They are also able to remove products from their shopping carts. If a user logs in as an admin then they gain access to edit products - being able to change the price, cost, quantity, name, and description. Admins can also add and remove products. The e-store also has promotional codes that admins can create and remove, and users can apply to get a discount on the total cost of their shopping cart. Users can also view their purcahse history.
 
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
