@@ -190,4 +190,55 @@ public class UserControllerTest {
         // analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
+
+    /*
+     * Tests to make sure that authenticateUsers work
+     */
+    @Test
+    public void testAuthenticateUsers() throws IOException {
+        //setup
+        User user = new User(1, "Xintilleon");
+        User user2 = new User(2, "DirtyFrank");
+        User[] users = new User[2];
+        users[0] = user;
+        users[1] = user2;
+        // invoke
+        ResponseEntity<User[]> response = userController.authenticateUsers("Xintilleon");
+        // analysis
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(user, response.getBody());
+
+    }
+
+    /*
+     * Tests to make sure that authenticateUsers sends not found when promted.
+     */
+    @Test
+    public void testAuthenticateUsersNotFound() throws IOException {
+        //setup
+        User user = new User(1, "Xintilleon");
+        User user2 = new User(2, "DirtyFrank");
+        User[] users = new User[2];
+        users[0] = user;
+        users[1] = user2;
+
+    }
+
+    /*
+     * Tests to make sure that authenticateUsers sends Internal server error when promted work
+     */
+    @Test
+    public void testAuthenticateUsersIternalServerError() throws IOException {
+        //setup
+        User user = new User(1, "Xintilleon");
+        User user2 = new User(2, "DirtyFrank");
+        User[] users = new User[2];
+        users[0] = user;
+        users[1] = user2;
+        // invoke
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+
+
+    }
 }
