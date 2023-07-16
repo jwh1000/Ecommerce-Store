@@ -97,10 +97,10 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testSearchHeroesHandleException() throws IOException { // findHeroes may throw IOException
+    public void testSearchProductsHandleException() throws IOException { // findHeroes may throw IOException
         // Setup
         String searchString = "an";
-        // When createProduct is called on the Mock Product DAO, throw an IOException
+        // When findProducts is called on the Mock Product DAO, throw an IOException
         doThrow(new IOException()).when(mockProductDAO).findProducts(searchString);
 
         // Invoke
