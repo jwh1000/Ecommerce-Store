@@ -58,6 +58,28 @@ public class UserControllerTest {
     }
 
     /*
+     * Tests to make sure the HttpStatus Not found works for search
+     */
+    @Test
+    public void testSearchNotFound() throws IOException {
+        // Setup
+        String searchString = "Problem";
+        User[] users = new User[2];
+        users[0] = new User(3, "dirtyinter");
+        users[1] = new User(1, "Xintilleon");
+        // user above
+        when(mockUserDAO.findUsers(searchString)).thenReturn(users);
+
+        // Invoke
+        ResponseEntity<User[]> response = userController.searchUsers(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+
+
+    }
+
+    /*
      * Tests to make sure the Handle exception works for search users
      */
     @Test
