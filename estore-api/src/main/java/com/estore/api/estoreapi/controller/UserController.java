@@ -130,10 +130,14 @@ public class UserController {
     public ResponseEntity<User[]> searchUsers(@RequestParam String name) {
         try {
             User[] user = userDAO.findUsers(name);
-            if (user[0].equals(null))
-                return new ResponseEntity<User[]>(user, HttpStatus.OK);
-            else
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            try {
+                if (!user[0].equals(null))
+                    return new ResponseEntity<User[]>(user, HttpStatus.OK);
+                else
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } catch (NullPointerException e) {
+                return new ResponseEntity<User[]>(HttpStatus.NOT_FOUND);
+            }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

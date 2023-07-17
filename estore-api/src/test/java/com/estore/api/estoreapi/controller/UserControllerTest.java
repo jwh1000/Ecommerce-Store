@@ -68,10 +68,10 @@ public class UserControllerTest {
         User user = new User(3, "dirtyinter");
         users[0] = user;
         users[1] = new User(1, "Xintilleon");
-        User[] empty = new User[2];
+        User[] empty = new User[1];
         when(mockUserDAO.findUsers(user.getUsername())).thenReturn(empty);
         // user above
-        when(mockUserDAO.findUsers(searchString)).thenReturn(users);
+        when(mockUserDAO.findUsers(searchString)).thenReturn(empty);
 
         // Invoke
         ResponseEntity<User[]> response = userController.searchUsers(searchString);
