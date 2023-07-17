@@ -23,7 +23,7 @@ export class LoginComponent {
   login(): void {
     if (this.usernameInput) {
       this.userService.authenticateUser(this.usernameInput).subscribe();
-      this.userService.createUser({ username:this.usernameInput } as User).subscribe();
+      this.userService.createUser({ username:this.usernameInput } as User).subscribe(); //This line of code doesn't always need to run but idk how do make it only run when the above line gets a 404 in response
       AppComponent.setUsername(this.usernameInput);
       this.location.go("main");
       this.success = true;
