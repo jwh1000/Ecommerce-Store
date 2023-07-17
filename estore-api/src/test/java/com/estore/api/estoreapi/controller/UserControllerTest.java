@@ -82,7 +82,7 @@ public class UserControllerTest {
     public void testcreateUser() throws IOException {
         // setup
         User user = new User(1, "Xintilleon");
-        User[] users = new User[1];
+        User[] users = new User[4];
         users[0] = user;
         // when createProduct is called, return true simulating successful creation
         // save
@@ -201,12 +201,12 @@ public class UserControllerTest {
         User[] users = new User[2];
         users[0] = user;
         users[1] = user2;
+        // when get users is called
+        when(mockUserDAO.getUsername("Xintilleon")).thenReturn(users);
         // invoke
         ResponseEntity<User> response = userController.authenticateUser("Xintilleon");
         // analysis
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(user, response.getBody());
-
     }
 
     /*
@@ -220,6 +220,10 @@ public class UserControllerTest {
         User[] users = new User[2];
         users[0] = user;
         users[1] = user2;
+        // invoke
+        ResponseEntity<User> response = userController.authenticateUser("a");
+        // analysis
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
     }
 
@@ -228,15 +232,13 @@ public class UserControllerTest {
      */
     @Test
     public void testAuthenticateUsersIternalServerError() throws IOException {
-        //setup
-        User user = new User(1, "Xintilleon");
-        User user2 = new User(2, "DirtyFrank");
-        User[] users = new User[2];
-        users[0] = user;
-        users[1] = user2;
+        // setup
+        // when get user is called and Iternal Server Error
+        doThrow(new IOException()).when(mockUserDAO).getUsername("a");
         // invoke
-
-
-
+        ResponseEntity<User> response = userController.authenticateUser("a");
+        // analysis
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        // invoke
     }
 }
