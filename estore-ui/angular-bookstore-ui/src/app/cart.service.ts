@@ -9,8 +9,9 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CartService {
-
-  //url and user are defined here
+  /*
+  *Url and user are defined here
+  */
   private productURL = 'http://localhost:8080/estore';
   private user = 'admin';
 
@@ -21,7 +22,9 @@ export class CartService {
   constructor(private http: HttpClient) { 
   }
 
-  //add to cart takes in product and alters url so post mapping adds specified product to cart
+  /*
+  *Add to cart takes in product and alters url so post mapping adds specified product to cart
+  */
   addToCart(product: Product): Observable<Product> {
     const url = `${this.productURL}/carts/${this.user}/product`
     return this.http.post<Product>(url,product,this.httpOptions).pipe(
@@ -30,8 +33,10 @@ export class CartService {
     );
   }
 
-  //remove from cart takes in product and alters url so delete mapping removes 
-  //specified product
+  /*
+  *Remove from cart takes in product and alters url so delete mapping removes 
+  *specified product
+  */
   removeFromCart(product: Product): Observable<Product> {
     const url = `${this.productURL}/carts/${this.user}/product/${product.id}`
     return this.http.delete<Product>(url).pipe(
@@ -40,7 +45,9 @@ export class CartService {
     );
   }
 
-  //handels errors
+  /* 
+  *Handles errors
+  */
 private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
     console.error(error);

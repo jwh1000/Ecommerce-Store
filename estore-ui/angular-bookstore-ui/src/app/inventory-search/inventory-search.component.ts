@@ -21,12 +21,16 @@ export class InventorySearchComponent {
 
   constructor(private productService: ProductService) {}
 
-  //calls the search
+  /*
+  *calls the search
+  */
   search(term: string): void {
     this.searchTerms.next(term);
   }
 
-  //initializes on startup
+  /*
+  *initializes on startup
+  */
   ngOnInit(): void {
     this.products$ = this.searchTerms.pipe(
       debounceTime(300),
