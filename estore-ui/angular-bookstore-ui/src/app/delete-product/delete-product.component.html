@@ -1,0 +1,8 @@
+<ul class="products">
+    <li *ngFor="let product of products">
+        <button type="button" (click)="delete(product)">
+        <span class="badge">{{product.id}}</span>
+        <span class="name">{{product.name}}</span>
+        </button>
+    </li>
+</ul>
