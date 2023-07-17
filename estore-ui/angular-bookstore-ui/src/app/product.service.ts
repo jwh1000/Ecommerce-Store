@@ -34,6 +34,19 @@ export class ProductService {
     );
   }
 
+  /*
+  *Uses get mapping to search for specified product
+  */
+  searchProduct(term: string): Observable<Product[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    const url = `${this.productURL}/inventory/?name=${term}`
+    return this.http.get<Product[]>(url).pipe(
+      tap(),
+      catchError(this.handleError<Product[]>('searchProducts', []))
+    );
+  }
   /** PUT: update the product on the server */
   updateProduct(product: Product): Observable<any> {
     const url = `${this.productURL}`;
@@ -60,6 +73,9 @@ export class ProductService {
   }
 
 
+  /*
+  *Handels errors
+  */
 private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
     console.error(error);
