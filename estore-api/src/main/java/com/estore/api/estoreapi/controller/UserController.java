@@ -148,16 +148,16 @@ public class UserController {
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * @author Xin Huang
      */
-    @GetMapping("/users/")
-    public ResponseEntity<User[]> authenticateUsers(@RequestParam String userName) {
+    @GetMapping("/users/auth")
+    public ResponseEntity<User> authenticateUser(@RequestParam String userName) {
         try {
-            User[] user = userDAO.getUsername(userName);
+            User user[] = userDAO.getUsername(userName);
             if (user != null)
-                return new ResponseEntity<User[]>(user, HttpStatus.OK);
+                return new ResponseEntity<User>(HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
-            return new ResponseEntity<User[]>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
