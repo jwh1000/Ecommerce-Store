@@ -129,6 +129,23 @@ public class UserFileDAOTest {
     }
 
     /**
+     * Tests the createUser function.
+     * Demonstrates successful use of createUser
+     * 
+     * @throws IOException
+     */
+    @Test
+    public void testCreateUserSuccessful() throws IOException {
+        // setup
+        User user = new User(4, "Asmellyuser");
+        String expected = user.toString();
+        // invoke
+        String result = userFileDAO.createUser(user).toString();
+        // analyze
+        assertEquals(expected, result);
+    }
+
+    /**
      * Tests the getUsername function.
      * DDemostrates successful use of getUsername
      * 
