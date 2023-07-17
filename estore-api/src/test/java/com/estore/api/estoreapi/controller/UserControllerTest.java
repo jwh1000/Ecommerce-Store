@@ -122,6 +122,10 @@ public class UserControllerTest {
     public void testcreateUserHandleException() throws IOException {
         // setup
         User user = new User(1, "Xintilleon");
+        User[] empty = new User[0];
+
+        when(mockUserDAO.findUsers(user.getUsername())).thenReturn(empty);
+
         // when createUser is called on the mock User DAO, throw an IOException
         doThrow(new IOException()).when(mockUserDAO).createUser(user);
         // invoke
