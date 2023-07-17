@@ -23,24 +23,29 @@ export class ProductUserDetailComponent implements OnInit{
   ngOnInit(): void {
     this.getProduct();
   }
-  
-  //uses product service to get a product of specified id
+  /*
+  *Uses product service to get a product of specified id
+  */
   getProduct(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getProduct(id)
     .subscribe(product => this.product = product);
   }
-  //returns user to previous page
+  /*
+  *Returns user to previous page
+  */
   goBack(): void{
     this.location.back();
   }
-
-  //uses cart service to add product to users cart
+  /*
+  *Uses cart service to add product to users cart
+  */
   add(product: Product):void {
     this.cartService.addToCart(product).subscribe();
   }
-
-  //uses cart service to remove product from users cart
+  /*
+  *Uses cart service to remove product from users cart
+  */
   delete(product: Product):void {
     this.cartService.removeFromCart(product).subscribe();
   }
