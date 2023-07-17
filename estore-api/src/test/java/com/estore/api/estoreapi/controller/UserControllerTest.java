@@ -202,7 +202,7 @@ public class UserControllerTest {
         users[0] = user;
         users[1] = user2;
         // invoke
-        ResponseEntity<User[]> response = userController.authenticateUsers("Xintilleon");
+        ResponseEntity<User> response = userController.authenticateUser("Xintilleon");
         // analysis
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(user, response.getBody());

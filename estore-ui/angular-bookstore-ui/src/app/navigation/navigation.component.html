@@ -1,0 +1,8 @@
+<p>Hello, {{username}}</p>
+<nav>
+    <div *ngIf="username == 'admin'">
+        <a routerLink="/admin">Admin Page</a>
+    </div>
+    <br>
+    <a routerLink="/user-product">Products</a>
+</nav>

@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminButtonsComponent } from './admin-buttons/admin-buttons.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { LoginComponent } from './login/login.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
     ProductDetailComponent,
     AdminButtonsComponent,
     NewProductComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    LoginComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
