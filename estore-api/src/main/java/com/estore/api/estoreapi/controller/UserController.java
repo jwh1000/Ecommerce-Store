@@ -130,7 +130,7 @@ public class UserController {
     public ResponseEntity<User[]> searchUsers(@RequestParam String name) {
         try {
             User[] user = userDAO.findUsers(name);
-            if (user.length != 0)
+            if (user[0].equals(null))
                 return new ResponseEntity<User[]>(user, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
