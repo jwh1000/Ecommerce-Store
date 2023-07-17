@@ -40,7 +40,7 @@ public class UserControllerTest {
      * Tests to make sure the return for search works for the controller.
      */
     @Test
-    public void testSearchProducts() throws IOException { // findUsers may throw IOException
+    public void testSearchUsersFound() throws IOException { // findUsers may throw IOException
         String searchString = "int";
         User[] users = new User[2];
         users[0] = new User(3, "dirtyinter");
@@ -61,12 +61,15 @@ public class UserControllerTest {
      * Tests to make sure the HttpStatus Not found works for search
      */
     @Test
-    public void testSearchNotFound() throws IOException {
+    public void testSearchUsersNotFound() throws IOException {
         // Setup
         String searchString = "Problem";
         User[] users = new User[2];
-        users[0] = new User(3, "dirtyinter");
+        User user = new User(3, "dirtyinter");
+        users[0] = user;
         users[1] = new User(1, "Xintilleon");
+        User[] empty = new User[2];
+        when(mockUserDAO.findUsers(user.getUsername())).thenReturn(empty);
         // user above
         when(mockUserDAO.findUsers(searchString)).thenReturn(users);
 
