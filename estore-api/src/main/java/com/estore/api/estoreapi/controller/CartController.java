@@ -56,15 +56,20 @@ public class CartController {
     public ResponseEntity<Product> addToCart(@RequestBody Product product, @PathVariable String username) {
         try {
             cartDAO.updateCart(username);
+
+            boolean found = false;
             
             // check if in inventory
             Product[] products = productDAO.findProducts(product.getName());
             for (Product searchProduct : products) {
                 if (searchProduct.getName().equals(product.getName())) {
+                    found = true;
                     break;
-                } else {
-                    return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
                 }
+            }
+
+            if (!found) {
+                return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
             }
 
             // check if already in cart
