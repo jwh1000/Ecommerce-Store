@@ -31,7 +31,10 @@ export class DeleteProductComponent {
    * @param product The product to be deleted.
    */
   delete(product: Product): void {
-    this.productService.deleteProduct(product.id).subscribe();
-    window.location.reload(); //reloads this component to reflect update due to the product being deleted
+    this.productService.deleteProduct(product.id).subscribe(
+      (data) =>{
+        this.ngOnInit(); //Reload this component after deleting.
+      }
+    );
   }
 }
