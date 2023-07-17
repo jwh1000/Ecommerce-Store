@@ -106,6 +106,8 @@ public class UserControllerTest {
         User user = new User(1, "Xintilleon");
         User[] users = new User[4];
         users[0] = user;
+        User[] empty = new User[0];
+        when(mockUserDAO.findUsers(user.getUsername())).thenReturn(empty);
         // when createProduct is called, return true simulating successful creation
         // save
         when(mockUserDAO.createUser(user)).thenReturn(user);
