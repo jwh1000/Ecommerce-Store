@@ -17,18 +17,16 @@ export class ProductService {
 
   constructor(private http: HttpClient) { 
   }
-  /*
-  *Uses get mapping to get all products in inventory
-  */
+
+  /** GET: gets all the products from the server */
   getProducts(): Observable<Product[]>{
     const url = `${this.productURL}/inventory`;
     return this.http.get<Product[]>(url).pipe(tap(),
       catchError(this.handleError<Product[]>('getProducts', []))
     )
   }
-  /*
-  *Uses get mappint to get specific product in inventory
-  */
+
+  /** GET: gets a specific product with a specified id from the server */
   getProduct(id: number) : Observable<Product> {
     const url = `${this.productURL}/inventory/product/${id}`;
     return this.http.get<Product>(url).pipe(tap(),
@@ -49,6 +47,31 @@ export class ProductService {
       catchError(this.handleError<Product[]>('searchProducts', []))
     );
   }
+  /** PUT: update the product on the server */
+  updateProduct(product: Product): Observable<any> {
+    const url = `${this.productURL}`;
+    return this.http.put(url, product, this.httpOptions).pipe(tap(),
+      catchError(this.handleError<any>('updateProduct'))
+    );
+  }
+
+  /** POST: add a new product to the server */
+  addProduct(product: Product): Observable<Product> {
+    const url = `${this.productURL}/inventory/product`;
+    return this.http.post<Product>(url, product, this.httpOptions).pipe(tap(),
+      catchError(this.handleError<Product>('addProduct'))
+    );
+  }
+
+  /** DELETE: delete the product from the server */
+  deleteProduct(id: number): Observable<Product> {
+    const url = `${this.productURL}/inventory/product/${id}`;
+
+    return this.http.delete<Product>(url, this.httpOptions).pipe(tap(),
+      catchError(this.handleError<Product>('deleteProduct'))
+    );
+  }
+
 
   /*
   *Handels errors

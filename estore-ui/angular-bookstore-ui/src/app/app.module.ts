@@ -6,10 +6,13 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
 import { FormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
-import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InventorySearchComponent } from './inventory-search/inventory-search.component';
+import { AdminButtonsComponent } from './admin-buttons/admin-buttons.component';
+import { NewProductComponent } from './new-product/new-product.component';
+import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
+import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { InventorySearchComponent } from './inventory-search/inventory-search.co
     ProductDetailComponent,
     ProductUserDetailComponent,
     ProductUserInventoryComponent,
-    InventorySearchComponent
+    InventorySearchComponent,
+    AdminButtonsComponent,
+    NewProductComponent,
+    DeleteProductComponent
   ],
   imports: [
     BrowserModule,
