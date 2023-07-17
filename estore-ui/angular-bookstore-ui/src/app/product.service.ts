@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from './product'
-import { PRODUCTS } from './mock-products';
 import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -19,6 +18,7 @@ export class ProductService {
   constructor(private http: HttpClient) { 
   }
 
+  /** GET: gets all the products from the server */
   getProducts(): Observable<Product[]>{
     const url = `${this.productURL}/inventory`;
     return this.http.get<Product[]>(url).pipe(tap(),
@@ -26,10 +26,36 @@ export class ProductService {
     )
   }
 
+  /** GET: gets a specific product with a specified id from the server */
   getProduct(id: number) : Observable<Product> {
     const url = `${this.productURL}/inventory/product/${id}`;
     return this.http.get<Product>(url).pipe(tap(),
       catchError(this.handleError<Product>(`getProduct id=${id}`))
+    );
+  }
+
+  /** PUT: update the product on the server */
+  updateProduct(product: Product): Observable<any> {
+    const url = `${this.productURL}`;
+    return this.http.put(url, product, this.httpOptions).pipe(tap(),
+      catchError(this.handleError<any>('updateProduct'))
+    );
+  }
+
+  /** POST: add a new product to the server */
+  addProduct(product: Product): Observable<Product> {
+    const url = `${this.productURL}/inventory/product`;
+    return this.http.post<Product>(url, product, this.httpOptions).pipe(tap(),
+      catchError(this.handleError<Product>('addProduct'))
+    );
+  }
+
+  /** DELETE: delete the product from the server */
+  deleteProduct(id: number): Observable<Product> {
+    const url = `${this.productURL}/inventory/product/${id}`;
+
+    return this.http.delete<Product>(url, this.httpOptions).pipe(tap(),
+      catchError(this.handleError<Product>('deleteProduct'))
     );
   }
 
