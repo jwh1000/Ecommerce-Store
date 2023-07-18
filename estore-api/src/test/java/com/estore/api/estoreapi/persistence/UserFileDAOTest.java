@@ -2,15 +2,12 @@ package com.estore.api.estoreapi.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -139,6 +136,7 @@ public class UserFileDAOTest {
      * @throws IOException
      */
     @Test
+    @SuppressWarnings("unused")
     public void testCreateUserSuccessful() throws IOException {
         // setup
         User user = new User(4, "test");
