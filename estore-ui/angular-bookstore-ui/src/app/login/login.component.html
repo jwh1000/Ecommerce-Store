@@ -1,0 +1,5 @@
+<label for="username" *ngIf="success == false">Login with a Username: </label>
+<input id="username" [(ngModel)]="usernameInput" placeholder="User" *ngIf="success == false">
+<button type="button" (click)="login()" *ngIf="success == false">Login</button>
+
+<app-navigation *ngIf="success"></app-navigation>

@@ -11,8 +11,12 @@ import { InventorySearchComponent } from './inventory-search/inventory-search.co
 import { AdminButtonsComponent } from './admin-buttons/admin-buttons.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { LoginComponent } from './login/login.component';
+import { NavigationComponent } from './navigation/navigation.component';
+
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { ProductUserInventoryComponent } from './product-user-inventory/product-
     InventorySearchComponent,
     AdminButtonsComponent,
     NewProductComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    LoginComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

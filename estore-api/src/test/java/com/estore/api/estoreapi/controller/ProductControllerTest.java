@@ -113,7 +113,7 @@ public class ProductControllerTest {
     public void testSearchProductsHandleException() throws IOException { // findHeroes may throw IOException
         // Setup
         String searchString = "an";
-        // When createProduct is called on the Mock Product DAO, throw an IOException
+        // When findProducts is called on the Mock Product DAO, throw an IOException
         doThrow(new IOException()).when(mockProductDAO).findProducts(searchString);
 
         // Invoke
@@ -123,6 +123,7 @@ public class ProductControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 
     }
+
 
     /**
      * Tests deleting a product.
@@ -145,6 +146,7 @@ public class ProductControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+
     /**
      * Tests deleting a product that doesn't exist, giving a 404 NOT_FOUND.
      * @throws IOException
@@ -165,6 +167,7 @@ public class ProductControllerTest {
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
+
 
     /**
      * Tests deleting a product, when an internal server error happens, giving a 500 INTERNAL_SERVER_ERROR
@@ -312,5 +315,6 @@ public class ProductControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
 
 }
