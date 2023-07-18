@@ -112,9 +112,9 @@ with the e-store application.
 
 ### Model Tier
 The following UML class diagrams provide an overview of how the model tier interacts with the other tiers of the program.
-![Replace with your Model Tier class diagram 1, etc.](product_uml.jpg)
-![Replace with your Model Tier class diagram 1, etc.](cart_uml.jpg)
-![Replace with your Model Tier class diagram 1, etc.](user_uml.jpg)
+![product_uml.jpg](product_uml.jpg)
+![cart_uml.jpg](cart_uml.jpg)
+![user_uml](user_uml.jpg)
 
 The product class is used for any product that the store admin wants to add to the store inventory. It contains information about the product such as its name, price, and description. An id is associated with each product in order to make sure each product is treated differently by the system. 
 
@@ -150,5 +150,6 @@ Additionally, each user is also associated with an instnace of the User class. T
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets._
 
->_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
-> those._
+![code_coverage](code_coverage.pdf)
+
+There are no major anomalies for the unit test code coverage.

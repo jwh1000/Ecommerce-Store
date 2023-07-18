@@ -1,6 +1,8 @@
 package com.estore.api.estoreapi.persistence;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -152,6 +154,13 @@ public class UserFileDAO implements UserDAO {
     public User createUser(User user) throws IOException {
         synchronized (users) {
             User newUser = new User(nextId(), user.getUsername());
+
+            String filePath = "estore-api/data/carts/" + user.getUsername() + ".json";
+            File cartFile = new File(filePath);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(cartFile));
+            writer.write("[]");
+            writer.close();
+            
             users.put(newUser.getId(), newUser);
             save();
             return newUser;
