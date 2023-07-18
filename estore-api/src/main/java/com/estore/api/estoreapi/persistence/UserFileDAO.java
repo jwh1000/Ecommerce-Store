@@ -10,7 +10,6 @@ import java.util.TreeMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 
 import com.estore.api.estoreapi.model.User;
 import org.springframework.stereotype.Component;
