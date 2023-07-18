@@ -10,6 +10,8 @@ import java.util.TreeMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
+
 import com.estore.api.estoreapi.model.User;
 import org.springframework.stereotype.Component;
 
@@ -153,7 +155,7 @@ public class UserFileDAO implements UserDAO {
     @Override
     public User createUser(User user) throws IOException {
         synchronized (users) {
-            User newUser = new User(nextId(), user.getUsername());
+            User newUser = new User(nextId(), user.getUsername());       
 
             String filePath = "estore-api/data/carts/" + user.getUsername() + ".json";
             File cartFile = new File(filePath);
