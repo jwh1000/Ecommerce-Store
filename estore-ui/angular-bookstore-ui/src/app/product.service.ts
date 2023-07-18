@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from './product'
-import { PRODUCTS } from './mock-products';
 import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -19,6 +18,7 @@ export class ProductService {
   constructor(private http: HttpClient) { 
   }
 
+  /** GET: gets all the products from the server */
   getProducts(): Observable<Product[]>{
     const url = `${this.productURL}/inventory`;
     return this.http.get<Product[]>(url).pipe(tap(),
@@ -26,6 +26,7 @@ export class ProductService {
     )
   }
 
+  /** GET: gets a specific product with a specified id from the server */
   getProduct(id: number) : Observable<Product> {
     const url = `${this.productURL}/inventory/product/${id}`;
     return this.http.get<Product>(url).pipe(tap(),
@@ -33,6 +34,19 @@ export class ProductService {
     );
   }
 
+  /*
+  *Uses get mapping to search for specified product
+  */
+  searchProduct(term: string): Observable<Product[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    const url = `${this.productURL}/inventory/?name=${term}`
+    return this.http.get<Product[]>(url).pipe(
+      tap(),
+      catchError(this.handleError<Product[]>('searchProducts', []))
+    );
+  }
   /** PUT: update the product on the server */
   updateProduct(product: Product): Observable<any> {
     const url = `${this.productURL}`;
@@ -59,6 +73,9 @@ export class ProductService {
   }
 
 
+  /*
+  *Handels errors
+  */
 private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
     console.error(error);
