@@ -11,6 +11,8 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 - Ryan Robison
 - Xin Huang
 
+## Acceptance Test Plan Excel Sheet:
+https://docs.google.com/spreadsheets/d/1Sr_BDbyPNKisC119Sb2-0nRZ_wNbU15_/edit?usp=sharing&ouid=117362566667470447176&rtpof=true&sd=true
 
 ## Prerequisites
 
