@@ -29,4 +29,10 @@ export class LoginComponent {
       this.success = true;
     }
   }
+
+  logout(): void {
+    AppComponent.setUsername(undefined);
+    this.location.go("login");
+    this.success = false;
+  }
 }
