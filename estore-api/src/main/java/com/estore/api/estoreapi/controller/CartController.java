@@ -84,7 +84,7 @@ public class CartController {
         } catch (IOException e) {
             return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        
+
     }
 
     /**
@@ -187,4 +187,3 @@ public class CartController {
         }
     }
 }
-

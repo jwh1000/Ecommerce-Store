@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.estore.api.estoreapi.model.Product;
 
 public interface CartDAO {
-    
+
     /**
      * Gets the contents of a user's cart
      * 

@@ -1,0 +1,19 @@
+<div *ngIf="product">
+    <h2>{{product.name | uppercase}}</h2>
+    <div>
+        <label for="product-name">Product Name: </label>
+        <label id="info" placeholder="Product Name">{{product.name}}</label>
+        <br>
+        <label for="description">Product description: </label>
+        <label id="info" placeholder="Product Description">{{product.description}}</label>
+        <br>
+        <label for="quantity">Product quantity: </label>
+        <label id="info" placeholder="Product quantity">{{product.quantity}}</label>
+        <br>
+        <label for="price">Product price: </label>
+        <label id="info" placeholder="Product Price">{{product.price}}</label>
+    </div>
+    <button type="button" (click)="goBack()">go back</button>
+    <button type="button" (click)="add(product)">Add to Cart</button>
+    <button type="button" (click)="delete(product)">Remove from Cart</button>
+</div>

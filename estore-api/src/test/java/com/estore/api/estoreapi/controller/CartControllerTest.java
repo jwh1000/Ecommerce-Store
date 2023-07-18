@@ -39,7 +39,7 @@ public class CartControllerTest {
         mockProductDAO = mock(ProductDAO.class);
         cartController = new CartController(mockCartDAO,mockProductDAO);
     }
-    
+
     @Test
     public void testAddtoCart() throws IOException {
         // setup
@@ -108,7 +108,7 @@ public class CartControllerTest {
         products[0] = product;
         when(mockProductDAO.createProduct(product)).thenReturn(product);
         when(mockProductDAO.findProducts(product.getName())).thenReturn(products);
-       
+
         // invoke
         ResponseEntity<Product> response = cartController.addToCart(product, user);
         // analysis
