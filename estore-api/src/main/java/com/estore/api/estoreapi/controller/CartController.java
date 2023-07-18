@@ -167,7 +167,7 @@ public class CartController {
      * 
      * @author Jack Hunsberger
      */
-    @GetMapping("/carts/{username}/")
+    @GetMapping("/carts/{username}//")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name, @PathVariable String username) {
         try {
             cartDAO.updateCart(username);
