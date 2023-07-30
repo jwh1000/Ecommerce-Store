@@ -11,8 +11,13 @@ import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.estore.api.estoreapi.model.User;
+import com.estore.api.estoreapi.model.User; 
 
+/**
+ * Purchase history file DAO
+ * 
+ * @author Cole DenBleyker
+ */
 @Component
 public class PurchaseHistoryFileDAO implements PurchaseHistoryDAO{
     
@@ -23,6 +28,12 @@ public class PurchaseHistoryFileDAO implements PurchaseHistoryDAO{
 
     private String root; // root directory for purchase history
 
+    /**
+     * Creates a purchase history file DAO
+     * 
+     * @param objectMapper allows for serialization/deserialization
+     * @throws IOException if the file cannot be accessed
+     */
     public void PurchaseHistoryDAO(@Value("${purchased.file}") String root, ObjectMapper objectMapper) throws IOException {
         this.root = root;
         this.objectMapper = objectMapper;
@@ -57,7 +68,7 @@ public class PurchaseHistoryFileDAO implements PurchaseHistoryDAO{
         String filename = this.root + username + ".json";
         products = new TreeMap<>();
 
-        Product[] productArray = objectMapper.readValue(new File(filename), valueType:Product[].class);
+        Product[] productArray = objectMapper.readValue(new File(filename), Product[].class);
 
         if(productArray == null) {
             productArray = new Product[0];
