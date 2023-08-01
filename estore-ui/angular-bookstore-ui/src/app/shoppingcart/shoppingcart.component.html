@@ -1,12 +1,2 @@
-<p>Hello, {{username}}</p>
-<button type="button" (click)="logOut()">Logout</button>
-<nav>
-    <div *ngIf="username == 'admin'">
-        <a routerLink="/admin">Admin Page</a>
-    </div>
-    <div *ngIf="username != 'admin'">
-        <a routerLink="/cart">Shopping Cart</a>
-    </div>
-    <br>
-    <a routerLink="/user-product">Products</a>
-</nav>
+<p> Hello, {{username}}. This is the checkout page</p>
+<h2>Items to checkout.</h2>
