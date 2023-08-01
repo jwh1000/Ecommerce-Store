@@ -44,7 +44,7 @@ public class DiscountCodeFileDAOTest {
      * Tests removing a product from the cart
      */
     @Test
-    public void testRemoveFromCart() {
+    public void testDeleteDiscount() {
         // invoke
         boolean result = assertDoesNotThrow(() -> discountFileDAO.deleteDiscountCode("ab1"),
                 "Unexpected exception thrown");
@@ -65,16 +65,17 @@ public class DiscountCodeFileDAOTest {
     @Test
     public void testDeleteCodeNotFound() {
         // invoke
+        DiscountCode[] empty = new DiscountCode[1];
         boolean result = assertDoesNotThrow(() -> discountFileDAO.deleteDiscountCode("9k1"),
                 "Unexpected exception thrown");
 
         // analyze
         DiscountCode[] results = new DiscountCode[1];
-        DiscountCode res = assertDoesNotThrow(() -> discountFileDAO.findDiscountCode("user"),
-                "Unexpected exception thrown");
+        DiscountCode res = assertDoesNotThrow(() -> discountFileDAO.findDiscountCode("9k1"),
+              "Unexpected exception thrown");
         results[1] = res;
         
-        assertArrayEquals(testCodes, results);
+        assertArrayEquals(empty, results);
         assertEquals(false, result);
 
     }
