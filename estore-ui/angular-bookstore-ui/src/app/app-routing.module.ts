@@ -9,6 +9,7 @@ import { ProductUserInventoryComponent } from './product-user-inventory/product-
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { CheckOutButtonComponent } from './check-out-button/check-out-button.component';
 
 
 /*
@@ -24,7 +25,7 @@ const routes: Routes = [
   { path: 'user-product', component: ProductUserInventoryComponent},
   { path: 'user-detail/:id', component: ProductUserDetailComponent},
 
-  { path: 'cart', component: ShoppingcartComponent}
+  { path: 'cart', component: CheckOutButtonComponent}
 
 
 ]

@@ -55,10 +55,12 @@ export class CartService {
   getCartContents(): Observable<Product[]> {
     this.user = this.loginStateService.getUsername();
     const url = `${this.productURL}/carts/${this.user}`;
-    return this.http.get<Product[]>(url).pipe(
+    let products = this.http.get<Product[]>(url).pipe(
       tap(),
       catchError(this.handleError<Product[]>('addToCart'))
     );
+    console.log(products);
+    return products;
   }
 
   /* 

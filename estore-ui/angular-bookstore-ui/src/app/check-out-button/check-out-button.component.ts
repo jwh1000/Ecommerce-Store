@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
 import { Location } from '@angular/common';
 import { Product } from '../product';
@@ -13,7 +12,6 @@ export class CheckOutButtonComponent {
   products: Product[] = [];
 
   constructor(
-    private productService: ProductService,
     private cartService: CartService,
     private location: Location
   ) {}
@@ -21,19 +19,25 @@ export class CheckOutButtonComponent {
     /*
     *on initialize gets products
     */
-    ngOnInit(): void {
+    ngOnUpdate(): void {
       this.getContents()
     }
+
     /*
     *Uses product service to retrieve products
     */
     getContents(): void {
       this.cartService.getCartContents()
       .subscribe(products => this.products = products)
+      console.log(this.products)
     }
 
-    delete(product: Product):void {
-      this.cartService.removeFromCart(product).subscribe();
+    checkOut(): void {
+      this.getContents()
+      for(var product of this.products) {
+        this.cartService.removeFromCart(product).subscribe();
+        console.log("deleted something");
+      }
     }
 
     goBack(): void {
