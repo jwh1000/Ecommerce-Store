@@ -1,4 +1,5 @@
 <p>Hello, {{username}}</p>
+<button class="btn" (click)="logOut()">Logout</button>
 <nav>
     <div *ngIf="username == 'admin'">
         <a routerLink="/admin">Admin Page</a>
