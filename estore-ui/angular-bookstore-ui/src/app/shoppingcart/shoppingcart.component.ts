@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginStateService } from '../login-state.service';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -20,10 +21,10 @@ export class ShoppingcartComponent implements OnInit{
     this.username = this.loginStateService.getUsername();
     this.getCartContents()
   }
-  
+
   getCartContents(): void {
     this.cartService.getCartContents()
-    .subscribe(products => this.cartproducts = this.cartproducts)
+    .subscribe(cartproducts => this.cartproducts = this.cartproducts)
   }
   
 
