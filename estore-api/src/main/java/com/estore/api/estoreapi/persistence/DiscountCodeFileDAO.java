@@ -21,9 +21,9 @@ public class DiscountCodeFileDAO implements DiscountCodeDAO {
     }
 
     @Override
-    public DiscountCode[] findDiscountCodes(String containsText) throws IOException {
+    public DiscountCode findDiscountCode(String containsText) throws IOException {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findDiscountCodes'");
+        throw new UnsupportedOperationException("Unimplemented method 'findDiscountCode'");
     }
 
     @Override

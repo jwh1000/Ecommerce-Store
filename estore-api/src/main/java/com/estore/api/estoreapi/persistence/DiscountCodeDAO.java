@@ -18,12 +18,12 @@ public interface DiscountCodeDAO {
     DiscountCode[] getDiscountCodes() throws IOException;
 
     /**
-     * Finds all {@linkplain DiscountCode discount codes} whose name contain the text
-     * @param containsText The text to compare to
-     * @return An array of {@link DiscountCode discount codes} whoes names contain the text
+     * Searches for a {@linkplain DiscountCode discount code} whose code matches a string.
+     * @param code The code to find
+     * @return A {@link DiscountCode discount codes} which code matches the string.
      * @throws IOException if an issue with underlying storage
      */
-    DiscountCode[] findDiscountCodes(String containsText) throws IOException;
+    DiscountCode findDiscountCode(String code) throws IOException;
 
     /**
      * Creates and saves a {@linkplain DiscountCode discount code}
