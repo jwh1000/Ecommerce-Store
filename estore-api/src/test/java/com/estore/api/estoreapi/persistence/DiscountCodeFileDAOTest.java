@@ -110,10 +110,10 @@ public class DiscountCodeFileDAOTest {
     @Test
     public void testDeleteDiscount() {
         // invoke
-        boolean result = assertDoesNotThrow(() -> discountFileDAO.deleteDiscountCode("ab1"),
+        boolean result = assertDoesNotThrow(() -> discountFileDAO.deleteDiscountCode("ab2"),
                 "Unexpected exception thrown");
 
-        DiscountCode[] testCodeRem = Arrays.copyOf(testCodes, 0);
+        DiscountCode[] testCodeRem = Arrays.copyOf(testCodes, 2);
 
         // analyze
         DiscountCode[] results = assertDoesNotThrow(() -> discountFileDAO.getDiscountCodes(),
@@ -137,7 +137,7 @@ public class DiscountCodeFileDAOTest {
         DiscountCode[] results = new DiscountCode[1];
         DiscountCode res = assertDoesNotThrow(() -> discountFileDAO.findDiscountCode("9k1"),
               "Unexpected exception thrown");
-        results[1] = res;
+        results[0] = res;
         
         assertArrayEquals(empty, results);
         assertEquals(false, result);
