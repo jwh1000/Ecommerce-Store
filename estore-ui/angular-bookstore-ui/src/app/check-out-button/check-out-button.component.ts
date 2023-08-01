@@ -29,15 +29,11 @@ export class CheckOutButtonComponent {
     getContents(): void {
       this.cartService.getCartContents()
       .subscribe(products => this.products = products)
-      console.log(this.products)
     }
 
     checkOut(): void {
       this.getContents()
-      for(var product of this.products) {
-        this.cartService.removeFromCart(product).subscribe();
-        console.log("deleted something");
-      }
+      this.cartService.clearCart();
     }
 
     goBack(): void {
