@@ -18,6 +18,7 @@ import { ProductUserDetailComponent } from './product-user-detail/product-user-d
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { CheckOutButtonComponent } from './check-out-button/check-out-button.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CheckOutButtonComponent } from './check-out-button/check-out-button.com
     LoginComponent,
     NavigationComponent,
     AdminPageComponent,
-    CheckOutButtonComponent
+    CheckOutButtonComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,

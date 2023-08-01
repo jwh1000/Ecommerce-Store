@@ -1,7 +1,7 @@
 <p> Hello, {{username}}. This is the checkout page</p>
 <h2>Items to checkout.</h2>
 <ul class="products">
-    <li *ngFor="let product of products">
+    <li *ngFor="let product of cartproducts">
       <a routerLink="/user-details/{{product.id}}">
           <span class ="badge">{{product.id}}</span>{{product.name}}
       </a>
