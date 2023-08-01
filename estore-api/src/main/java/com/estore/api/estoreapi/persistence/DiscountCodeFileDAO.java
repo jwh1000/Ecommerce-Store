@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -44,14 +45,28 @@ public class DiscountCodeFileDAO implements DiscountCodeDAO {
 
     @Override
     public DiscountCode[] getDiscountCodes() throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDiscountCodes'");
+        synchronized(codes){
+        ArrayList<DiscountCode> discountArrayList = new ArrayList<>();
+        for(DiscountCode code : codes.values()){
+            discountArrayList.add(code);
+        }
+        DiscountCode[] discountArray = new DiscountCode[discountArrayList.size()];
+        discountArrayList.toArray(discountArray);
+        return discountArray;
+        }
+
     }
 
     @Override
-    public DiscountCode findDiscountCode(String containsText) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findDiscountCode'");
+    public DiscountCode findDiscountCode(String text) throws IOException {
+        synchronized(codes){
+            for(DiscountCode code : codes.values()){
+                if(text == null || code.getCode().equals(text)){
+                    return code;
+                }
+            }
+            return null;
+        }
     }
 
     @Override
