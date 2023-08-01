@@ -73,7 +73,7 @@ public class DiscountCodeFileDAOTest {
         DiscountCode[] results = new DiscountCode[1];
         DiscountCode res = assertDoesNotThrow(() -> discountFileDAO.findDiscountCode("9k1"),
               "Unexpected exception thrown");
-        results[1] = res;
+        results[0] = res;
         
         assertArrayEquals(empty, results);
         assertEquals(false, result);
