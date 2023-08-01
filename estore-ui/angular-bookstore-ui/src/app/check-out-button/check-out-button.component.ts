@@ -33,7 +33,7 @@ export class CheckOutButtonComponent {
 
     checkOut(): void {
       this.getContents()
-      this.cartService.clearCart();
+      this.cartService.clearCart().subscribe(products => this.products = products);
     }
 
     goBack(): void {

@@ -69,17 +69,17 @@ export class CartService {
     this.user = this.loginStateService.getUsername();
     const url = `${this.productURL}/carts/${this.user}`;
     console.log("yeah we here");
-    let product = this.http.delete<Product[]>(url).pipe(tap(), 
+    let products = this.http.delete<Product[]>(url).pipe(tap(), 
       catchError(this.handleError<Product[]>('addToCart'))
     );
-    return product
+    return products;
   }
 
   /* 
   *Handles errors
   */
-private handleError<T>(operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
     console.error(error);
     return of(result as T);
   };
