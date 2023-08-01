@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.DiscountCode;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -42,32 +42,55 @@ public class DiscountCodeFileDAO implements DiscountCodeDAO {
         load();
     }
 
+    /**
+     ** {@inheritDoc}}
+     */
     @Override
     public DiscountCode[] getDiscountCodes() throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDiscountCodes'");
-    }
+        synchronized (codes) {
+            ArrayList<DiscountCode> discountCodeArrayList = new ArrayList<>();
 
-    @Override
-    public DiscountCode findDiscountCode(String containsText) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findDiscountCode'");
-    }
+            for (DiscountCode discountCode : codes.values()) {
+                discountCodeArrayList.add(discountCode);
+            }
 
-    @Override
-    public DiscountCode createDiscountCode(DiscountCode discountCode) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createDiscountCode'");
+            DiscountCode[] discountCodeArray = new DiscountCode[discountCodeArrayList.size()];
+            discountCodeArrayList.toArray(discountCodeArray);
+            return discountCodeArray;
+        }
     }
 
     /**
-     * Deletes a product give code
-     * @param id The id of the product to delete.
-     * @return Boolean of whether or not the product deletion was successful.
-     * @throws IOException if underlying storage cannot be accessed
-     * @author Ryan Robison
+     ** {@inheritDoc}}
      */
+    @Override
+    public DiscountCode findDiscountCode(String codeString) throws IOException {
+        synchronized (codes) {
+            for (DiscountCode discountCode : codes.values()) {
+                if (discountCode.getCode().equals(codeString)) {
+                    return discountCode;
+                }
+            }
+        }
+        return null;
+    }
 
+    /**
+     ** {@inheritDoc}}
+     */
+    @Override
+    public DiscountCode createDiscountCode(DiscountCode discountCode) throws IOException {
+        synchronized (codes) {
+            DiscountCode newDiscountCode = new DiscountCode(discountCode.getCode(), discountCode.getDiscountPercentage());
+            codes.put(newDiscountCode.getCode(), newDiscountCode);
+            save();
+            return newDiscountCode;
+        }
+    }
+
+    /**
+     ** {@inheritDoc}}
+     */
     @Override
     public boolean deleteDiscountCode(String code) throws IOException {
         synchronized(codes){

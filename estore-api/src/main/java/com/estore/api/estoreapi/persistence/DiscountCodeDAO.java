@@ -20,10 +20,10 @@ public interface DiscountCodeDAO {
     /**
      * Searches for a {@linkplain DiscountCode discount code} whose code matches a string.
      * @param code The code to find
-     * @return A {@link DiscountCode discount codes} which code matches the string.
+     * @return A {@link DiscountCode discount codes} which code matches the string, or null if no results found.
      * @throws IOException if an issue with underlying storage
      */
-    DiscountCode findDiscountCode(String code) throws IOException;
+    DiscountCode findDiscountCode(String codeString) throws IOException;
 
     /**
      * Creates and saves a {@linkplain DiscountCode discount code}
