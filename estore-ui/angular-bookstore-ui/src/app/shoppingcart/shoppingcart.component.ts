@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LoginStateService } from '../login-state.service';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
-import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-shoppingcart',
