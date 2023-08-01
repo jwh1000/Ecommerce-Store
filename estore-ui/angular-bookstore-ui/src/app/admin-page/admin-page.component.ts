@@ -23,5 +23,5 @@ export class AdminPageComponent {
     goBack(): void {
       this.location.back();
     }
-  }
+}
 
