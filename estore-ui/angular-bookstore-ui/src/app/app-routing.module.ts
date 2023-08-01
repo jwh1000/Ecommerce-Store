@@ -7,6 +7,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 
 /*
@@ -15,7 +16,7 @@ import { ProductUserDetailComponent } from './product-user-detail/product-user-d
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'main', component: NavigationComponent},
-  { path: 'admin', component: AdminButtonsComponent},
+  { path: 'admin', component: AdminPageComponent},
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
