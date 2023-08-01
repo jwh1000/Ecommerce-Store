@@ -1,22 +1,19 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { LoginStateService } from '../login-state.service';
 
 @Component({
   selector: 'app-shoppingcart',
-  template: `
-    <p>
-      shoppingcart works!
-    </p>
-  `,
+  templateUrl: './shoppingcart.component.html',
   styleUrls: ['./shoppingcart.component.css']
 })
 export class ShoppingcartComponent {
+  constructor(
+    private loginStateService: LoginStateService
+  ){ }
+  username?: String;
 
-  /*
-    *Constructor initializes product and cart service
-    */
-    constructor(
-      private location: Location
-    ){}
+  ngOnInit():  void {
+    this.username = this.loginStateService.getUsername();
+  }
   
 }
