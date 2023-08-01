@@ -40,7 +40,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginComponent,NavigationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

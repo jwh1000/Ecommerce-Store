@@ -1,8 +1,11 @@
 <p>Hello, {{username}}</p>
-<button class="btn" (click)="logOut()">Logout</button>
+<button type="button" (click)="logOut()">Logout</button>
 <nav>
     <div *ngIf="username == 'admin'">
         <a routerLink="/admin">Admin Page</a>
+    </div>
+    <div *ngIf="username != 'admin'">
+        <a routerLink="/cart">Shopping Cart</a>
     </div>
     <br>
     <a routerLink="/user-product">Products</a>

@@ -14,13 +14,12 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 *routes to different pages for app routing
 */
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
   { path: 'main', component: NavigationComponent},
   { path: 'admin', component: AdminPageComponent},
 
+  { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-  { path: '', redirectTo: '/user-product', pathMatch: 'full' },
   { path: 'user-product', component: ProductUserInventoryComponent},
   { path: 'user-detail/:id', component: ProductUserDetailComponent}
 

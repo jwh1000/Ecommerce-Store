@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppComponent } from '../app.component';
-import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
+import { LoginStateService } from '../login-state.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,19 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-  constructor(private router: Router){ }
+  constructor(
+    private router: Router,
+    private loginStateService: LoginStateService
+  ){ }
 
   username?: String;
+  success?: boolean;
 
   ngOnInit(): void {
-    this.username = AppComponent.getUsername();
+    console.log(this.loginStateService.getUsername());
+    this.username = this.loginStateService.getUsername();
   }
 
-  logOut($myParam: string = ''): void {
-    const navigationDetails: string[] = ['/login'];
-    if($myParam.length) {
-      navigationDetails.push($myParam);
-    }
-    this.router.navigate(navigationDetails);
-  }
+  logOut(): void {
+    this.loginStateService.resetState();
+    this.router.navigate(['/login']);
+ }
 }
