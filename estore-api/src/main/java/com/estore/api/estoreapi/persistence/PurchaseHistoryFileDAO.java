@@ -34,7 +34,7 @@ public class PurchaseHistoryFileDAO implements PurchaseHistoryDAO{
      * @param objectMapper allows for serialization/deserialization
      * @throws IOException if the file cannot be accessed
      */
-    public void PurchaseHistoryDAO(@Value("${purchased.file}") String root, ObjectMapper objectMapper) throws IOException {
+    public PurchaseHistoryFileDAO(@Value("${purchased.file}") String root, ObjectMapper objectMapper) throws IOException {
         this.root = root;
         this.objectMapper = objectMapper;
         load("admin");
