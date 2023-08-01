@@ -18,7 +18,6 @@ export class NavigationComponent {
   success?: boolean;
 
   ngOnInit(): void {
-    console.log(this.loginStateService.getUsername());
     this.username = this.loginStateService.getUsername();
   }
 

@@ -23,15 +23,16 @@ export class LoginComponent {
       this.userService.createUser({ username:this.usernameInput } as User).subscribe(); //This line of code doesn't always need to run but idk how do make it only run when the above line gets a 404 in response
       this.loginStateService.setState();
       this.loginStateService.setUsername(this.usernameInput);
+
       this.success = this.loginStateService.success;
-      console.log('work please', this.success);
       this.loginStateService.loggedIn()
     }
   }
 
   logout(): void {
-    this.loginStateService.setUsername('');
     this.loginStateService.resetState();
+    this.loginStateService.setUsername('');
+
     this.success = this.loginStateService.success;
     this.loginStateService.loggedIn()
   }
