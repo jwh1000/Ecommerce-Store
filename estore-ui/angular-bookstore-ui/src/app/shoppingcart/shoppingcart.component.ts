@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-shoppingcart',
-  standalone: true,
-  imports: [CommonModule],
   template: `
     <p>
       shoppingcart works!
@@ -14,4 +12,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ShoppingcartComponent {
 
+  /*
+    *Constructor initializes product and cart service
+    */
+    constructor(
+      private location: Location
+    ){}
+  
 }
