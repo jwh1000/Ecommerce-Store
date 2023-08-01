@@ -54,7 +54,7 @@ public class PurchaseHistoryController {
      *         {@link ResponseEntity ResponseEntity} HTTP status of CREATED on success<br>
      *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("/purchases/{username}/product")
+    @PostMapping("/purchases/{username}")
     public ResponseEntity<Product> addToPurchased(@RequestBody Product product, @PathVariable String username) {
         try {
             purchasedDAO.updatePurchased(username);
@@ -118,7 +118,7 @@ public class PurchaseHistoryController {
      *         {@link ResponseEntity ResponseEntity} HTTP status of NOT_FOUND if the product cannot be found<br>
      *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("purchases/{usernmae}/product/{id}")
+    @GetMapping("purchases/{username}/{id}")
     public ResponseEntity<Product> getPurchasedProduct(@PathVariable int id, @PathVariable String username) {
         try {
             purchasedDAO.updatePurchased(username);
@@ -144,7 +144,7 @@ public class PurchaseHistoryController {
      *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
      * 
      */
-    @DeleteMapping("/purchases/{username}/product/{id}")
+    @DeleteMapping("/purchases/{username}/{id}")
     public ResponseEntity<Product> removeFromPurchased(@PathVariable int id, @PathVariable String username) {
         try {
             purchasedDAO.updatePurchased(username);
@@ -170,7 +170,7 @@ public class PurchaseHistoryController {
      *         {@link ResponseEntity ResponseEntity} HTTP status of NOT_FOUND if the product cannot be found
      *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("/purchases/{userame}/")
+    @GetMapping("/purchases/{username}")
     public ResponseEntity<Product[]> searchPurchased(@RequestParam String name, @PathVariable  String username) {
         try {
             purchasedDAO.updatePurchased(username);
