@@ -49,6 +49,18 @@ export class CartService {
     );
   }
 
+  /*
+  * gets all contents of the cart
+  */
+  getCartContents(): Observable<Product[]> {
+    this.user = this.loginStateService.getUsername();
+    const url = `${this.productURL}/carts/${this.user}`;
+    return this.http.get<Product[]>(url).pipe(
+      tap(),
+      catchError(this.handleError<Product[]>('addToCart'))
+    );
+  }
+
   /* 
   *Handles errors
   */
@@ -57,6 +69,5 @@ private handleError<T>(operation = 'operation', result?: T) {
     console.error(error);
     return of(result as T);
   };
-}
-
+  }
 }
