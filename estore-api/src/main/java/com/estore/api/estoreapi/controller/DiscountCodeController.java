@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +54,29 @@ public class DiscountCodeController {
             }
         } catch (IOException e) { // catch any error and return internal server error
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Gets single discount code
+     * 
+     * @param id
+     * 
+     * @return ResponseEntity HTTP status of OK if item is found and returned
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @author Ryan Robison
+     */
+    @GetMapping("/discount-code/{code}")
+    public ResponseEntity<DiscountCode> getDiscountCode(@RequestParam String code) {
+        try {
+            DiscountCode co = discountDAO.findDiscountCode(code);
+            if (co != null)
+                return new ResponseEntity<DiscountCode>(co, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            return new ResponseEntity<DiscountCode>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
