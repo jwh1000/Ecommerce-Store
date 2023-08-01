@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'user-detail/:id', component: ProductUserDetailComponent},
   { path: 'user-details/:id', component: ShoppingcartComponent},
 
-  { path: 'cart', component: CheckOutButtonComponent}
+  { path: 'cart', component: ShoppingcartComponent}
 
 
 ]
