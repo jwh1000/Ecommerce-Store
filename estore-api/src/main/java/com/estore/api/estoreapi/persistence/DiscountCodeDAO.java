@@ -39,5 +39,5 @@ public interface DiscountCodeDAO {
      * @return Boolean of whether or not the discount code deletion was successful.
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteProduct(String code) throws IOException;
+    boolean deleteDiscountCode(String code) throws IOException;
 }

@@ -33,9 +33,9 @@ public class DiscountCodeFileDAO implements DiscountCodeDAO {
     }
 
     @Override
-    public boolean deleteProduct(String code) throws IOException {
+    public boolean deleteDiscountCode(String code) throws IOException {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteProduct'");
+        throw new UnsupportedOperationException("Unimplemented method 'deleteDiscountCode'");
     }
     
 }
