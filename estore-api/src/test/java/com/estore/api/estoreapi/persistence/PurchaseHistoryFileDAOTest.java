@@ -47,8 +47,8 @@ public class PurchaseHistoryFileDAOTest {
             .readValue(new File("estore-api/data/purchases/user.json"), Product[].class))
             .thenReturn(testProducts);
 
-            purchasedFileDAO = new PurchaseHistoryFileDAO("estore-api/data/pruchases/", mockObjectMapper);
-            purchasedFileDAO.updatePurchased("user");
+        purchasedFileDAO = new PurchaseHistoryFileDAO("estore-api/data/purchases/", mockObjectMapper);
+        purchasedFileDAO.updatePurchased("user");
     }
 
     @Test
