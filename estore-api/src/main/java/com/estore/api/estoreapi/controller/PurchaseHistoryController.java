@@ -170,7 +170,7 @@ public class PurchaseHistoryController {
      *         {@link ResponseEntity ResponseEntity} HTTP status of NOT_FOUND if the product cannot be found
      *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("/purchases/{username}")
+    @GetMapping("/purchases/{username}/")
     public ResponseEntity<Product[]> searchPurchased(@RequestParam String name, @PathVariable  String username) {
         try {
             purchasedDAO.updatePurchased(username);
