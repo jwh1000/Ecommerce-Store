@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,20 +35,44 @@ public class DiscountCodeController {
         this.discountDAO = discountDAO;
     }
 
+    /**
+     * Creates a {@linkplain DiscountCode discount code} with a given discount code object.
+     * 
+     * @param discountCode the {@link DiscountCode discount code} to create
+     * 
+     * @return a ResponseEntity with the new discount code and an OK status on success
+     *         or a ResponseEntity with an internal server error
+     */
+    @PostMapping("/discount-code/codes")
+    public ResponseEntity<DiscountCode> createDiscountCode(@RequestBody DiscountCode discountCode) {
+        try {
+            DiscountCode searchDiscountCode = discountDAO.findDiscountCode(discountCode.getCode());
+
+            if (searchDiscountCode.getCode().equals(discountCode.getCode())) {
+                return new ResponseEntity<DiscountCode>(HttpStatus.CONFLICT);
+            }
+
+            DiscountCode newDiscountCode = discountDAO.createDiscountCode(discountCode);
+            return new ResponseEntity<DiscountCode>(newDiscountCode, HttpStatus.CREATED);
+        } catch (IOException e) {
+            return new ResponseEntity<DiscountCode>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     /**
-     * Deletes a product with the given ID.
+     * Deletes a discount code with the given code.
      * 
-     * @param code code of the product to delete.
+     * @param code code of the discount code to delete.
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/discount-code/{code}")
-    public ResponseEntity<DiscountCode> deleteProduct(@RequestParam String code) {
+    public ResponseEntity<DiscountCode> deleteDiscountCode(@RequestParam String code) {
         try {
-            if (discountDAO.findDiscountCode(code) == null) // check to see if the product with given id doesn't exist
+            if (discountDAO.findDiscountCode(code) == null) // check to see if the discount code with given code doesn't exist
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); // return 404
             else { // otherwise go ahead and delete it
                 discountDAO.deleteDiscountCode(code);

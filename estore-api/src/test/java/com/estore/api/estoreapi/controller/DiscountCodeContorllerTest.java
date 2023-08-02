@@ -46,7 +46,7 @@ public class DiscountCodeContorllerTest {
         when(mockDiscountDAO.deleteDiscountCode("ab2")).thenReturn(true);
 
         // Invoke
-        ResponseEntity<DiscountCode> response = discountController.deleteProduct(codesearch);
+        ResponseEntity<DiscountCode> response = discountController.deleteDiscountCode(codesearch);
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -67,7 +67,7 @@ public class DiscountCodeContorllerTest {
         when(mockDiscountDAO.deleteDiscountCode("sb1")).thenReturn(false);
 
         // Invoke
-        ResponseEntity<DiscountCode> response = discountController.deleteProduct("sb1");
+        ResponseEntity<DiscountCode> response = discountController.deleteDiscountCode("sb1");
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -89,7 +89,7 @@ public class DiscountCodeContorllerTest {
 
 
         // Invoke
-        ResponseEntity<DiscountCode> response = discountController.deleteProduct(codesearch);
+        ResponseEntity<DiscountCode> response = discountController.deleteDiscountCode(codesearch);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
