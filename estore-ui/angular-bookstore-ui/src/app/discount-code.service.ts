@@ -34,7 +34,7 @@ export class DiscountCodeService {
 
   /** GET: gets one discounts from the server */
   deleteDiscountCode(code: String): Observable<DiscountCode[]>{
-    const url = `${this.discountURL}/`;
+    const url = `${this.discountURL}/?code=${code}`;
     return this.http.delete<DiscountCode[]>(url).pipe(tap(),
       catchError(this.handleError<DiscountCode[]>('getDiscountCodes', []))
     )

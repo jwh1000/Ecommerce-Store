@@ -18,6 +18,7 @@ export class AdminButtonsComponent {
   displayProducts: boolean = false;
   displayCreate: boolean = false;
   displayDelete: boolean = false;
+  displayDeleteDiscount: boolean = false;
 
   /**
    * When the create product button is hit, display the view for creating a product.
@@ -26,6 +27,7 @@ export class AdminButtonsComponent {
     this.displayProducts = false;
     this.displayCreate = true;
     this.displayDelete = false;
+    this.displayDeleteDiscount = false;
   }
 
   /**
@@ -35,6 +37,7 @@ export class AdminButtonsComponent {
     this.displayProducts = true;
     this.displayCreate = false;
     this.displayDelete = false;
+    this.displayDeleteDiscount = false;
   }
 
   /**
@@ -44,5 +47,16 @@ export class AdminButtonsComponent {
     this.displayProducts = false;
     this.displayCreate = false;
     this.displayDelete = true;
+    this.displayDeleteDiscount = false;
+  }
+
+  /**
+   * When the delete discount button is hit, display the view for deleting a discount.
+   */
+  deleteDiscountAction(): void {
+    this.displayProducts = false;
+    this.displayCreate = false;
+    this.displayDelete = false;
+    this.displayDeleteDiscount = true;
   }
 }
