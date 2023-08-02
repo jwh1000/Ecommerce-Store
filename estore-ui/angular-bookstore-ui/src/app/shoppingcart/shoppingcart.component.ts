@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { LoginStateService } from '../login-state.service';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { Location } from '@angular/common';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -14,7 +15,8 @@ export class ShoppingcartComponent implements OnInit{
   constructor(
     private loginStateService: LoginStateService,
     private cartService: CartService,
-    private location: Location
+    private location: Location,
+    private productService: ProductService
   ){}
   username?: String;
   total?: number = 0.0;
@@ -51,10 +53,20 @@ export class ShoppingcartComponent implements OnInit{
   checkOut(): void {
     this.getContents();
 
-    this.cartService.clearCart().subscribe(products => this.cartproducts = products);
+    this.cartService.clearCart().subscribe(products => {
+      this.cartproducts = products;
+      this.total = 0;
+    });
+
+    for (var product of this.cartproducts) {
+      product.quantity -= 1;
+      this.productService.updateProduct(product).subscribe();
+    }
+    
     this.ngOnInit();
   }
 
+  
   
   goBack(): void {
     this.location.back();

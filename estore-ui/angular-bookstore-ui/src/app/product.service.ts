@@ -50,6 +50,7 @@ export class ProductService {
   /** PUT: update the product on the server */
   updateProduct(product: Product): Observable<any> {
     const url = `${this.productURL}`;
+    console.log("we here");
     return this.http.put(url, product, this.httpOptions).pipe(tap(),
       catchError(this.handleError<any>('updateProduct'))
     );
