@@ -7,17 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Bookstore';
-
-  //INCREDIBLY JANKY
-  static username?: string;
-
-  public static setUsername(username?: string) {
-    this.username = username;
-    console.log('set username:' + this.username)
-  }
-
-  public static getUsername() {
-    console.log('get username:' + this.username)
-    return this.username;
-  }
 }

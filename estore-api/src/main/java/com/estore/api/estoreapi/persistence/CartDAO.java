@@ -49,13 +49,24 @@ public interface CartDAO {
      * Deletes a {@linkplain Product product} with a given id from a users cart.
      * 
      * @param id The id of the product to delete.
-     * @param usernam The username of the owner of a shopping cart.
+     * @param username The username of the owner of a shopping cart.
      * @return Boolean of whether or not the product deletion was successful.
      * @throws IOException if underlying storage cannot be accessed
      * 
      * @author Cole DenBleyker
      */
     boolean removeFromCart (int id, String usernam) throws IOException;
+
+    /**
+     * Clears a user's cart
+     * 
+     * @param username The username of the owner of a shopping cart.
+     * @return Boolean of whether or not the product deletion was successful.
+     * @throws IOException if underlying storage cannot be accessed
+     * 
+     * @author Jack Hunsberger
+     */
+    void clearCart (String usernam) throws IOException;
 
 
     public void updateCart(String username) throws IOException;
