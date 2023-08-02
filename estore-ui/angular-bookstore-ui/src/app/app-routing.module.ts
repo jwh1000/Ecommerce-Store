@@ -7,6 +7,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 
 
 /*
@@ -21,7 +22,8 @@ const routes: Routes = [
 
   { path: '', redirectTo: '/user-product', pathMatch: 'full' },
   { path: 'user-product', component: ProductUserInventoryComponent},
-  { path: 'user-detail/:id', component: ProductUserDetailComponent}
+  { path: 'user-detail/:id', component: ProductUserDetailComponent},
+  { path: 'purchase-history', component: PurchaseHistoryComponent}
 
 ]
 
