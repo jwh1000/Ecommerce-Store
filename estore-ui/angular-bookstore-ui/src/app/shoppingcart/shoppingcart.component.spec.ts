@@ -1,0 +1,20 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ShoppingcartComponent } from './shoppingcart.component';
+
+describe('ShoppingCartComponent', () => {
+    let component: ShoppingcartComponent;
+    let fixture: ComponentFixture<ShoppingcartComponent>;
+  
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        declarations: [ShoppingcartComponent]
+      });
+      fixture = TestBed.createComponent(ShoppingcartComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+  });

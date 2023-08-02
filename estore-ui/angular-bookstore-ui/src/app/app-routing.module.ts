@@ -8,22 +8,26 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 
 /*
 *routes to different pages for app routing
 */
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
   { path: 'main', component: NavigationComponent},
-  { path: 'admin', component: AdminButtonsComponent},
+  { path: 'admin', component: AdminPageComponent},
 
+  { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-  { path: '', redirectTo: '/user-product', pathMatch: 'full' },
   { path: 'user-product', component: ProductUserInventoryComponent},
   { path: 'user-detail/:id', component: ProductUserDetailComponent},
-  { path: 'purchase-history', component: PurchaseHistoryComponent}
+  { path: 'purchase-history', component: PurchaseHistoryComponent},
+  { path: 'user-details/:id', component: ShoppingcartComponent},
+  { path: 'cart', component: ShoppingcartComponent}
+
 
 ]
 

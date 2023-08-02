@@ -162,6 +162,27 @@ public class CartController {
     }
 
     /**
+     * Deletes everything in the cart
+     * 
+     * @param username The username of the user whose shopping cart you wish to remove a {@link Product product} from
+     * @return {@link ResponseEntity ResponseEntity} HTTP status of OK if deleted<br>
+     *         {@link ResponseEntity ResponseEntity} HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * 
+     * @author Jack Hunsberger
+     */
+    @DeleteMapping("/carts/{username}")
+    public ResponseEntity<Product> clearCart(@PathVariable String username) {
+        try {
+            cartDAO.updateCart(username);
+            cartDAO.clearCart(username);
+            return new ResponseEntity<Product>(HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    /**
      * searches a users cart with a given search term
      * 
      * @param name the search parameter

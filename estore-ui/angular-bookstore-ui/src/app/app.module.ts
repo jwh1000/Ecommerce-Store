@@ -17,6 +17,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
     DeleteProductComponent,
     LoginComponent,
     NavigationComponent,
-    PurchaseHistoryComponent
+    PurchaseHistoryComponent,
+    AdminPageComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,7 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginComponent,NavigationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
