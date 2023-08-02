@@ -64,7 +64,7 @@ export class CartService {
   }
 
   /*
-  * gets all contents of the cart
+  * clears all items in the cart
   */
   clearCart(): Observable<Product[]> {
     this.user = this.loginStateService.getUsername();
