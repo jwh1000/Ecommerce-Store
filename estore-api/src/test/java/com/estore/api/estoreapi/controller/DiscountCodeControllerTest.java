@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.estore.api.estoreapi.model.DiscountCode;
+import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.DiscountCodeDAO;
 
 
@@ -151,5 +152,102 @@ public class DiscountCodeControllerTest {
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+
+    /**
+     * Tests getting all discount codes.
+     * @throws IOException
+     */
+    @Test
+    public void testGetDiscountCodes() throws IOException { 
+        // Setup
+        DiscountCode[] codes = new DiscountCode[2];
+        codes[0] = new DiscountCode("Test", 10);
+        codes[1] = new DiscountCode("Test2", 5);
+        // When get discount codes is called returns books above
+        when(mockDiscountDAO.getDiscountCodes()).thenReturn(codes);
+
+        // Invoke
+        ResponseEntity<DiscountCode[]> response = discountController.getDiscountCodes();
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(codes,response.getBody());
+    }
+
+    /**
+     * Tests an internal error occuring while getting all discount codes.
+     * @throws IOException
+     */
+    @Test
+    public void testGetDiscountCodesInternalError() throws IOException {  
+        // Setup
+        //When get discount codes is called returns internal error
+        doThrow(new IOException()).when(mockDiscountDAO).getDiscountCodes();
+    
+        // Invoke
+        ResponseEntity<DiscountCode[]> response = discountController.getDiscountCodes();
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    /**
+     * Tests getting a single discount code.
+     * @throws IOException
+     */
+    @Test
+    public void testGetDiscountCode() throws IOException { 
+        // Setup
+        DiscountCode[] discountCodes = new DiscountCode[2];
+        discountCodes[0] = new DiscountCode("Test", 10);
+        discountCodes[1] = new DiscountCode("Test2", 5);
+        // When get discount code is called returns specified discount code above
+        when(mockDiscountDAO.findDiscountCode("Test")).thenReturn(discountCodes[0]);
+
+        // Invoke
+        ResponseEntity<DiscountCode> response = discountController.getDiscountCode("Test");
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(discountCodes[0],response.getBody());
+    }
+
+    /**
+     * Tests getting a discount code when that discount code doesn't exist.
+     * @throws IOException
+     */
+    @Test
+    public void testGetDiscountCodeNotFound() throws IOException { 
+        // Setup
+        DiscountCode[] discountCodes = new DiscountCode[2];
+        discountCodes[0] = new DiscountCode("Test", 10);
+        discountCodes[1] = new DiscountCode("Test2", 5);
+        // When get discount code is called returns null as discount code wanted is not there
+        when(mockDiscountDAO.findDiscountCode("Blah")).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<DiscountCode> response = discountController.getDiscountCode("Blah");
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+        assertEquals(null,response.getBody());
+    }
+
+    /**
+     * Tests an internal error being thrown while getting a discount code
+     * @throws IOException
+     */
+    @Test
+    public void testGetDiscountCodeInternalError() throws IOException {  
+        // Setup
+        //When get discount code is called returns internal error
+        doThrow(new IOException()).when(mockDiscountDAO).findDiscountCode("Blah");
+    
+        // Invoke
+        ResponseEntity<DiscountCode> response = discountController.getDiscountCode("Blah");
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 }
