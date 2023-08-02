@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.estore.api.estoreapi.model.DiscountCode;
-import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.DiscountCodeDAO;
 
 
