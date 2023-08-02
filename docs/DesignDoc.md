@@ -115,6 +115,7 @@ The following UML class diagrams provide an overview of how the model tier inter
 ![product_uml.jpg](product_uml.jpg)
 ![cart_uml.jpg](cart_uml.jpg)
 ![user_uml](user_uml.jpg)
+![discountCode_uml](discountCode_uml.jpg)
 
 The product class is used for any product that the store admin wants to add to the store inventory. It contains information about the product such as its name, price, and description. An id is associated with each product in order to make sure each product is treated differently by the system. 
 
