@@ -14,6 +14,8 @@
 <div *ngIf="empty == false">
   <p> Total: {{total}}</p>
   <button type="button" (click)="checkOut()">Checkout</button>
+  <input id="code" [(ngModel)]="discountIn" placeholder="Discount Code">
+  <button type="button" (click)="update()">Apply Discount</button>
 </div>
 <hr>
 <button type="button" (click)="goBack()">go back</button>

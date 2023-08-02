@@ -3,6 +3,8 @@ import { LoginStateService } from '../login-state.service';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { Location } from '@angular/common';
+import { DiscountCode } from '../discountcode';
+import { DiscountCodeService } from '../discount-code.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -11,11 +13,14 @@ import { Location } from '@angular/common';
 })
 export class ShoppingcartComponent implements OnInit{
   cartproducts: Product[] = [];
+  discountCode?: DiscountCode;
   constructor(
     private loginStateService: LoginStateService,
     private cartService: CartService,
-    private location: Location
+    private location: Location,
+    private discountService: DiscountCodeService
   ){}
+  discountIn?: string;
   username?: String;
   total?: number = 0.0;
   empty?: boolean = true;
@@ -55,16 +60,27 @@ export class ShoppingcartComponent implements OnInit{
     this.ngOnInit();
   }
 
+  update(): void{
+    if(this.discountIn){
+      this.discountIn.trim();
+      this.discountService.getDiscountCode(this.discountIn).subscribe(discountCode => this.discountCode = discountCode);
+    }
+    this.getCartContents();
+  }
   
   goBack(): void {
     this.location.back();
   }
 
   getTotal(): void {
-    this.total = 0;
+    this.total = 0.0;
 
     for (var product of this.cartproducts) {
       this.total += product.price;
+    }
+    if(this.discountCode!=null){
+      this.total -= (this.discountCode.discountPercentage/100)*this.total;
+      this.discountCode=undefined;
     }
   }
 }
