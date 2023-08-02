@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product';
 import { CartService } from '../cart.service'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-user-inventory',
@@ -13,8 +14,11 @@ export class ProductUserInventoryComponent implements OnInit{
     /*
     *Constructor initializes product and cart service
     */
-    constructor(private productService: ProductService,
-      private cartService: CartService){}
+    constructor(
+      private productService: ProductService,
+      private cartService: CartService,
+      private location: Location
+    ){}
     
     /*
     *on initialize gets products
@@ -40,6 +44,10 @@ export class ProductUserInventoryComponent implements OnInit{
     */
     delete(product: Product):void {
       this.cartService.removeFromCart(product).subscribe();
+    }
+
+    goBack(): void {
+      this.location.back();
     }
   }
 

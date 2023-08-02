@@ -96,6 +96,16 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public boolean purchase() {
+        this.quantity -= 1;
+        if (this.quantity < 0) {
+            this.quantity = 0;
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     // String representation of product, for tests/debugging
     @Override
     public String toString() {
