@@ -16,6 +16,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
@@ -33,6 +34,7 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     DeleteProductComponent,
     LoginComponent,
     NavigationComponent,
+    PurchaseHistoryComponent,
     AdminPageComponent,
     ShoppingcartComponent
   ],
