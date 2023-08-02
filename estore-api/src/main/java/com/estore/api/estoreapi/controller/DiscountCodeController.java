@@ -69,7 +69,7 @@ public class DiscountCodeController {
      *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/discount-code/{code}")
+    @DeleteMapping("/discount-code/")
     public ResponseEntity<DiscountCode> deleteDiscountCode(@RequestParam String code) {
         try {
             if (discountDAO.findDiscountCode(code) == null) // check to see if the discount code with given code doesn't exist
@@ -93,7 +93,7 @@ public class DiscountCodeController {
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * @author Ryan Robison
      */
-    @GetMapping("/discount-code/{code}")
+    @GetMapping("/discount-code/")
     public ResponseEntity<DiscountCode> getDiscountCode(@RequestParam String code) {
         try {
             DiscountCode co = discountDAO.findDiscountCode(code);
