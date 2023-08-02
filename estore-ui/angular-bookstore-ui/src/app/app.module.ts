@@ -17,7 +17,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { CheckOutButtonComponent } from './check-out-button/check-out-button.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 
@@ -35,7 +34,6 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     LoginComponent,
     NavigationComponent,
     AdminPageComponent,
-    CheckOutButtonComponent,
     ShoppingcartComponent
   ],
   imports: [

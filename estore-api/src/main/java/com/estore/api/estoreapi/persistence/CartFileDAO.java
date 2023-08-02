@@ -168,6 +168,10 @@ public class CartFileDAO implements CartDAO{
      */
     public void clearCart(String username) throws IOException {
         synchronized (products) {
+            Product[] array = getProductArray(username);
+            for (Product product: array) {
+                product.purchase();
+            }
             this.products.clear();
             save(username);
         }

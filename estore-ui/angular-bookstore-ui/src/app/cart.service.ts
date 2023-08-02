@@ -57,8 +57,9 @@ export class CartService {
     const url = `${this.productURL}/carts/${this.user}`;
     let products = this.http.get<Product[]>(url).pipe(
       tap(),
-      catchError(this.handleError<Product[]>('addToCart'))
+      catchError(this.handleError<Product[]>('getProducts'))
     );
+    console.log(products);
     return products;
   }
 
@@ -68,7 +69,6 @@ export class CartService {
   clearCart(): Observable<Product[]> {
     this.user = this.loginStateService.getUsername();
     const url = `${this.productURL}/carts/${this.user}`;
-    console.log("yeah we here");
     let products = this.http.delete<Product[]>(url).pipe(tap(), 
       catchError(this.handleError<Product[]>('addToCart'))
     );
