@@ -166,6 +166,20 @@ public class CartFileDAO implements CartDAO{
     /**
      * {@inheritDoc}
      */
+    public void clearCart(String username) throws IOException {
+        synchronized (products) {
+            Product[] array = getProductArray(username);
+            for (Product product: array) {
+                product.purchase();
+            }
+            this.products.clear();
+            save(username);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public void updateCart(String username) throws IOException{
         load(username);
     }

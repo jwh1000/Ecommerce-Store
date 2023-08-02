@@ -16,6 +16,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 import { ProductUserDetailComponent } from './product-user-detail/product-user-detail.component';
 import { ProductUserInventoryComponent } from './product-user-inventory/product-user-inventory.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { ProductUserInventoryComponent } from './product-user-inventory/product-
     NewProductComponent,
     DeleteProductComponent,
     LoginComponent,
-    NavigationComponent
+    NavigationComponent,
+    AdminPageComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,7 @@ import { ProductUserInventoryComponent } from './product-user-inventory/product-
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginComponent,NavigationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
