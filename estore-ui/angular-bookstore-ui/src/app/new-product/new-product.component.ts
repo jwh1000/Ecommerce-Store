@@ -23,7 +23,7 @@ export class NewProductComponent {
    */
   add(name: string, priceString: string): void {
     name = name.trim();
-    priceString = name.trim();
+    priceString = priceString.trim();
     if (!name) { return; }
     if (!priceString) { return; }
     var price = parseFloat(priceString);
