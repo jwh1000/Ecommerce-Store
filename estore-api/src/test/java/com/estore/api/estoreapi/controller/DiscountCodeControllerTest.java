@@ -16,8 +16,12 @@ import com.estore.api.estoreapi.model.DiscountCode;
 import com.estore.api.estoreapi.persistence.DiscountCodeDAO;
 
 
-
-public class DiscountCodeContorllerTest {
+/**
+ * Tests for the DiscountCodeController class.
+ * 
+ * @author Rylan Arbour, Ryan Robison
+ */
+public class DiscountCodeControllerTest {
     private DiscountCodeController discountController;
     private DiscountCodeDAO mockDiscountDAO;
 
@@ -29,6 +33,60 @@ public class DiscountCodeContorllerTest {
     public void setupDiscountController() {
         mockDiscountDAO = mock(DiscountCodeDAO.class);
         discountController = new DiscountCodeController(mockDiscountDAO);
+    }
+
+    /*
+     * Tests creating a discount code.
+     */
+    @Test
+    public void testCreateDiscountCode() throws IOException {  
+        // Setup
+        DiscountCode discountCode = new DiscountCode("Test", 10);
+        // when create discount code is called, creates discount code
+        when(mockDiscountDAO.createDiscountCode(discountCode)).thenReturn(discountCode);
+        when(mockDiscountDAO.findDiscountCode(discountCode.getCode())).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<DiscountCode> response = discountController.createDiscountCode(discountCode);
+
+        // Analyze
+        assertEquals(HttpStatus.CREATED,response.getStatusCode());
+        assertEquals(discountCode,response.getBody());
+    }
+
+    /**
+     * Tests creating a discount code that fails as there is a conflict (already exists)
+     * @throws IOException
+     */
+    @Test
+    public void testCreateDiscountCodeFail() throws IOException { 
+        DiscountCode discountCode = new DiscountCode("Test", 10);
+        // when create discount code is called but there is conflict aka discount code exists
+        when(mockDiscountDAO.createDiscountCode(discountCode)).thenReturn(null);
+        when(mockDiscountDAO.findDiscountCode(discountCode.getCode())).thenReturn(discountCode);
+        // Invoke
+        ResponseEntity<DiscountCode> response = discountController.createDiscountCode(discountCode);
+
+        // Analyze
+        assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
+    }
+
+    /**
+     * Tests creating a discount code where some kind of internal error is encountered.
+     * @throws IOException
+     */
+    @Test
+    public void testCreateDiscountCodeInternalError() throws IOException {  
+        // Setup
+        DiscountCode discountCode = new DiscountCode("Test", 10);
+        // when create discount code is called, an internal server error is thrown
+        doThrow(new IOException()).when(mockDiscountDAO).findDiscountCode(discountCode.getCode());
+    
+        // Invoke
+        ResponseEntity<DiscountCode> response = discountController.createDiscountCode(discountCode);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     /**

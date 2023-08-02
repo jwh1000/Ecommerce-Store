@@ -48,7 +48,7 @@ public class DiscountCodeController {
         try {
             DiscountCode searchDiscountCode = discountDAO.findDiscountCode(discountCode.getCode());
 
-            if (searchDiscountCode.getCode().equals(discountCode.getCode())) {
+            if (searchDiscountCode != null && searchDiscountCode.equals(discountCode)) {
                 return new ResponseEntity<DiscountCode>(HttpStatus.CONFLICT);
             }
 
@@ -103,6 +103,23 @@ public class DiscountCodeController {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
             return new ResponseEntity<DiscountCode>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Gets all discount codes.
+     * 
+     * @return ResponseEntity HTTP status of OK when complete list is returned
+     *         Returned list contains all discount codes or an empty list if none
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/discount-code/codes")
+    public ResponseEntity<DiscountCode[]> getDiscountCodes() {
+        try {
+            DiscountCode[] codes = discountDAO.getDiscountCodes();
+            return new ResponseEntity<DiscountCode[]>(codes, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<DiscountCode[]>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
