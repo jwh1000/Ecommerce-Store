@@ -160,6 +160,12 @@ public class UserFileDAO implements UserDAO {
             File cartFile = new File(filePath);
             BufferedWriter writer = new BufferedWriter(new FileWriter(cartFile));
             writer.write("[]");
+            writer.flush();
+
+            filePath = "estore-api/data/purchases/" + user.getUsername() + ".json";
+            File historyFile = new File(filePath);
+            writer = new BufferedWriter(new FileWriter(historyFile));
+            writer.write("[]");
             writer.close();
             
             users.put(newUser.getId(), newUser);

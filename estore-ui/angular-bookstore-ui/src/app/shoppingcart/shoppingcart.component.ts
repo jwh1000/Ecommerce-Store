@@ -4,6 +4,7 @@ import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { Location } from '@angular/common';
 import { ProductService } from '../product.service';
+import { PurchasesService } from '../purchases.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -16,7 +17,8 @@ export class ShoppingcartComponent implements OnInit{
     private loginStateService: LoginStateService,
     private cartService: CartService,
     private location: Location,
-    private productService: ProductService
+    private productService: ProductService,
+    private purchaseService: PurchasesService
   ){}
   username?: String;
   total?: number = 0.0;
@@ -52,6 +54,10 @@ export class ShoppingcartComponent implements OnInit{
 
   checkOut(): void {
     this.getContents();
+
+    for (var product of this.cartproducts) {
+      this.purchaseService.addProduct(product).subscribe();
+    }
 
     this.cartService.clearCart().subscribe(products => {
       this.cartproducts = products;
