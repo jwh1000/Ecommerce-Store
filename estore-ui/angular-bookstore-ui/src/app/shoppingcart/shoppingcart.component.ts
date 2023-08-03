@@ -21,7 +21,7 @@ export class ShoppingcartComponent implements OnInit{
     private cartService: CartService,
     private location: Location,
     private productService: ProductService,
-    private discountService: DiscountCodeService
+    private discountService: DiscountCodeService,
     private purchaseService: PurchasesService
   ){}
   discountIn?: string;
