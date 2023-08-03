@@ -1,6 +1,8 @@
 <button type="button" (click)="createProductAction()">Create new product</button>
 <button type="button" (click)="editProductAction()">Edit existing product</button>
 <button type="button" (click)="deleteProductAction()">Delete existing product</button>
+<button type="button" (click)="createDiscountAction()">Create new discount code</button>
+<button type="button" (click)="deleteDiscountAction()">Delete existing discount code</button>
 
 <p *ngIf="displayProducts">Edit an existing product below by clicking on it.</p>
 <app-products *ngIf="displayProducts"></app-products>
@@ -10,3 +12,9 @@
 
 <p *ngIf="displayDelete">Click a product to DELETE it!</p>
 <app-delete-product *ngIf="displayDelete"></app-delete-product>
+
+<p *ngIf="displayCreateDiscount">Create a new discount code below.</p>
+<app-create-discount *ngIf="displayCreateDiscount"></app-create-discount>
+
+<p *ngIf="displayDeleteDiscount">Click a Discount to DELETE it!</p>
+<app-delete-discount *ngIf="displayDeleteDiscount"></app-delete-discount>

@@ -19,6 +19,8 @@ import { ProductUserInventoryComponent } from './product-user-inventory/product-
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { DeleteDiscountComponent } from './delete-discount/delete-discount.component';
+import { CreateDiscountComponent } from './create-discount/create-discount.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     NavigationComponent,
     PurchaseHistoryComponent,
     AdminPageComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    DeleteDiscountComponent,
+    CreateDiscountComponent
   ],
   imports: [
     BrowserModule,
