@@ -194,4 +194,38 @@ public class ProductTest {
         // analyze
         assertEquals(expected, result);
     }
+
+    @Test
+    public void test_purchase() {
+        // setup
+        int id = 100;
+        double price = 5.99;
+        String name = "House of Leaves";
+        Product product = new Product(id, name, price);
+        product.setQuantity(10);
+        boolean expected = true;
+
+        // invoke
+        boolean result = product.purchase();
+
+        // analyze
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void test_purchase_invalid() {
+        // setup
+        int id = 100;
+        double price = 5.99;
+        String name = "House of Leaves";
+        Product product = new Product(id, name, price);
+        product.setQuantity(0);
+        boolean expected = false;
+
+        // invoke
+        boolean result = product.purchase();
+
+        // analyze
+        assertEquals(expected, result);
+    }
 }
