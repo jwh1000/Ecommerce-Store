@@ -195,7 +195,7 @@ public class ProductControllerTest {
         // Setup
         Product product = new Product(6, "BookTest", 10.99);
         Product[] products = new Product[0];
-        // when creat product is called creates product
+        // when create product is called, creates product
         when(mockProductDAO.createProduct(product)).thenReturn(product);
         when(mockProductDAO.findProducts(product.getName())).thenReturn(products);
 

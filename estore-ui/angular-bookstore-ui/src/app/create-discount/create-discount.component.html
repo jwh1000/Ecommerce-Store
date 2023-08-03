@@ -1,0 +1,16 @@
+<ul class="discountcodes">
+    <div>
+        <h2>Creating a new discount code:</h2>
+        <label for="create-discount">Code (What a user would type to apply the discount): </label>
+        <input id="create-discount" #discountCode />
+        <br>
+        <label for="create-discount">Discount amount in percent (an integer): </label>
+        <input id="create-discount" #discountPercentage />
+        <br>
+        
+        <!-- (click) passes input value to add() and then clears the input -->
+        <button type="button" class="add-button" (click)="add(discountCode.value, discountPercentage.value); discountCode.value=''; discountPercentage.value=''">
+          Add Discount Code
+        </button>
+    </div>
+</ul>

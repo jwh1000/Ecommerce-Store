@@ -1,0 +1,9 @@
+<ul class="discountcodes">
+    <li *ngFor="let discountcode of discountcodes">
+        <button type="button" (click)="delete(discountcode.code)">
+        <span class="badge">{{discountcode.code}}</span>
+        <p> </p>
+        <span class="name">{{discountcode.discountPercentage}}%</span>
+        </button>
+    </li>
+</ul>

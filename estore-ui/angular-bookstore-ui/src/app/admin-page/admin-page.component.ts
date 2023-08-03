@@ -3,6 +3,7 @@ import { ProductService } from '../product.service';
 import { Product } from '../product';
 import { CartService } from '../cart.service'
 import { Location } from '@angular/common';
+import { DiscountCodeService } from '../discount-code.service';
 
 @Component({
   selector: 'app-product-user-inventory',
@@ -17,6 +18,7 @@ export class AdminPageComponent {
     constructor(
       private productService: ProductService,
       private cartService: CartService,
+      private discountService: DiscountCodeService,
       private location: Location
     ){}
 
