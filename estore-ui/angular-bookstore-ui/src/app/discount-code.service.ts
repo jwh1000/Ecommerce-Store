@@ -49,7 +49,7 @@ export class DiscountCodeService {
   }
 
   /*
-  *Handels errors
+  *Handles errors
   */
 private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {

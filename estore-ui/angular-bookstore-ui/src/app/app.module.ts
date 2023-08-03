@@ -19,6 +19,7 @@ import { ProductUserInventoryComponent } from './product-user-inventory/product-
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { DeleteDiscountComponent } from './delete-discount/delete-discount.component';
+import { CreateDiscountComponent } from './create-discount/create-discount.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DeleteDiscountComponent } from './delete-discount/delete-discount.compo
     NavigationComponent,
     AdminPageComponent,
     ShoppingcartComponent,
-    DeleteDiscountComponent
+    DeleteDiscountComponent,
+    CreateDiscountComponent
   ],
   imports: [
     BrowserModule,

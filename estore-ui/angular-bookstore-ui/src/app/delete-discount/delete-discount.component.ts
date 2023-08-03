@@ -12,7 +12,7 @@ export class DeleteDiscountComponent {
 
   constructor(private discountService: DiscountCodeService) { }
 
-  //Get list of all discount on initalization.
+  //Get list of all discount codes on initalization.
   ngOnInit(): void {
     this.getDiscountCodes();
   }
