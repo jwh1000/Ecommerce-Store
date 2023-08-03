@@ -1,16 +1,22 @@
 <button type="button" (click)="goBack()">go back</button>
 <h2>Products</h2>
-<app-inventory-search></app-inventory-search>
-<ul class="products">
-  <li *ngFor="let product of products">
-    <div *ngIf="product.quantity">
-    <a routerLink="/user-detail/{{product.id}}">
-        <span class ="badge">{{product.id}}</span>{{product.name}}
-    </a>
-    <button type="button" class="add" title="Add to Cart"
-      (click)="add(product)">+</button>
-    <button type="button" class="delete" title="Remove from Cart"
-      (click)="delete(product)">-</button>
-      </div>
-  </li>
-</ul>
+<div *ngIf="products.length != 0" >
+  <app-inventory-search></app-inventory-search>
+  <ul class="products">
+    <li *ngFor="let product of products">
+        <div *ngIf="product.quantity">
+          <a routerLink="/user-detail/{{product.id}}">
+              <span class ="badge">{{product.id}}</span>{{product.name}}
+          </a>
+          <button type="button" class="add" title="Add to Cart"
+            (click)="add(product)">+</button>
+          <button type="button" class="delete" title="Remove from Cart"
+            (click)="delete(product)">-</button>
+        </div>
+    </li>
+  </ul>
+</div>
+<div *ngIf="products.length == 0">
+  <p> Sorry, there are no available products. </p>
+</div>
+
