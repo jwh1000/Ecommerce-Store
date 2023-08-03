@@ -17,7 +17,7 @@ public class ProductTest {
         double expected_price = 5.99;
         String expected_name = "House of Leaves";
         String expected_description = "Lorem Ipsum";
-        int expected_quantity = 0;
+        int expected_quantity = 1;
 
         // invoke
         Product product = new Product(expected_id, expected_name, expected_price);
