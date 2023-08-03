@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class PurchasesService {
 
   private productURL = 'http://localhost:8080/estore';
 
@@ -19,16 +19,16 @@ export class ProductService {
   }
 
   /** GET: gets all the products from the server */
-  getProducts(): Observable<Product[]>{
-    const url = `${this.productURL}/inventory`;
+  getPurchases(): Observable<Product[]>{
+    const url = `${this.productURL}/purchases/{username}`;
     return this.http.get<Product[]>(url).pipe(tap(),
       catchError(this.handleError<Product[]>('getProducts', []))
     )
   }
 
   /** GET: gets a specific product with a specified id from the server */
-  getProduct(id: number) : Observable<Product> {
-    const url = `${this.productURL}/inventory/product/${id}`;
+  getPurchase(id: number) : Observable<Product> {
+    const url = `${this.productURL}/purchases/{username}/{id}`;
     return this.http.get<Product>(url).pipe(tap(),
       catchError(this.handleError<Product>(`getProduct id=${id}`))
     );
@@ -41,32 +41,24 @@ export class ProductService {
     if (!term.trim()) {
       return of([]);
     }
-    const url = `${this.productURL}/inventory/?name=${term}`
+    const url = `${this.productURL}/purchases/{username}`
     return this.http.get<Product[]>(url).pipe(
       tap(),
       catchError(this.handleError<Product[]>('searchProducts', []))
     );
   }
-  /** PUT: update the product on the server */
-  updateProduct(product: Product): Observable<any> {
-    const url = `${this.productURL}`;
-    console.log("we here");
-    return this.http.put(url, product, this.httpOptions).pipe(tap(),
-      catchError(this.handleError<any>('updateProduct'))
-    );
-  }
 
   /** POST: add a new product to the server */
   addProduct(product: Product): Observable<Product> {
-    const url = `${this.productURL}/inventory/product`;
+    const url = `${this.productURL}/purchases/{username}`;
     return this.http.post<Product>(url, product, this.httpOptions).pipe(tap(),
       catchError(this.handleError<Product>('addProduct'))
     );
   }
 
   /** DELETE: delete the product from the server */
-  deleteProduct(id: number): Observable<Product> {
-    const url = `${this.productURL}/inventory/product/${id}`;
+  deleteProduct(product: Product): Observable<Product> {
+    const url = `${this.productURL}/purchases/{username}/{id}`;
 
     return this.http.delete<Product>(url, this.httpOptions).pipe(tap(),
       catchError(this.handleError<Product>('deleteProduct'))
