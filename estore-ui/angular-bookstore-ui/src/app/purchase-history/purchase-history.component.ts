@@ -27,7 +27,7 @@ export class PurchaseHistoryComponent {
   }
 
   getProducts(): void {
-    this.productService.getProducts()
+    this.purchaseService.getPurchases()
     .subscribe(products => this.products = products);
   }
 

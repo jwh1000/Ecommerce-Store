@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { ProductService } from '../product.service';
 import { DiscountCode } from '../discountcode';
 import { DiscountCodeService } from '../discount-code.service';
+import { PurchasesService } from '../purchases.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -21,6 +22,7 @@ export class ShoppingcartComponent implements OnInit{
     private location: Location,
     private productService: ProductService,
     private discountService: DiscountCodeService
+    private purchaseService: PurchasesService
   ){}
   discountIn?: string;
   username?: String;
@@ -57,6 +59,10 @@ export class ShoppingcartComponent implements OnInit{
 
   checkOut(): void {
     this.getContents();
+
+    for (var product of this.cartproducts) {
+      this.purchaseService.addProduct(product).subscribe();
+    }
 
     this.cartService.clearCart().subscribe(products => {
       this.cartproducts = products;
