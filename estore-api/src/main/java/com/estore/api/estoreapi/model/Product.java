@@ -50,7 +50,7 @@ public class Product {
         this.id = id;
 
         // these fields can be changed from the admin panel
-        this.quantity = 0;
+        this.quantity = 1;
         this.description = "Lorem Ipsum";
     }
 
